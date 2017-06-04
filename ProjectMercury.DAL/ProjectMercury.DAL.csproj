@@ -48,13 +48,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AltKategoriRepo.cs" />
+    <Compile Include="Repository\AnalizRepo.cs" />
+    <Compile Include="Repository\KategoriRepo.cs" />
+    <Compile Include="Repository\KullanicilarRepo.cs" />
+    <Compile Include="Repository\MarkaRepo.cs" />
+    <Compile Include="Repository\SepetRepo.cs" />
+    <Compile Include="Repository\SiteBilgileriRepo.cs" />
+    <Compile Include="Repository\UrunKategoriRepo.cs" />
+    <Compile Include="Repository\UrunRepo.cs" />
+    <Compile Include="Repository\UyelerRepo.cs" />
+    <Compile Include="VMModels\VMAnaliz.cs" />
+    <Compile Include="VMModels\VMSiparis.cs" />
+    <Compile Include="VMModels\VMUrun.cs" />
+    <Compile Include="VMModels\VMUyeler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\" />
+    <ProjectReference Include="..\ProjectMercury.Entity\ProjectMercury.Entity.csproj">
+      <Project>{bbf81beb-a5be-45fc-83ba-6ca80ffba906}</Project>
+      <Name>ProjectMercury.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

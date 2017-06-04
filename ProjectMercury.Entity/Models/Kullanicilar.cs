@@ -12,5 +12,6 @@ namespace ProjectMercury.Entity.Models
         public string KullaniciAdi { get; set; }
         public string KullaniciSifre { get; set; }
         public bool Master { get; set; }
+        public bool System { get; set; }
     }
 }
