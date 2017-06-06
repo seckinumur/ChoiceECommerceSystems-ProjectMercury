@@ -14,35 +14,40 @@ namespace ProjectMercury.WEB.Controllers
         {
             return View();
         }
+        public ActionResult Logoff()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
         [HttpPost]
         public ActionResult Login(Kullanicilar Al)
         {
             bool Kontrol = KullanicilarRepo.KullaniciGiris(Al);
             if (Kontrol == true)
             {
-                Session["Login"] = "Admin";
+                Session["Login"] = Kontrol;
                 return RedirectToAction("Admin");
             }
             else
             {
-                ViewBag.UyariTipi = "alert alert-warning";
-                ViewBag.Uyari = false;
-                ViewBag.Sonuc = "Kullanıcı Adı Yada Parolası Hatalı!";
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Kullanıcı Adı Yada Parolası Hatalı!";
                 return View();
             }
         }
         public ActionResult Admin()
         {
-            if(Session["Login"].ToString() == "Admin")
+            if(Session["Login"] != null)
             {
                 var Gonder = AnalizRepo.Analiz();
                 return View(Gonder);
             }
             else
             {
-                ViewBag.UyariTipi = "alert alert-warning";
-                ViewBag.Uyari = false;
-                ViewBag.Sonuc = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login");
             }
         }

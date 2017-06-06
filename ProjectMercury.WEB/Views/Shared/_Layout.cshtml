@@ -12,7 +12,7 @@
     <link rel="icon" href="~/images/favicon.png" sizes="32x32">
 
 
-    <title>Choice Admin Control Systems V.1.4</title>
+    <title>Choice Admin Control Systems V.1.5</title>
 
     <link href="~/Content/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
@@ -48,11 +48,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <a href="~/Uyari/Uyari"><i class="fa fa-user fa-fw"></i> Profil</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="~/Admin/Ayarlar"><i class="fa fa-gear fa-fw"></i> Ayarlar</a>
+                            <a href="~/Admin/Logoff"><i class="fa fa-sign-out fa-fw"></i> Oturumu Kapat</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -72,7 +68,7 @@
                             <a href="~/Admin/Ayarlar"><i class="fa fa-gear fa-fw "></i> Ayarlar</a>
                         </li>
                         <li>
-                            <a href="~/Admin/KategoriEkle"><i class="fa fa-th-list"></i> Kategori İşlemleri</a>
+                            <a href="~/Product/Kategori"><i class="fa fa-th-list"></i> Kategori İşlemleri</a>
                         </li>
                         <li>
                             <a href="~/Admin/AltKategoriEkle"><i class="fa fa-indent"></i> Alt Kategori İşlemleri</a>
@@ -86,15 +82,19 @@
                         <li>
                             <a href="~/Admin/UrunEkle"><i class="fa fa-shopping-cart"></i> Ürün ekle</a>
                         </li>
-
-                        @{
-                            foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
-                            {
-                                <li>
-                                    <a href="~/Admin/KategoriyeGoreListele/@item.KategoriID"><i class="fa fa-database"></i> @item.KategoriAdi</a>
-                                </li>
-                            }
-                        }
+                        <li>
+                            <a href="#"><i class="fa fa-th-list fa-fw"></i> Kategoriler<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                @{
+                                    foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
+                                    {
+                                        <li>
+                                            <a href="~/Admin/KategoriyeGoreListele/@item.KategoriID"><i class="fa fa-database"></i> @item.KategoriAdi</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

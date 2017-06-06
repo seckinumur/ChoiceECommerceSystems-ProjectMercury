@@ -66,7 +66,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Kullanicilar.Any(p => p.KullaniciAdi == Al.KullaniciAdi && p.KullaniciSifre== p.KullaniciSifre);
+                return db.Kullanicilar.Any(p => p.KullaniciAdi == Al.KullaniciAdi && p.KullaniciSifre == p.KullaniciSifre);
             }
         }
     }

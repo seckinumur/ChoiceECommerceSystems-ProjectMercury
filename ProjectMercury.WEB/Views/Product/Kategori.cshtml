@@ -1,0 +1,217 @@
+﻿@model List<ProjectMercury.DAL.VMModels.VMKategori>
+@{
+    ViewBag.Title = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-wrapper">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Kategorileri Düzenle <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tüm Kategoriler Gösteriliyor
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Kategoriler</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.KategoriAdi</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.KategoriID','@item.KategoriAdi')" disabled="@(item.UrunVarmi == true ? true : false)">Kategoriyi Sil</button>
+                                            <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.KategoriID','@item.KategoriAdi')">Kategoriyi Düzenle</button>
+                                        </td>
+                                    </tr>
+
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">ÇOMAR AI V.1.2 (ALPHA)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                ÇOMAR YARDIM
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Ürünlerinizin Ana Kategorilerini Düzenleyebilirsiniz.
+                                    <hr  style="color:blue;"/>
+                                    <strong style="color:red;">
+                                        (Ana Kategori Bir Ürünün Belirgin Olduğu Temel Sınıfnıdır. Köpek mamasını ele alacaksak
+                                        /KÖPEK - Ana kategori / Mama Alt Kategoridir.)
+                                    </strong> Kategoriler İçerlerinde Ürün Varsa
+                                    Silinemezler. Ama İçerlerinde Alt Kategori Yada Ürün Cinsi Varsa Bile Ürünle İlişkili Olmayan
+                                    Kategori silinir. Eğer Sil Butonuna Basmanıza İzin Yoksa İçersinde Hala Ürün Olan Bir Kategoriyi
+                                    Silmek İstediğinizdendir.
+                                </p>
+                            </div>
+                            <div class="panel-footer">
+                                Haydi Hazırsanız Şimdi Bir Kategori ekleyelim...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Kategori Silme</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KategoriID" id="SilID" />
+                            <input type="hidden" name="Gorev" value="Sil" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
+                                <label>Bu Kategori Silenecek Devam Edilsin mi?</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">SİL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Duzenle" tabindex="-1" role="dialog" aria-labelledby="DuzenleLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="DuzenleLabel">Kategori Düzenle</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KategoriID" id="ID" />
+                            <input type="hidden" name="Gorev" value="Guncelle" />
+                            <div class="form-group">
+                                <label>Bu Kategori Güncellenecek Devam Edilsin mi?</label>
+                                <div class="form-group">
+                                    <label>Kategori Adı</label>
+                                    <input class="form-control" name="kategoriAdi" id="kategoriAdi" required>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        ÇOMAR AI V.1.2 (ALPHA)
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>
+                                            Merhaba! Ben SiteRobotu Çomar. Şimdi Seçtiğiniz Kategorinin ismini Görüyor Olmalısınız.
+                                            Buradan Kategorinin İsmini Yeniden Adlandırabilirsiniz. <strong style="color:red;"> ! Lütfen Dikkat...
+                                            Unutmayın Ki Bu Ana Kategorinin İsmini Değiştirmek İlgili Ürünlerin Tümün Ve alt
+                                            Alt Kategorilerinin Tümünün Anlam Değişikliğine Sebep Olabilir.
+                                            </strong>
+                                        </p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        Hazırsanız Şimdi Kategoriyi Güncelleyelim...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Ekle" tabindex="-1" role="dialog" aria-labelledby="EkleLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="EkleLabel">Kategori Ekle</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="Gorev" value="Ekle" />
+                            <div class="form-group">
+                                <label>Yeni Bir Kategori Eklenecek Devam Edilsin mi?</label>
+                                <div class="form-group">
+                                    <label>Kategori Adı</label>
+                                    <input class="form-control" name="KategoriAdi" required>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        ÇOMAR AI V.1.2 (ALPHA)
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>
+                                            Merhaba! Ben SiteRobotu Çomar. Bu Menüden Yeni Bir Kategori Ekleyebilirsiniz.
+                                            Yeni bir Kategori Ürünlerin ve Alt Kategorilerinin Tek Türde Toplanacağı Ana
+                                            Başlıktır.<strong>
+                                                Yeni Bir Kategori Temel Başlıktır Bu Başlığın Ürünlerin Ve
+                                                Alt Kategorilerin Mantıklı Olabilmesi İçin Doğru Bir İsim Seçilmesi Çok
+                                                Önemlidir.
+                                            </strong>
+                                        </p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        Hazırsanız Şimdi Yeni Bir Kategori Ekleyelim...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Ekle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div>
+                <button data-toggle="modal" data-target="#Ekle" class="btn btn-info col-lg-12">Kategori Ekle</button>
+                <p class="text-warning"><strong>Bir Kategori Eklemek İçin Kategori Ekle Butonuna Basın</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function Islem(obj,obj2)
+    {
+        document.getElementById("kategoriAdi").value = obj2;
+        document.getElementById("SilID").value = obj;
+        document.getElementById("ID").value = obj;
+        document.getElementById("Silinecek").value = obj2;
+    }
+</script>

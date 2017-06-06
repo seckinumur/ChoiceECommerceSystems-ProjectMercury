@@ -162,6 +162,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,6 +184,9 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Product\Kategori.cshtml" />
+    <Content Include="Views\Product\Hata.cshtml" />
+    <Content Include="Views\Product\AltKategori.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

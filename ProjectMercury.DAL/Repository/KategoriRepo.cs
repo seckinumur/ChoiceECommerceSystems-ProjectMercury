@@ -1,4 +1,5 @@
-﻿using ProjectMercury.Entity.DBContext;
+﻿using ProjectMercury.DAL.VMModels;
+using ProjectMercury.Entity.DBContext;
 using ProjectMercury.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,35 @@ namespace ProjectMercury.DAL.Repository
 {
     public class KategoriRepo
     {
-        public static bool KategoriKaydet(Kategori Al) //Kategori Kaydet
+        public static bool KategoriKaydet(VMKategori Al) //Kategori Kaydet
         {
             using (DBCON db = new DBCON())
             {
-                bool Control = db.Kategori.Any(p => p.KategoriAdi == Al.KategoriAdi);
-                if (Control == true)
+                try
+                {
+                    bool Control = db.Kategori.Any(p => p.KategoriAdi == Al.KategoriAdi);
+                    if (Control == true)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Kategori Ekle = new Kategori
+                        {
+                            KategoriAdi = Al.KategoriAdi
+                        };
+                        db.Kategori.Add(Ekle);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+                catch
                 {
                     return false;
                 }
-                else
-                {
-                    db.Kategori.Add(Al);
-                    db.SaveChanges();
-                    return true;
-                }
             }
         }
-        public static bool KategoriGuncelle(Kategori Al) //Kategori Guncelle
+        public static bool KategoriGuncelle(VMKategori Al) //Kategori Guncelle
         {
             using (DBCON db = new DBCON())
             {
@@ -44,14 +56,21 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static void KategoriSil(string ID) //Kategori Sil
+        public static bool KategoriSil(int ID) //Kategori Sil
         {
-            int id = int.Parse(ID);
             using (DBCON db = new DBCON())
             {
-                var Bul = db.Kategori.FirstOrDefault(p => p.KategoriID == id);
-                db.Kategori.Remove(Bul);
-                db.SaveChanges();
+                try
+                {
+                    var Bul = db.Kategori.FirstOrDefault(p => p.KategoriID == ID);
+                    db.Kategori.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
         public static Kategori KategoriBul(string ID) //Kategori Bul
@@ -62,11 +81,22 @@ namespace ProjectMercury.DAL.Repository
                 return db.Kategori.FirstOrDefault(p => p.KategoriID == id);
             }
         }
-        public static List<Kategori> Kategoriler() //Kategorileri Listele
+        public static List<VMKategori> Kategoriler() //Kategorileri Listele
         {
             using (DBCON db = new DBCON())
             {
-                return db.Kategori.ToList();
+                var Kontrol = db.Kategori.Select(p => new VMKategori
+                {
+                    KategoriAdi = p.KategoriAdi,
+                    KategoriID = p.KategoriID,
+                    UrunVarmi = false
+                }).ToList();
+                foreach (var item in Kontrol)
+                {
+                    bool Check = db.Urun.Any(p => p.KategoriID == item.KategoriID);
+                    item.UrunVarmi = Check;
+                }
+                return Kontrol;
             }
         }
     }
