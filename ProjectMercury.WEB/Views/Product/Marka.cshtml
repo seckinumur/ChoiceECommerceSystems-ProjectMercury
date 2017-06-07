@@ -1,6 +1,6 @@
-﻿@model List<ProjectMercury.DAL.VMModels.VMAltKategori>
+﻿@model List<ProjectMercury.DAL.VMModels.VMMArka>
 @{
-    ViewBag.Title = "AltKategori";
+    ViewBag.Title = "Marka";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <h1 class="page-header">Alt Kategorileri Düzenle <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+            <h1 class="page-header">Marka Düzenle <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
 
         </div>
     </div>
@@ -16,14 +16,14 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Tüm Alt Kategoriler Gösteriliyor
+                    Tüm Markalar Gösteriliyor
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Alt Kategoriler</th>
+                                <th>Markalar</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -32,10 +32,10 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.AltKategoriAdi</td>
+                                        <td>@item.MarkaAdi</td>
                                         <td>
-                                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.AltKategoriID','@item.AltKategoriAdi')" disabled="@(item.UrunVarmi == true ? true : false)">AltKategoriyi Sil</button>
-                                            <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.AltKategoriID','@item.AltKategoriAdi')">AltKategoriyi Düzenle</button>
+                                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.MarkaID','@item.MarkaAdi')" disabled="@(item.UrunVarmi == true ? true : false)">Ürün Kategoriler Sil</button>
+                                            <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.MarkaID','@item.MarkaAdi')">Ürün Kategoriler Düzenle</button>
                                         </td>
                                     </tr>
                                 }
@@ -59,16 +59,16 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Ürünlerinizin Alt Kategorilerini Düzenleyebilirsiniz.
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Ürünlerinizin Markalarını Düzenleyebilirsiniz.
                                     <hr style="color:blue;" />
-                                    <strong style="color:red;">Alt Kategori Bir Kategorinin Temel Sınıfıdır.</strong>
+                                    <strong style="color:red;">Marka Bir Ürünün Firma Adıdır.</strong>
                                     <hr />
                                     Eğer Sil Butonu Çalışmıyorsa Bir Veya Daha Fazla Ürün Silmeye Çalıştığınız Sınıfı
                                     Kullanıyor Demektir. Bu durumda Silemezseniz.
                                 </p>
                             </div>
                             <div class="panel-footer">
-                                Haydi Hazırsanız Şimdi Bir Alt Kategori ekleyelim...
+                                Haydi Hazırsanız Şimdi Bir Marka ekleyelim...
                             </div>
                         </div>
                     </div>
@@ -81,15 +81,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Alt Kategori Silme</h4>
+                        <h4 class="modal-title" id="myModalLabel">Marka Silme</h4>
                     </div>
                     <form role="form" method="post">
                         <div class="modal-body">
-                            <input type="hidden" name="AltKategoriID" id="SilID" />
+                            <input type="hidden" name="MarkaID" id="SilID" />
                             <input type="hidden" name="Gorev" value="Sil" />
                             <div class="form-group">
                                 <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
-                                <label>Bu Alt Kategori Silenecek Devam Edilsin mi?</label>
+                                <label>Marka Silenecek Devam Edilsin mi?</label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -106,17 +106,17 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="DuzenleLabel">Alt Kategori Düzenle</h4>
+                        <h4 class="modal-title" id="DuzenleLabel">Marka Düzenle</h4>
                     </div>
                     <form role="form" method="post">
                         <div class="modal-body">
-                            <input type="hidden" name="AltKategoriID" id="ID" />
+                            <input type="hidden" name="MarkaID" id="ID" />
                             <input type="hidden" name="Gorev" value="Guncelle" />
                             <div class="form-group">
-                                <label>Bu Alt Kategori Güncellenecek Devam Edilsin mi?</label>
+                                <label>Bu Marka Güncellenecek Devam Edilsin mi?</label>
                                 <div class="form-group">
-                                    <label>Alt Kategori Adı</label>
-                                    <input class="form-control" name="AltkategoriAdi" id="kategoriAdi" required>
+                                    <label>Marka Adı</label>
+                                    <input class="form-control" name="MarkaAdi" id="kategoriAdi" required>
                                 </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -124,15 +124,15 @@
                                     </div>
                                     <div class="panel-body">
                                         <p>
-                                            Merhaba! Ben SiteRobotu Çomar. Şimdi Seçtiğiniz Alt Kategorinin ismini Görüyor Olmalısınız.
-                                            Buradan Alt Kategorinin İsmini Yeniden Adlandırabilirsiniz. <strong style="color:red;">
-                                            ! Lütfen Dikkat... Unutmayın Ki Alt Kategorinin İsmini Değiştirmek İlgili Ürünlerin 
-                                            Tümün Ve Ürün Kategorilerinin Tümünün Anlam Değişikliğine Sebep Olabilir.
+                                            Merhaba! Ben SiteRobotu Çomar. Şimdi Seçtiğiniz Marka ismini Görüyor Olmalısınız.
+                                            Buradan Marka İsmini Yeniden Adlandırabilirsiniz. <strong style="color:red;">
+                                                ! Lütfen Dikkat... Unutmayın Ki Marka İsmini Değiştirmek İlgili Ürünlerin
+                                                Tümünün Anlam Değişikliğine Sebep Olabilir.
                                             </strong>
                                         </p>
                                     </div>
                                     <div class="panel-footer">
-                                        Hazırsanız Şimdi Alt Kategoriyi Güncelleyelim...
+                                        Hazırsanız Şimdi Marka Güncelleyelim...
                                     </div>
                                 </div>
                             </div>
@@ -151,16 +151,16 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="EkleLabel">Alt Kategori Ekle</h4>
+                        <h4 class="modal-title" id="EkleLabel">Marka Ekle</h4>
                     </div>
                     <form role="form" method="post">
                         <div class="modal-body">
                             <input type="hidden" name="Gorev" value="Ekle" />
                             <div class="form-group">
-                                <label>Yeni Bir Alt Kategori Eklenecek Devam Edilsin mi?</label>
+                                <label>Yeni Bir Marka Eklenecek Devam Edilsin mi?</label>
                                 <div class="form-group">
                                     <label>Alt Kategori Adı</label>
-                                    <input class="form-control" name="AltKategoriAdi" required>
+                                    <input class="form-control" name="MarkaAdi" required>
                                 </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -168,15 +168,12 @@
                                     </div>
                                     <div class="panel-body">
                                         <p>
-                                            Merhaba! Ben SiteRobotu Çomar. Bu Menüden Yeni Bir Alt Kategori Ekleyebilirsiniz.
-                                            Yeni bir Alt Kategori Ürünlerin ve Ürün Kategorini Tek Türde Toplanacağı Ana
-                                            Başlıktır.<strong>Yeni Bir Alt Kategori Oluştururken Ürün Kategorine Mantıklı Olabilmesi 
-                                            İçin Doğru Bir İsim Seçilmesi Çok Önemlidir.
-                                            </strong>
+                                            Merhaba! Ben SiteRobotu Çomar. Bu Menüden Yeni Bir Marka Ekleyebilirsiniz.
+                                            Yeni bir Marka O Marka Ait Ürünlerin Tek Türde Toplanacağı Başlıktır.
                                         </p>
                                     </div>
                                     <div class="panel-footer">
-                                        Hazırsanız Şimdi Yeni Bir Alt Kategori Ekleyelim...
+                                        Hazırsanız Şimdi Yeni Bir Marka Ekleyelim...
                                     </div>
                                 </div>
                             </div>
@@ -192,15 +189,14 @@
 
         <div class="col-lg-12">
             <div>
-                <button data-toggle="modal" data-target="#Ekle" class="btn btn-info col-lg-12">Alt Kategori Ekle</button>
-                <p class="text-warning"><strong>Bir Alt Kategori Eklemek İçin Alt Kategori Ekle Butonuna Basın</strong></p>
+                <button data-toggle="modal" data-target="#Ekle" class="btn btn-info col-lg-12">Marka Ekle</button>
+                <p class="text-warning"><strong>Bir Marka Eklemek İçin Marka Ekle Butonuna Basın</strong></p>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    function Islem(obj,obj2)
-    {
+    function Islem(obj, obj2) {
         document.getElementById("kategoriAdi").value = obj2;
         document.getElementById("SilID").value = obj;
         document.getElementById("ID").value = obj;

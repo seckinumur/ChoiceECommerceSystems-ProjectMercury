@@ -187,6 +187,8 @@
     <Content Include="Views\Product\Kategori.cshtml" />
     <Content Include="Views\Product\Hata.cshtml" />
     <Content Include="Views\Product\AltKategori.cshtml" />
+    <Content Include="Views\Product\UrunKategori.cshtml" />
+    <Content Include="Views\Product\Marka.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

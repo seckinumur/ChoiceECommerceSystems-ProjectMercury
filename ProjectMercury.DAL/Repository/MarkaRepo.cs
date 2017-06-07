@@ -1,4 +1,5 @@
-﻿using ProjectMercury.Entity.DBContext;
+﻿using ProjectMercury.DAL.VMModels;
+using ProjectMercury.Entity.DBContext;
 using ProjectMercury.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -8,26 +9,37 @@ using System.Threading.Tasks;
 
 namespace ProjectMercury.DAL.Repository
 {
-   public class MarkaRepo
+    public class MarkaRepo
     {
-        public static bool MarkaKaydet(Marka Al) //Marka Kaydet
+        public static bool MarkaKaydet(VMMArka Al) //Marka Kaydet
         {
             using (DBCON db = new DBCON())
             {
-                bool Control = db.Marka.Any(p => p.MarkaAdi == Al.MarkaAdi);
-                if (Control == true)
+                try
+                {
+                    bool Control = db.Marka.Any(p => p.MarkaAdi == Al.MarkaAdi);
+                    if (Control == true)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Marka Ekle = new Marka
+                        {
+                            MarkaAdi = Al.MarkaAdi
+                        };
+                        db.Marka.Add(Ekle);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+                catch
                 {
                     return false;
                 }
-                else
-                {
-                    db.Marka.Add(Al);
-                    db.SaveChanges();
-                    return true;
-                }
             }
         }
-        public static bool MarkaGuncelle(Marka Al) //Marka Guncelle
+        public static bool MarkaGuncelle(VMMArka Al) //Marka Guncelle
         {
             using (DBCON db = new DBCON())
             {
@@ -44,14 +56,21 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static void MarkaSil(string ID) //Marka Sil
+        public static bool MarkaSil(int ID) //Marka Sil
         {
-            int id = int.Parse(ID);
             using (DBCON db = new DBCON())
             {
-                var Bul = db.Marka.FirstOrDefault(p => p.MarkaID == id);
-                db.Marka.Remove(Bul);
-                db.SaveChanges();
+                try
+                {
+                    var Bul = db.Marka.FirstOrDefault(p => p.MarkaID == ID);
+                    db.Marka.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
         public static Marka MarkaBul(string ID) //Marka Bul
@@ -62,11 +81,21 @@ namespace ProjectMercury.DAL.Repository
                 return db.Marka.FirstOrDefault(p => p.MarkaID == id);
             }
         }
-        public static List<Marka> MarkaBul() //Marka Bul
+        public static List<VMMArka> Markalar() //Marka Listele
         {
             using (DBCON db = new DBCON())
             {
-                return db.Marka.ToList();
+                var result = db.Marka.Select(p => new VMMArka
+                {
+                    MarkaAdi = p.MarkaAdi,
+                    MarkaID = p.MarkaID
+                }).ToList();
+                foreach (var item in result)
+                {
+                    bool kontrol = db.Urun.Any(p => p.MarkaID == item.MarkaID);
+                    item.UrunVarmi = kontrol;
+                }
+                return result;
             }
         }
     }
