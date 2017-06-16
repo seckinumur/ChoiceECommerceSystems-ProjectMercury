@@ -3,8 +3,10 @@ using ProjectMercury.DAL.VMModels;
 using ProjectMercury.Entity.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace ProjectMercury.WEB.Controllers
@@ -88,7 +90,7 @@ namespace ProjectMercury.WEB.Controllers
                 return RedirectToAction("Login", "Admin");
             }
         }
-        public ActionResult AltKategori()
+        public ActionResult AltKategoriler()
         {
             if (Session["Login"] != null)
             {
@@ -104,7 +106,7 @@ namespace ProjectMercury.WEB.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AltKategori(VMAltKategori Data)
+        public ActionResult AltKategoriler(VMAltKategori Data)
         {
             if (Session["Login"] != null)
             {
@@ -113,7 +115,7 @@ namespace ProjectMercury.WEB.Controllers
                     bool sonucu = AltKategoriRepo.AltKategoriSil(Data.AltKategoriID);
                     if (sonucu == true)
                     {
-                        return RedirectToAction("AltKategori");
+                        return RedirectToAction("AltKategoriler");
                     }
                     else
                     {
@@ -127,7 +129,7 @@ namespace ProjectMercury.WEB.Controllers
                     bool sonuc = AltKategoriRepo.AltKategoriGuncelle(Data);
                     if (sonuc == true)
                     {
-                        return RedirectToAction("AltKategori");
+                        return RedirectToAction("AltKategoriler");
                     }
                     else
                     {
@@ -141,7 +143,7 @@ namespace ProjectMercury.WEB.Controllers
                     bool sonuc = AltKategoriRepo.AltKategoriKaydet(Data);
                     if (sonuc == true)
                     {
-                        return RedirectToAction("AltKategori");
+                        return RedirectToAction("AltKategoriler");
                     }
                     else
                     {
@@ -308,6 +310,218 @@ namespace ProjectMercury.WEB.Controllers
                 {
                     TempData["Hata"] = "Marka İşlemleri Başarısız Oldu!";
                     TempData["HataKodu"] = "0050";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult KategoriListele(int id)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    ViewBag.KategoriAdi = KategoriRepo.KategoriIsmiBul(id);
+                    var Bul = KategoriRepo.KategoriListele(id);
+                    return View(Bul);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "0010";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult AltKategori(int id)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    ViewBag.KategoriAdi = KategoriRepo.KategoriIsmiBul(id);
+                    var Bul = KategoriRepo.KategoriListele(id);
+                    return View(Bul);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "0010";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult AltKategoriListele(int id)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    ViewBag.KategoriAdi = AltKategoriRepo.AltKategoriKategoriBul(id);
+                    ViewBag.AltKategoriAdi = AltKategoriRepo.AltKategoriBul(id);
+                    var Bul = UrunRepo.UrunleriAltKategoriyeGoreBul(id.ToString());
+                    return View(Bul);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "0011";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult AltKategoriListele(VMUrun Data)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (Data.Gorev == "Degistir")
+                    {
+                        bool Sonucu = UrunRepo.IndirimDegistir(Data);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("AltKategoriListele");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0041";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Sil")
+                    {
+                        bool sonucu = UrunRepo.UrunSil(Data.UrunID);
+                        if(sonucu == true)
+                        {
+                            return RedirectToAction("AltKategoriListele");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0090";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
+                        TempData["HataKodu"] = "0040";
+                        return RedirectToAction("Hata");
+                    }
+                    
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "0011";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult UrunEkle()
+        {
+            if (Session["Login"] != null)
+            {
+                var Gonder = AnalizRepo.UrunKaydetKategori();
+                return View(Gonder);
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult UrunEkle(VMUrun Data, HttpPostedFileBase Resim)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    WebImage img = new WebImage(Resim.InputStream);
+                    FileInfo imginfo = new FileInfo(Resim.FileName);
+                    string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
+                    img.Resize(860, 480);
+                    img.Save("~/images/ImageStore/" + newfoto);
+                    Data.Image = "~/images/ImageStore/" + newfoto;
+                    bool sonuc = UrunRepo.UrunKaydet(Data);
+                    if(sonuc != true)
+                    {
+                        TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Ekleme İşlemi Başarısız Oldu!";
+                        TempData["HataKodu"] = "1111";
+                        return RedirectToAction("Hata");
+                    }
+                    TempData["1"] = "alert alert-success";
+                    TempData["2"] = false;
+                    TempData["3"] = "Ürün Başarıyla Kaydedildi! Şimdi Başka Bir Ürün Ekleyebilirsiniz.";
+                    return RedirectToAction("UrunEkle");
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Ekleme İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "1111";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult UrunDuzenle(int ID)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    return View(UrunRepo.UrunBul(ID));
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Bulma İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "2111";
                     return RedirectToAction("Hata");
                 }
             }

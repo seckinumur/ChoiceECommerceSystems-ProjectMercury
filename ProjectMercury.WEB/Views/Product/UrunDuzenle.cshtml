@@ -1,0 +1,88 @@
+﻿@model ProjectMercury.DAL.VMModels.VMUrun
+@{
+    ViewBag.Title = "UrunDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">ÜRÜN DETAY SAYFASI<small>Ürün Düzenleme</small> <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button></h1>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <img src="@Model.Image" class="img-responsive" />
+                </div>
+
+                <div class="col-md-6">
+                    <form role="form" method="post">
+
+                        <div class="form-group">
+                            <label>Ürün Adı</label>
+                            <input class="form-control" name="UrunAdi" value="@Model.UrunAdi">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ürün Fiyatı</label>
+                            <input class="form-control" name="UrunFiyati" value="@Model.UrunFiyati">
+                        </div>
+
+                        <div class="form-group">
+                            <label>İndirimli Fiyatı</label>
+                            <input class="form-control" name="IndirimliFiyati" value="@Model.IndirimliFiyati">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Ürün Açıklaması</label>
+                            <textarea class="form-control" rows="3" name="UrunAciklama">@Model.UrunAciklama</textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Resim Dosyası</label>
+                            <input type="file" name="Image">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">ÜRÜNÜ GÜNCELLE</button>
+                        </div>
+
+                    </form>
+                </div>
+                <br />
+            </div>
+            <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">ÇOMAR AI V.1.2 (ALPHA)</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    ÇOMAR YARDIM
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        Merhaba! Ben SiteRobotu Çomar. Burada Ürünle İlgili Temel Bilgileri Değiştirebilirsiniz.
+                                        Ürününü Başka Bir Kategoriye Taşımak Mümkün Değildir!. Ürünü Başka Bir Kategoriye Taşımak
+                                        İçin Ürünü Silmeniz Ve bir Daha İstediğini Kategoriye Göre Eklemeniz Gerekmektedir.
+                                    </p>
+                                </div>
+                                <div class="panel-footer">
+                                    Haydi şimdi Hazırsanız Bu Ürünü Düzenleyelim....
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

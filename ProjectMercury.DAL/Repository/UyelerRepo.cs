@@ -15,21 +15,18 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                int? No = db.Uyeler.OrderByDescending(p => p.UyeNo).FirstOrDefault().UyeNo + 1; // bu yapıyı kontrol et
-                bool Control = db.Uyeler.Any(p => p.KullaniciAdi == Al.KullaniciAdi && p.Sifre == Al.Sifre && p.UyeNo == Al.UyeNo);
+                bool Control = db.Uyeler.Any(p => p.KullaniciAdi == Al.KullaniciAdi && p.Sifre == Al.Sifre);
                 if (Control != true)
                 {
                     db.Uyeler.Add(new Uyeler()
                     {
                         Adres = Al.Adres,
-                        Banlimi = Al.Banlimi,
                         KullaniciAdi = Al.KullaniciAdi,
                         MailAdresi = Al.MailAdresi,
                         UyeAdiSoyadi = Al.UyeAdiSoyadi,
                         Sifre = Al.Sifre,
-                        Tarih = Al.Tarih,
-                        Telefon = Al.Telefon,
-                        UyeNo = int.Parse(No.ToString())
+                        Tarih = DateTime.Now.ToShortDateString(),
+                        Telefon = Al.Telefon
                     });
                     db.SaveChanges();
                     return true;
@@ -64,14 +61,21 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static void UyeSil(string ID) //Üye Sil
+        public static bool UyeSil(int ID) //Üye Sil
         {
             using (DBCON db = new DBCON())
             {
-                int id = int.Parse(ID);
-                var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == id);
-                db.Uyeler.Remove(Bul);
-                db.SaveChanges();
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == ID);
+                    db.Uyeler.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
        
@@ -90,9 +94,60 @@ namespace ProjectMercury.DAL.Repository
                     Sifre = p.Sifre,
                     Tarih = p.Tarih,
                     Telefon = p.Telefon,
-                    UyelerID = p.UyelerID,
-                    UyeNo = p.UyeNo
+                    UyelerID = p.UyelerID
                 }).FirstOrDefault();
+            }
+        }
+        public static List<VMUyeler> TumUyeler() //Üyelerin hepsi
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.Uyeler.Select(p => new VMUyeler
+                {
+                    Adres = p.Adres,
+                    Banlimi = p.Banlimi,
+                    KullaniciAdi = p.KullaniciAdi,
+                    MailAdresi = p.MailAdresi,
+                    UyeAdiSoyadi = p.UyeAdiSoyadi,
+                    Sifre = p.Sifre,
+                    Tarih = p.Tarih,
+                    Telefon = p.Telefon,
+                    UyelerID = p.UyelerID
+                }).ToList();
+            }
+        }
+        public static bool UyeBanla(VMUyeler Al) //Üye Banla
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
+                    Bul.Banlimi = true;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool UyeBanlaKaldir(VMUyeler Al) //Üye BanKaldir
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
+                    Bul.Banlimi = false;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
         }
     }

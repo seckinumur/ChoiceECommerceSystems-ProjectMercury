@@ -19,7 +19,7 @@ namespace ProjectMercury.DAL.Repository
                 int Indirim = db.Urun.Where(p => p.IndirimVarmi == true).Count();
                 int Indirimsiz = db.Urun.Where(p => p.IndirimVarmi == false).Count();
                 int Musteriler = db.Uyeler.Count();
-                int Kullanicilar = db.Kullanicilar.Count();
+                int Kullanicilar = db.Kullanicilar.Where(p=> p.System==false).ToList().Count();
                 int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true).Count();
                 int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false).Count();
                 int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false).Count();
@@ -38,6 +38,25 @@ namespace ProjectMercury.DAL.Repository
                     Gonderilmeyen = Gonderilmeyenurunler
                 };
                 return Analiz;
+            }
+        }
+        public static VMUrunModel UrunKaydetKategori() //Toplam
+        {
+            using (DBCON db = new DBCON())
+            {
+                var Marka = db.Marka.ToList();
+                var Kategori = db.Kategori.ToList();
+                var AltKategori = db.AltKategori.ToList();
+                var UrunKategori = db.UrunKategori.ToList();
+
+                VMUrunModel Model = new VMUrunModel
+                {
+                    altkategoriadi=AltKategori,
+                    kategori=Kategori,
+                    marka=Marka,
+                    urunkategoriadi=UrunKategori
+                };
+                return Model;
             }
         }
         public static List<VMUrun> ToplamUrun() //Toplam Ürün
@@ -138,8 +157,7 @@ namespace ProjectMercury.DAL.Repository
                     Sifre = p.Sifre,
                     Tarih = p.Tarih,
                     Telefon = p.Telefon,
-                    UyelerID = p.UyelerID,
-                    UyeNo = p.UyeNo
+                    UyelerID = p.UyelerID
                 }).ToList();
             }
         }

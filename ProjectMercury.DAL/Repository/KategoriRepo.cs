@@ -73,12 +73,21 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static Kategori KategoriBul(string ID) //Kategori Bul
+        public static List<VMAltKategori> KategoriListele(int ID) //Kategorin Alt Kategorilerini Listele
         {
-            int id = int.Parse(ID);
             using (DBCON db = new DBCON())
             {
-                return db.Kategori.FirstOrDefault(p => p.KategoriID == id);
+                return db.AltKategori.Where(p => p.KategoriID == ID).Select(p=> new VMAltKategori {
+                    AltKategoriAdi=p.AltKategoriAdi,
+                    AltKategoriID=p.AltKategoriID
+                }).ToList();
+            }
+        }
+        public static string KategoriIsmiBul(int ID) //Kategori Bul
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.Kategori.FirstOrDefault(p => p.KategoriID == ID).KategoriAdi;
             }
         }
         public static List<VMKategori> Kategoriler() //Kategorileri Listele
@@ -96,6 +105,17 @@ namespace ProjectMercury.DAL.Repository
                     bool Check = db.Urun.Any(p => p.KategoriID == item.KategoriID);
                     item.UrunVarmi = Check;
                 }
+                return Kontrol;
+            }
+        }
+        public static List<VMKategori> KategorilerIsim() //Kategorileri Listele
+        {
+            using (DBCON db = new DBCON())
+            {
+                var Kontrol = db.Kategori.Select(p => new VMKategori
+                {
+                    KategoriAdi = p.KategoriAdi
+                }).ToList();
                 return Kontrol;
             }
         }

@@ -61,10 +61,12 @@
     <Compile Include="VMModels\VMAltKategori.cs" />
     <Compile Include="VMModels\VMAnaliz.cs" />
     <Compile Include="VMModels\VMKategori.cs" />
+    <Compile Include="VMModels\VMKullanicilar.cs" />
     <Compile Include="VMModels\VMMArka.cs" />
     <Compile Include="VMModels\VMSiparis.cs" />
     <Compile Include="VMModels\VMUrun.cs" />
     <Compile Include="VMModels\VMUrunKategori.cs" />
+    <Compile Include="VMModels\VMUrunModel.cs" />
     <Compile Include="VMModels\VMUyeler.cs" />
   </ItemGroup>
   <ItemGroup>

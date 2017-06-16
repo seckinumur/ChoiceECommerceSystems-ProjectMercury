@@ -24,9 +24,11 @@ namespace ProjectMercury.DAL.Repository
                     }
                     else
                     {
+                        var bulKat = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.KategoriIsmi);
                         AltKategori Ekle = new AltKategori
                         {
                             AltKategoriAdi = Al.AltKategoriAdi,
+                            KategoriID=bulKat.KategoriID
                         };
                         db.AltKategori.Add(Ekle);
                         db.SaveChanges();
@@ -45,8 +47,10 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
+                    var bulKat = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.KategoriIsmi);
                     var Bul = db.AltKategori.FirstOrDefault(p => p.AltKategoriID == Al.AltKategoriID);
                     Bul.AltKategoriAdi = Al.AltKategoriAdi;
+                    Bul.KategoriID = bulKat.KategoriID;
                     db.SaveChanges();
                     return true;
                 }
@@ -73,12 +77,19 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static AltKategori AltKategoriBul(string ID) //AltKategori Bul
+        public static string AltKategoriBul(int ID) //AltKategori Bul
         {
-            int id = int.Parse(ID);
             using (DBCON db = new DBCON())
             {
-                return db.AltKategori.FirstOrDefault(p => p.AltKategoriID == id);
+                return db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID).AltKategoriAdi;
+            }
+        }
+        public static string AltKategoriKategoriBul(int ID) //AltKategori Bul
+        {
+            using (DBCON db = new DBCON())
+            {
+                int Bul =  db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID).KategoriID;
+                return db.Kategori.FirstOrDefault(p => p.KategoriID == Bul).KategoriAdi;
             }
         }
         public static List<VMAltKategori> AltKategoriler() //AltKategorileri Bul
@@ -88,12 +99,16 @@ namespace ProjectMercury.DAL.Repository
                 var result = db.AltKategori.Select(p => new VMAltKategori
                 {
                     AltKategoriAdi = p.AltKategoriAdi,
-                    AltKategoriID = p.AltKategoriID
+                    AltKategoriID = p.AltKategoriID,
+                    KategoriIsmi= p.KategoriID.ToString()
                 }).ToList();
+                
                 foreach (var item in result)
                 {
                     bool kontrol = db.Urun.Any(p => p.AltKategoriID == item.AltKategoriID);
+                    var bulKat = db.Kategori.FirstOrDefault(p => p.KategoriID.ToString() == item.KategoriIsmi);
                     item.UrunVarmi = kontrol;
+                    item.KategoriIsmi = bulKat.KategoriAdi;
                 }
                 return result;
             }

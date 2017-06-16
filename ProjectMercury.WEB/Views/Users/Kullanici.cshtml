@@ -1,0 +1,221 @@
+﻿@model List<ProjectMercury.DAL.VMModels.VMKullanicilar>
+@{
+    ViewBag.Title = "Kullanici";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">Kullanıcılar <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tüm Kullanıcılar Gösteriliyor
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Kullanıcı Adı</th>
+                                <th>Şifre</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.KullaniciAdi</td>
+                                        <td>@item.KullaniciSifre</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.KullanicilarID','@item.KullaniciAdi')">Sil</button>
+                                            <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.KullanicilarID','@item.KullaniciAdi','@item.KullaniciSifre')">Düzenle</button>
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#Banla" onclick="BanIslemi('@item.KullanicilarID','@item.KullaniciAdi')" disabled="@(item.Master == true ? true : false)">Admin</button>
+                                        </td>
+
+                                    </tr>
+    }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">ÇOMAR AI V.1.2 (ALPHA)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                ÇOMAR YARDIM
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Sisteme Erişim Sağlayan Kullanıcıları Görmektesiniz.
+                                    <hr />
+                                    <strong style="color:red">
+                                        Bu Kullanıcılar Dünya Üzerinde Herhangi Bir Cihazdan Sisteme Bağlanıp Erişim
+                                        Hakkına Sahiptir. Sisteme Veri Ekleyebilir Yada Çıkarabilir!
+                                    </strong>
+                                    <hr />
+                                    Eğer Kullanıcı <strong>Admin</strong> Modda İse Kullanıcı Ekleyebilir Çıkarabilir ve Site Bilgilerini Değiştirebilir.
+                                    Admin Moda Erişim Vermek Site Sahibiyle Aynı Yetkiere Sahip Olmak Demektir.
+                                    <hr />
+                                    <strong style="color:blue">
+                                        Yanlız Sistemde Değiştirilemeyen Ve Asla Görünmeyen Bir Kullanıcı Yapısı Daha Vardır. O kullanıcı
+                                        Linux Sistemlerde Olduğu Gibi SuperUser "SU" Olarak Tanımlanır. Çomar Yapay Zekası Ve Sistem Kontrol Mekanizması ile sistem Güvenlik
+                                        Sistemi Bu Useri Kullanır. Bu User Veritabanında Kayıtlıdır. Herhangi bir Ters Mühendislik Yapılır Yada Herhangi bir Hack Girişimi
+                                        Olursa Bu Userden Sisteme Erişilip Kurtarma Sistemini Ve güvenli Modu Çalıştırılabilir. Bu User Veritabanının Bütünlüğünü ve
+                                        Güvenliğini Sağlamaz. Tüm Sorumluluk Kullanıclara Aittir.
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="panel-footer">
+                                Haydi Hazırsanız Şimdi Bir Kullanıcıya Bakalım...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Ürün Silme</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KullanicilarID" id="SilID" />
+                            <input type="hidden" name="Gorev" value="Sil" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
+                                <label style="color:orangered">Ürün Silenecek Devam Edilsin mi?</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">SİL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Banla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Admin İşlemleri</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KullanicilarID" id="BanUyeID" />
+                            <input type="hidden" name="Gorev" value="Admin" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="UyeAdiBan">
+                                <label style="color:orangered">Bu Kullanıcıyı Yetkilendirmek İstediğinizden Eminmisiniz ?</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Admin Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="UyeDuzenle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Kullanıcı Düzenle</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KullanicilarID" id="DuzenleID" />
+                            <input type="hidden" name="Gorev" value="Duzenle" />
+                            <div class="form-group">
+                                <input class="form-control" name="KullaniciAdi" id="KullaniciAdi" placeholder="Kullanıcı Adı" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="KullaniciSifre" id="Sifresi" placeholder="Şifre" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="Ekle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Kullanıcı Ekleme</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="Gorev" value="Ekle" />
+                            <div class="form-group">
+                                <input class="form-control" name="KullaniciAdi" placeholder="Kullanıcı Adı" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="KullaniciSifre" placeholder="Şifre" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12">
+        <div>
+            <button data-toggle="modal" data-target="#Ekle" class="btn btn-info col-lg-12">Kullanıcı Ekle</button>
+            <p class="text-warning"><strong>Unutmayın! Kullanıcı Eklemek Sisteme Erişim Yetkisi Vermektir.</strong></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function Duzenle(obj, obj1, obj2) {
+        document.getElementById("DuzenleID").value = obj;
+        document.getElementById("KullaniciAdi").value = obj1;
+        document.getElementById("Sifresi").value = obj2;
+    }
+    function BanIslemi(obj, ob2) {
+        document.getElementById("BanUyeID").value = obj;
+        document.getElementById("UyeAdiBan").value = ob2;
+    }
+    function Islem(obj, obj2) {
+        document.getElementById("SilID").value = obj;
+        document.getElementById("Silinecek").value = obj2;
+    }
+</script>

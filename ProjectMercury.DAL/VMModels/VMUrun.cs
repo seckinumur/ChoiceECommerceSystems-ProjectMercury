@@ -22,6 +22,7 @@ namespace ProjectMercury.DAL.VMModels
         public string AltKategori { get; set; }
         public string UrunKategori { get; set; }
         public string Marka { get; set; }
+        public string Gorev { get; set; }
 
         public int KategoriID { get; set; }
         public int AltKategoriID { get; set; }

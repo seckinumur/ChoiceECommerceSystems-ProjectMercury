@@ -28,29 +28,37 @@ namespace ProjectMercury.Entity.DBContext
     {
         protected override void Seed(DBCON db)
         {
-            db.UrunKategori.Add(new UrunKategori
+            db.Kategori.Add(new Kategori
             {
-                UrunKategoriAdi = "KPSS Konu Anlatýmý"
+                KategoriAdi = "KPSS Kitaplarý"
             });
             db.SaveChanges();
 
             db.AltKategori.Add(new AltKategori
             {
                 AltKategoriAdi = "KPSS Eðitim Bilimleri",
-                Urunkategori = db.UrunKategori.Where(p=> p.UrunKategoriID==1).ToList()
+                KategoriID= 1
             });
             db.SaveChanges();
-            db.Kategori.Add(new Kategori
+
+            db.UrunKategori.Add(new UrunKategori
             {
-                KategoriAdi = "KPSS Kitaplarý",
-                Altkategori = db.AltKategori.Where(p => p.AltKategoriID == 1).ToList()
+                UrunKategoriAdi = "Ürün Kategori Yok"
             });
             db.SaveChanges();
+
+            db.UrunKategori.Add(new UrunKategori
+            {
+                UrunKategoriAdi = "KPSS Konu Anlatýmý"
+            });
+            db.SaveChanges();
+
             db.Marka.Add(new Marka
             {
                 MarkaAdi= "Lider Yayýnlarý"
             });
             db.SaveChanges();
+
             db.Urun.Add(new Urun
             {
                 AltKategoriID = 1,
@@ -63,15 +71,25 @@ namespace ProjectMercury.Entity.DBContext
                 UrunAdi="Murat Yayýnlarý KPSS Eðitim Bilimleri Konu Anlatýmlý Modüler Set(2017)",
                 UrunFiyati="59,50",
                 Yorum="1456 Sayfa 19.50 x 27.50 cm 1.Hamur Kaðýt Poþet Ambalaj",
-                UrunKategoriID=1
+                UrunKategoriID=2,
+                Image= "~/images/ImageStore/Demo.JPG"
+            });
+            db.SaveChanges();
+
+            db.Kullanicilar.Add(new Kullanicilar
+            {
+                KullaniciAdi="admin",
+                KullaniciSifre="9916",
+                Master=true,
+                System=true
             });
             db.SaveChanges();
             db.Kullanicilar.Add(new Kullanicilar
             {
-                KullaniciAdi="Admin",
-                KullaniciSifre="9916",
-                Master=true,
-                System=true
+                KullaniciAdi = "demo",
+                KullaniciSifre = "1234",
+                Master = true,
+                System = false
             });
             db.SaveChanges();
         }

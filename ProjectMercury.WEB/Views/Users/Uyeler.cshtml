@@ -1,0 +1,276 @@
+﻿@model List<ProjectMercury.DAL.VMModels.VMUyeler>
+    @{
+        ViewBag.Title = "Uyeler";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <div id="page-wrapper">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Üyeler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Tüm Üyeler Gösteriliyor
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Üye Adı Soyadı</th>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Şifre</th>
+                                    <th>Telefon</th>
+                                    <th>Mail</th>
+                                    <th>Adres</th>
+                                    <th>Üye Tarihi</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.UyeAdiSoyadi</td>
+                                            <td>@item.KullaniciAdi</td>
+                                            <td>@item.Sifre</td>
+                                            <td>@item.Telefon</td>
+                                            <td>@item.MailAdresi</td>
+                                            <td>@item.Adres</td>
+                                            <td>@item.Tarih</td>
+                                            <td>
+                                                <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UyelerID','@item.UyeAdiSoyadi')">Sil</button>
+                                                <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.UyelerID','@item.UyeAdiSoyadi','@item.KullaniciAdi','@item.Sifre','@item.Telefon','@item.MailAdresi','@item.Adres')">Düzenle</button>
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#Banla" disabled="@(item.Banlimi == true ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Banla</button>
+                                                <button class="btn btn-success" data-toggle="modal" data-target="#BANKaldir" disabled="@(item.Banlimi == false ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Ban Kaldır</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">ÇOMAR AI V.1.2 (ALPHA)</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    ÇOMAR YARDIM
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Üyelerinizi Görebilir. Üyelerin Bilgilerini Düzenleyebilir Yada
+                                        Üyelerinizi Silebilirsiniz. <strong style="color:red">Dikkat!</strong> Üye Silmek Tüm Üyelik Bilgilerini
+                                        ve Tüm Satım Alma İşlemlerini Siler.
+                                        <hr />
+                                        <strong style="color:blue">Eğer Üye İle İlgili Sıkıntılar Yaşıyorsanız ve Üyeyi Silmek İstemiyorsanız üyeyi
+                                        Banlayabilirsiniz. Banlanmış Üye Sipariş Verirken Banlandığını Görecektir. Alışveriş Sepeti Dolu Olsa Bile
+                                        Sipariş Veremeyecektir.</strong>
+                                    </p>
+                                </div>
+                                <div class="panel-footer">
+                                    Haydi Hazırsanız Şimdi Bir Üyeye Bakalım...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Ürün Silme</h4>
+                        </div>
+                        <form role="form" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="UyelerID" id="SilID" />
+                                <input type="hidden" name="Gorev" value="Sil" />
+                                <div class="form-group">
+                                    <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
+                                    <label style="color:orangered">Ürün Silenecek Devam Edilsin mi?</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-warning">SİL</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="Banla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Üye Banlama</h4>
+                        </div>
+                        <form role="form" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="UyelerID" id="BanUyeID" />
+                                <input type="hidden" name="Gorev" value="Banla" />
+                                <div class="form-group">
+                                    <input class="form-control" readonly="readonly" style="color:orangered" id="UyeAdiBan">
+                                    <label style="color:orangered">Bu Üyeyi Banlamak İstediğinizden Eminmisiniz ?</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-warning">Banla</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="BANKaldir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Üye Ban Kaldırma</h4>
+                        </div>
+                        <form role="form" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="UyelerID" id="BanUyeID1" />
+                                <input type="hidden" name="Gorev" value="BanKaldir" />
+                                <div class="form-group">
+                                    <input class="form-control" readonly="readonly" style="color:orangered" id="UyeAdiBan1">
+                                    <label style="color:orangered">Bu Üyeden Ban Kaldırmak İstediğinizden Eminmisiniz ?</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-warning">Ban Kaldır</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="UyeDuzenle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Düzenle İşlemleri</h4>
+                        </div>
+                        <form role="form" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="UyelerID" id="DuzenleID" />
+                                <input type="hidden" name="Gorev" value="Duzenle" />
+                                    <div class="form-group">
+                                        <input class="form-control" name="UyeAdiSoyadi" id="UyeAdi" placeholder="Üye Adı Soyadı" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="KullaniciAdi" id="KullaniciAdi" placeholder="Kullanıcı Adı" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="Sifre" id="Sifresi" placeholder="Şifre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="Telefon" id="Tel" placeholder="Telefon" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="MailAdresi" id="Email" placeholder="E-Mail" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="Adres" id="Adres" placeholder="Adres" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-warning">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="Ekle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">Üye Ekleme</h4>
+                        </div>
+                        <form role="form" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="Gorev" value="Ekle" />
+                                <div class="form-group">
+                                    <input class="form-control"name="UyeAdiSoyadi"  placeholder="Üye Adı Soyadı" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="KullaniciAdi"  placeholder="Kullanıcı Adı" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="Sifre" placeholder="Şifre" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="Telefon" placeholder="Telefon" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="MailAdresi" placeholder="E-Mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" name="Adres" placeholder="Adres" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-warning">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-12">
+            <div>
+                <button data-toggle="modal" data-target="#Ekle" class="btn btn-info col-lg-12">Üye Ekle</button>
+                <p class="text-warning"><strong>Manuel sisteme Üye Ekleme</strong></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function Duzenle(obj, obj1, obj2,obj3,obj4,obj5,obj6) {
+            document.getElementById("DuzenleID").value = obj;
+            document.getElementById("UyeAdi").value = obj1;
+            document.getElementById("KullaniciAdi").value = obj2;
+            document.getElementById("Sifresi").value = obj3;
+            document.getElementById("Tel").value = obj4;
+            document.getElementById("Email").value = obj5;
+            document.getElementById("Adres").value = obj6;
+        }
+        function BanIslemi(obj, ob2) {
+            document.getElementById("BanUyeID").value = obj;
+            document.getElementById("UyeAdiBan").value = ob2;
+            document.getElementById("BanUyeID1").value = obj;
+            document.getElementById("UyeAdiBan1").value = ob2;
+        }
+        function Islem(obj, obj2) {
+            document.getElementById("SilID").value = obj;
+            document.getElementById("Silinecek").value = obj2;
+        }
+    </script>

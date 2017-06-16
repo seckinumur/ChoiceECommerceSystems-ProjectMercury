@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "IndirimsizUrunler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">İndirimsiz Ürünler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    İndirimli Ürünler Gösteriliyor
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Alt Kategori</th>
+                                <th>Ürün Kategori</th>
+                                <th>Ürün Adı</th>
+                                <th>Ürün Fiyatı</th>
+                                <th>İndirimli Fiyatı</th>
+                                <th>Ürün Adedi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Kategori</td>
+                                        <td>@item.AltKategori</td>
+                                        <td>@item.UrunKategori</td>
+                                        <td>@item.UrunAdi</td>
+                                        <td>@item.UrunFiyati</td>
+                                        <td>@item.IndirimliFiyati</td>
+                                        <td>@item.UrunAdedi</td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UrunAdi','@item.IndirimliFiyati','@item.UrunID')">İndirim</button>
+                                            <a data-toggle="modal" data-target="#Duzenle" class="btn btn-info" href="#">Detay</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">ÇOMAR AI V.1.2 (ALPHA)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                ÇOMAR YARDIM
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada İndirimde Olmayan Ürünleri Gelişmiş Arama Özelliği İle Donatılmış
+                                    Tabloda Görmektesiniz. Bu Tablonun en Sağındaki Butona <strong>İNDİRİM</strong> Butonuna
+                                    Bastığınızda İlgili Ürünün İndirim Değerini Değiştirebilirsiniz. Buradan Ürün Silemezsiniz.
+                                    Ürünle İlgili Detay Görmek Ürünü Düzenlemek İçin Detay Butonuna Basmanız Yeterli.
+                                </p>
+                            </div>
+                            <div class="panel-footer">
+                                Haydi Hazırsanız Şimdi Bir İndirim ekleyelim...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">İndirim İşlemleri</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="UrunID" id="ID" />
+                            <input type="hidden" name="Gorev" value="Degistir" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:darkorange" id="Urunismi">
+                                <label style="color:blue">Mevcut İndirim</label>
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="indirimgoster">
+                                <hr />
+                                <label style="color:forestgreen">Yeni İndirim</label>
+                                <input class="form-control" name="IndirimliFiyati" style="color:orangered" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Uygula</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+        function Islem(obj, obj2,obj3) {
+            document.getElementById("Urunismi").value = obj;
+            document.getElementById("indirimgoster").value = obj2;
+            document.getElementById("ID").value = obj3;
+        }
+</script>
+

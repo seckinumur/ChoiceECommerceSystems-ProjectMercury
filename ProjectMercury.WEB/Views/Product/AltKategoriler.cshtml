@@ -23,7 +23,8 @@
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Alt Kategoriler</th>
+                                <th>Kategori</th>
+                                <th>Alt Kategori</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -32,10 +33,11 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td>@item.KategoriIsmi</td>
                                         <td>@item.AltKategoriAdi</td>
                                         <td>
                                             <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.AltKategoriID','@item.AltKategoriAdi')" disabled="@(item.UrunVarmi == true ? true : false)">AltKategoriyi Sil</button>
-                                            <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.AltKategoriID','@item.AltKategoriAdi')">AltKategoriyi Düzenle</button>
+                                            <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.AltKategoriID','@item.AltKategoriAdi','@item.KategoriIsmi')">AltKategoriyi Düzenle</button>
                                         </td>
                                     </tr>
                                 }
@@ -118,6 +120,22 @@
                                     <label>Alt Kategori Adı</label>
                                     <input class="form-control" name="AltkategoriAdi" id="kategoriAdi" required>
                                 </div>
+                                <div class="form-group">
+                                    <label>Mevcut Kategorisi</label>
+                                    <input class="form-control" id="KatGonder" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategori Adı</label>
+                                    <select class="form-control" name="KategoriIsmi">
+                                        @{
+                                            foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.KategorilerIsim())
+                                            {
+                                                <option>@item.KategoriAdi</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         ÇOMAR AI V.1.2 (ALPHA)
@@ -126,8 +144,8 @@
                                         <p>
                                             Merhaba! Ben SiteRobotu Çomar. Şimdi Seçtiğiniz Alt Kategorinin ismini Görüyor Olmalısınız.
                                             Buradan Alt Kategorinin İsmini Yeniden Adlandırabilirsiniz. <strong style="color:red;">
-                                            ! Lütfen Dikkat... Unutmayın Ki Alt Kategorinin İsmini Değiştirmek İlgili Ürünlerin 
-                                            Tümün Ve Ürün Kategorilerinin Tümünün Anlam Değişikliğine Sebep Olabilir.
+                                                ! Lütfen Dikkat... Unutmayın Ki Alt Kategorinin İsmini Değiştirmek İlgili Ürünlerin
+                                                Tümün Ve Ürün Kategorilerinin Tümünün Anlam Değişikliğine Sebep Olabilir.
                                             </strong>
                                         </p>
                                     </div>
@@ -162,6 +180,17 @@
                                     <label>Alt Kategori Adı</label>
                                     <input class="form-control" name="AltKategoriAdi" required>
                                 </div>
+                                <div class="form-group">
+                                    <label>Kategori Adı</label>
+                                    <select class="form-control" name="KategoriIsmi">
+                                        @{
+                                            foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.KategorilerIsim())
+                                            {
+                                                <option>@item.KategoriAdi</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         ÇOMAR AI V.1.2 (ALPHA)
@@ -170,8 +199,9 @@
                                         <p>
                                             Merhaba! Ben SiteRobotu Çomar. Bu Menüden Yeni Bir Alt Kategori Ekleyebilirsiniz.
                                             Yeni bir Alt Kategori Ürünlerin ve Ürün Kategorini Tek Türde Toplanacağı Ana
-                                            Başlıktır.<strong>Yeni Bir Alt Kategori Oluştururken Ürün Kategorine Mantıklı Olabilmesi 
-                                            İçin Doğru Bir İsim Seçilmesi Çok Önemlidir.
+                                            Başlıktır.<strong>
+                                                Yeni Bir Alt Kategori Oluştururken Ürün Kategorine Mantıklı Olabilmesi
+                                                İçin Doğru Bir İsim Seçilmesi Çok Önemlidir.
                                             </strong>
                                         </p>
                                     </div>
@@ -199,12 +229,12 @@
     </div>
 </div>
 <script type="text/javascript">
-    function Islem(obj,obj2)
-    {
+    function Islem(obj, obj2,obj3) {
         document.getElementById("kategoriAdi").value = obj2;
         document.getElementById("SilID").value = obj;
         document.getElementById("ID").value = obj;
         document.getElementById("Silinecek").value = obj2;
+        document.getElementById("KatGonder").value = obj3;
     }
 </script>
 

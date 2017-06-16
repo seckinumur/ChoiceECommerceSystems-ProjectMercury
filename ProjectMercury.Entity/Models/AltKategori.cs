@@ -10,7 +10,6 @@ namespace ProjectMercury.Entity.Models
     {
         public int AltKategoriID { get; set; }
         public string AltKategoriAdi { get; set; }
-
-        public virtual List<UrunKategori> Urunkategori { get; set; }
+        public int KategoriID { get; set; }
     }
 }
