@@ -482,7 +482,7 @@ namespace ProjectMercury.WEB.Controllers
                     string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
                     img.Resize(860, 480);
                     img.Save("~/images/ImageStore/" + newfoto);
-                    Data.Image = "~/images/ImageStore/" + newfoto;
+                    Data.Image = "/images/ImageStore/" + newfoto;
                     bool sonuc = UrunRepo.UrunKaydet(Data);
                     if(sonuc != true)
                     {
@@ -516,7 +516,67 @@ namespace ProjectMercury.WEB.Controllers
             {
                 try
                 {
+                    var Al = AnalizRepo.UrunKaydetKategori();
+                    ViewBag.Marka = Al.marka;
+                    ViewBag.Kategori = Al.kategori;
+                    ViewBag.AltKategori = Al.altkategoriadi;
+                    ViewBag.UrunKategori = Al.urunkategoriadi;
                     return View(UrunRepo.UrunBul(ID));
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Bulma İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "2111";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult UrunDuzenle(VMUrun Data, HttpPostedFileBase Resim)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (System.IO.File.Exists(Server.MapPath("~" + Data.Image)))
+                    {
+                        System.IO.File.Delete(Server.MapPath("~"+Data.Image));
+                    }
+
+                    WebImage img = new WebImage(Resim.InputStream);
+                    FileInfo imginfo = new FileInfo(Resim.FileName);
+                    string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
+                    img.Resize(860, 480);
+                    img.Save("~/images/ImageStore/" + newfoto);
+                    Data.Image = "/images/ImageStore/" + newfoto;
+
+                    bool Result = UrunRepo.UrunGuncelle(Data);
+                    if (Result == true)
+                    {
+                        var Al = AnalizRepo.UrunKaydetKategori();
+                        ViewBag.Marka = Al.marka;
+                        ViewBag.Kategori = Al.kategori;
+                        ViewBag.AltKategori = Al.altkategoriadi;
+                        ViewBag.UrunKategori = Al.urunkategoriadi;
+                        var gonder = UrunRepo.UrunBul(Data.UrunID);
+                        TempData["1"] = "alert alert-success";
+                        TempData["2"] = false;
+                        TempData["3"] = "Ürün Başarıyla Güncellendi!";
+                        return View(gonder);
+                    }
+                    else
+                    {
+                        TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Kaydetme İşlemi Başarısız Oldu!";
+                        TempData["HataKodu"] = "8111";
+                        return RedirectToAction("Hata");
+                    }
                 }
                 catch
                 {

@@ -85,7 +85,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                var result = db.UrunKategori.Select(p => new VMUrunKategori
+                var result = db.UrunKategori.Where(p=> p.UrunKategoriAdi != "Ürün Kategori Yok").Select(p => new VMUrunKategori
                 {
                     UrunKategoriAdi = p.UrunKategoriAdi,
                     UrunKategoriID = p.UrunKategoriID

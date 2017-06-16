@@ -18,11 +18,11 @@
 
                         <div class="form-group col-md-2">
                             <label>Marka Adı</label>
-                            <select class="form-control" name="Marka">
+                            <select class="selectpicker form-control" data-live-search="true" name="Marka">
                                 @{
                                     foreach (var item in Model.marka)
                                     {
-                                        <option>@item.MarkaAdi</option>
+                                        <option data-tokens="@item.MarkaAdi">@item.MarkaAdi</option>
                                     }
                                 }
                             </select>
@@ -30,11 +30,11 @@
 
                         <div class="form-group col-md-2">
                             <label>Kategori Adı</label>
-                            <select class="form-control" name="Kategori">
+                            <select  class="selectpicker form-control" data-live-search="true" name="Kategori">
                                 @{
                                     foreach (var item in Model.kategori)
                                     {
-                                        <option>@item.KategoriAdi</option>
+                                        <option data-tokens="@item.KategoriAdi">@item.KategoriAdi</option>
                                     }
                                 }
                             </select>
@@ -42,11 +42,11 @@
 
                         <div class="form-group col-md-2">
                             <label>Alt Kategori Adı</label>
-                            <select class="form-control" name="AltKategori">
+                            <select class="selectpicker form-control" data-live-search="true" name="AltKategori">
                                 @{
                                     foreach (var item in Model.altkategoriadi)
                                     {
-                                        <option>@item.AltKategoriAdi</option>
+                                        <option data-tokens="@item.AltKategoriAdi">@item.AltKategoriAdi</option>
                                     }
                                 }
                             </select>
@@ -54,11 +54,11 @@
 
                         <div class="form-group col-md-2">
                             <label>Ürün Kategori</label>
-                            <select class="form-control" name="UrunKategori">
+                            <select class="selectpicker form-control" data-live-search="true" name="UrunKategori">
                                 @{
                                     foreach (var item in Model.urunkategoriadi)
                                     {
-                                        <option>@item.UrunKategoriAdi</option>
+                                        <option data-tokens="@item.UrunKategoriAdi">@item.UrunKategoriAdi</option>
                                     }
                                 }
                             </select>

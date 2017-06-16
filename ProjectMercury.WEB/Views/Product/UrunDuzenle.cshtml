@@ -20,41 +20,102 @@
                 </div>
 
                 <div class="col-md-6">
-                    <form role="form" method="post">
+                    <form role="form" method="post" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label>Marka Adı</label>
+                            <select class="selectpicker form-control" data-live-search="true" name="Marka" id="Marka">
+                                @{
+                                    foreach (var item in (List<ProjectMercury.Entity.Models.Marka>)ViewBag.Marka)
+                                    {
+                                        <option data-tokens="@item.MarkaAdi">@item.MarkaAdi</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kategori Adı</label>
+                            <select class="selectpicker form-control" data-live-search="true" name="Kategori" id="Kategori">
+                                @{
+                                    foreach (var item in (List<ProjectMercury.Entity.Models.Kategori>)ViewBag.Kategori)
+                                    {
+                                        <option data-tokens="@item.KategoriAdi">@item.KategoriAdi</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Alt Kategori Adı</label>
+                            <select class="selectpicker form-control" data-live-search="true" name="AltKategori" id="AltKategori">
+                                @{
+                                    foreach (var item in (List<ProjectMercury.Entity.Models.AltKategori>)ViewBag.AltKategori)
+                                    {
+                                        <option data-tokens="@item.AltKategoriAdi">@item.AltKategoriAdi</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ürün Kategori</label>
+                            <select class="selectpicker form-control" data-live-search="true" name="UrunKategori" id="UrunKategori">
+                                @{
+                                    foreach (var item in (List<ProjectMercury.Entity.Models.UrunKategori>)ViewBag.UrunKategori)
+                                    {
+                                        <option data-tokens="@item.UrunKategoriAdi">@item.UrunKategoriAdi</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label>Ürün Adı</label>
-                            <input class="form-control" name="UrunAdi" value="@Model.UrunAdi">
+                            <input class="form-control" name="UrunAdi" required value="@Model.UrunAdi" placeholder="Ürün Adını Girin">
                         </div>
 
                         <div class="form-group">
                             <label>Ürün Fiyatı</label>
-                            <input class="form-control" name="UrunFiyati" value="@Model.UrunFiyati">
+                            <input class="form-control" name="UrunFiyati" required value="@Model.UrunFiyati" placeholder="Ürün Fiyatını Girin">
                         </div>
 
                         <div class="form-group">
                             <label>İndirimli Fiyatı</label>
-                            <input class="form-control" name="IndirimliFiyati" value="@Model.IndirimliFiyati">
+                            <input class="form-control" name="IndirimliFiyati" required value="@Model.IndirimliFiyati" placeholder="Ürün İndirimli Fiyatını Girin">
                         </div>
-
 
                         <div class="form-group">
                             <label>Ürün Açıklaması</label>
-                            <textarea class="form-control" rows="3" name="UrunAciklama">@Model.UrunAciklama</textarea>
+                            <textarea class="form-control" rows="3" name="UrunAciklama" required>@Model.UrunAciklama</textarea>
                         </div>
 
-
-                        <div class="form-group">
-                            <label>Resim Dosyası</label>
-                            <input type="file" name="Image">
+                        <div class="form-group col-md-6">
+                            <div class="fileinput fileinput-new col-md-12" data-provides="fileinput">
+                                <div class="fileinput-preview fileinput-exists thumbnail img-responsive col-md-12"></div>
+                                <div class="col-md-12">
+                                    <span class="btn btn-success btn-file col-md-12 form-control"><span class="fileinput-new">Resim Dosyası Seçin</span><span class="fileinput-exists">Değiştir</span><input type="file" name="Resim"></span>
+                                    <br /><br />
+                                    <a href="#" class="btn btn-danger fileinput-exists col-lg-12 form-control " data-dismiss="fileinput">Sil</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">ÜRÜNÜ GÜNCELLE</button>
-                        </div>
 
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-danger col-md-12 form-control">ÜRÜNÜ EKLE</button>
+                        </div>
+                        <div>
+                            <input hidden="hidden" name="UrunID" value="@Model.UrunID">
+                            <input hidden="hidden" name="Image" value="@Model.Image">
+                        </div>
                     </form>
                 </div>
                 <br />
+
+                <div class="col-lg-12">
+                    <div class="@TempData["1"]" hidden="@TempData["2"]">@TempData["3"]</div>
+                </div>
+
             </div>
             <div class="modal fade" id="Comar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
@@ -70,13 +131,16 @@
                                 </div>
                                 <div class="panel-body">
                                     <p>
-                                        Merhaba! Ben SiteRobotu Çomar. Burada Ürünle İlgili Temel Bilgileri Değiştirebilirsiniz.
-                                        Ürününü Başka Bir Kategoriye Taşımak Mümkün Değildir!. Ürünü Başka Bir Kategoriye Taşımak
-                                        İçin Ürünü Silmeniz Ve bir Daha İstediğini Kategoriye Göre Eklemeniz Gerekmektedir.
+                                        Merhaba! Ben SiteRobotu Çomar. Bu sayfadan Ürün Ekleyebilirsiniz.<strong style="color:red">
+                                            Ürün Eklemek İçin Önce Eklenecek Ürünle İlgili Bir Kategori Olması Gerekir.
+                                            Kategoriden Sonra Bir Alt Kategori Olması Gerekir.
+                                        </strong>
+                                        Her Ürünün Ürün Kategorisi Olmak zorunda Değildir. Ama Her Ürünün Kategorisi Ve alt Kategorisi Olmalıdır.
+                                        Ürünlere Resim Yüklemek Ürünlerin İçeriğini Zenginleştirir.
                                     </p>
                                 </div>
                                 <div class="panel-footer">
-                                    Haydi şimdi Hazırsanız Bu Ürünü Düzenleyelim....
+                                    Haydi şimdi Hazırsanız Ürün Ekleyelim....
                                 </div>
                             </div>
                         </div>
@@ -86,3 +150,16 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    @*$('#selectpicker').selectpicker('val', ['@Model.Marka', '@Model.Kategori', '@Model.AltKategori', '@Model.UrunKategori']);*@
+    @*$('#Marka').selectpicker('val', '@Model.Marka');*@
+
+       @*$('#UrunKategori').val('@Model.UrunKategori');*@
+    $(document).ready(function () {
+        $('#Marka').selectpicker('val', '@Model.Marka');
+        $('#Kategori').selectpicker('val', '@Model.Kategori');
+        $('#AltKategori').selectpicker('val', '@Model.AltKategori');
+        $('#UrunKategori').selectpicker('val', '@Model.UrunKategori');
+    });
+
+</script>

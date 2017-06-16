@@ -72,7 +72,7 @@ namespace ProjectMercury.Entity.DBContext
                 UrunFiyati="59,50",
                 Yorum="1456 Sayfa 19.50 x 27.50 cm 1.Hamur Kaðýt Poþet Ambalaj",
                 UrunKategoriID=2,
-                Image= "~/images/ImageStore/Demo.JPG"
+                Image= "/images/ImageStore/Demo.JPG"
             });
             db.SaveChanges();
 

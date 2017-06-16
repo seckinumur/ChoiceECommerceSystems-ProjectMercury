@@ -126,11 +126,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kategori Adı</label>
-                                    <select class="form-control" name="KategoriIsmi">
+                                    <select class="selectpicker form-control" data-live-search="true" name="KategoriIsmi">
                                         @{
                                             foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.KategorilerIsim())
                                             {
-                                                <option>@item.KategoriAdi</option>
+                                                <option data-tokens="@item.KategoriAdi">@item.KategoriAdi</option>
                                             }
                                         }
                                     </select>
@@ -182,11 +182,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kategori Adı</label>
-                                    <select class="form-control" name="KategoriIsmi">
+                                    <select class="selectpicker form-control" data-live-search="true" name="KategoriIsmi">
                                         @{
                                             foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.KategorilerIsim())
                                             {
-                                                <option>@item.KategoriAdi</option>
+                                                <option data-tokens="@item.KategoriAdi">@item.KategoriAdi</option>
                                             }
                                         }
                                     </select>

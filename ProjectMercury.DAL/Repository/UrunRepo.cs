@@ -81,14 +81,36 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
+                    double id = Double.Parse(Al.IndirimliFiyati);
+                    if (id == 0)
+                    {
+                        Al.IndirimVarmi = false;
+                        Al.IndirimliFiyati = "0";
+                    }
+                    else
+                    {
+                        Al.IndirimVarmi = true;
+                    }
+                    if (Al.UrunKategori == "Ürün Kategori Yok")
+                    {
+                        Al.UrunKategoriID = 1;
+                    }
+                    else
+                    {
+                        Al.UrunKategoriID = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriAdi == Al.UrunKategori).UrunKategoriID;
+                    }
+                    var marka = db.Marka.FirstOrDefault(p => p.MarkaAdi == Al.Marka);
+                    var kategori = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.Kategori);
+                    var altkategori = db.AltKategori.FirstOrDefault(p => p.AltKategoriAdi == Al.AltKategori);
+
                     var Bul = db.Urun.FirstOrDefault(p => p.UrunID == Al.UrunID);
-                    Bul.AltKategoriID = Al.AltKategoriID;
+                    Bul.AltKategoriID = altkategori.AltKategoriID;
                     Bul.Gramaj = Al.Gramaj;
                     Bul.Image = Al.Image;
                     Bul.IndirimliFiyati = Al.IndirimliFiyati;
                     Bul.IndirimVarmi = Al.IndirimVarmi;
-                    Bul.KategoriID = Al.KategoriID;
-                    Bul.MarkaID = Al.MarkaID;
+                    Bul.KategoriID = kategori.KategoriID;
+                    Bul.MarkaID = marka.MarkaID;
                     Bul.UrunAciklama = Al.UrunAciklama;
                     Bul.UrunAdedi = Al.UrunAdedi;
                     Bul.UrunAdi = Al.UrunAdi;
