@@ -16,7 +16,7 @@ namespace ProjectMercury.WEB
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Admin", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "View", action = "Anasayfa", id = UrlParameter.Optional }
             );
         }
     }

@@ -14,8 +14,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = AnalizRepo.ToplamUrun();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = AnalizRepo.ToplamUrun();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Tüm Ürünler Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "8966";
+                    return RedirectToAction("Hata", "Product");
+                }
             }
             else
             {
@@ -29,8 +38,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = AnalizRepo.IndirimliUrun();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = AnalizRepo.IndirimliUrun();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "İndirimli Ürünler Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "8866";
+                    return RedirectToAction("Hata", "Product");
+                }
             }
             else
             {
@@ -45,24 +63,33 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Degistir")
+                try
                 {
-                    bool Sonucu = UrunRepo.IndirimDegistir(Data);
-                    if (Sonucu == true)
+                    if (Data.Gorev == "Degistir")
                     {
-                        return RedirectToAction("IndirimliUrunler");
+                        bool Sonucu = UrunRepo.IndirimDegistir(Data);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("IndirimliUrunler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0041";
+                            return RedirectToAction("Hata", "Product");
+                        }
                     }
                     else
                     {
                         TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0041";
-                        return RedirectToAction("Hata","Product");
+                        TempData["HataKodu"] = "0040";
+                        return RedirectToAction("Hata", "Product");
                     }
                 }
-                else
+                catch
                 {
-                    TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
-                    TempData["HataKodu"] = "0040";
+                    TempData["Hata"] = "İndirimli Ürünler Sayfasının İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "8886";
                     return RedirectToAction("Hata", "Product");
                 }
             }
@@ -78,8 +105,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = AnalizRepo.IndirimsizUrun();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = AnalizRepo.IndirimsizUrun();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "İndirimsiz Ürünler Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "7786";
+                    return RedirectToAction("Hata", "Product");
+                }
             }
             else
             {
@@ -94,24 +130,33 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Degistir")
+                try
                 {
-                    bool Sonucu = UrunRepo.IndirimDegistir(Data);
-                    if (Sonucu == true)
+                    if (Data.Gorev == "Degistir")
                     {
-                        return RedirectToAction("IndirimsizUrunler");
+                        bool Sonucu = UrunRepo.IndirimDegistir(Data);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("IndirimsizUrunler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0031";
+                            return RedirectToAction("Hata", "Product");
+                        }
                     }
                     else
                     {
                         TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0031";
+                        TempData["HataKodu"] = "0030";
                         return RedirectToAction("Hata", "Product");
                     }
                 }
-                else
+                catch
                 {
-                    TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
-                    TempData["HataKodu"] = "0030";
+                    TempData["Hata"] = "İndirimsiz Ürünler Sayfasının İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "7886";
                     return RedirectToAction("Hata", "Product");
                 }
             }

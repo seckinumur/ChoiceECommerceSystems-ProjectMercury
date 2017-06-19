@@ -9,7 +9,7 @@ namespace ProjectMercury.WEB.Controllers
     public class ViewController : Controller
     {
         // GET: View
-        public ActionResult Index()
+        public ActionResult Anasayfa()
         {
             return View();
         }

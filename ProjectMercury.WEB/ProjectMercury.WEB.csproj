@@ -94,15 +94,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap-select.min.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\default.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jasny-bootstrap.min.css" />
     <Content Include="Content\css\metisMenu.min.css" />
+    <Content Include="Content\css\owl.carousel.html" />
+    <Content Include="Content\css\owl.carousel.min.css" />
+    <Content Include="Content\css\owl.theme.default.min.css" />
+    <Content Include="Content\css\owl.theme.html" />
+    <Content Include="Content\css\owl.video.play.html" />
+    <Content Include="Content\css\roboto.css" />
+    <Content Include="Content\css\roboto2.css" />
+    <Content Include="Content\css\roboto3.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\css\swiper.css" />
     <Content Include="Content\datatables-plugins\dataTables.bootstrap.css" />
     <Content Include="Content\datatables-plugins\dataTables.bootstrap.js" />
     <Content Include="Content\datatables-plugins\dataTables.bootstrap.min.js" />
@@ -150,6 +161,13 @@
     <Content Include="Content\datatables\js\jquery.dataTables.min.js" />
     <Content Include="Content\datatables\js\jquery.js" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontawesome-webfont5b62.html" />
+    <Content Include="Content\fonts\fontawesome-webfont5b62.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.html" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\fontawesome-webfont5b62.html" />
+    <Content Include="fonts\fontawesome-webfont5b62.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\choice corporation2.png" />
@@ -167,6 +185,19 @@
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\jasny-bootstrap.css.map" />
+    <Content Include="fonts\fontawesome-webfont5b62.eot" />
+    <Content Include="fonts\fontawesome-webfont5b62.ttf" />
+    <Content Include="fonts\fontawesome-webfont5b62.woff" />
+    <Content Include="fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont5b62.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont5b62.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont5b62.woff" />
+    <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regulard41d.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\defaults-tr_TR.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
@@ -176,9 +207,17 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.downCount.js" />
+    <Content Include="Scripts\jquery.sticky.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\metisMenu.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\nouislider.min.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\pace.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="Scripts\swiper.min.js" />
+    <Content Include="Scripts\wow.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +235,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\View\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Content\datatables-responsive\dataTables.responsive.scss" />
@@ -224,6 +262,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Product\UrunDuzenle.cshtml" />
+    <Content Include="Views\Shared\_LayoutView.cshtml" />
+    <Content Include="Views\View\Anasayfa.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

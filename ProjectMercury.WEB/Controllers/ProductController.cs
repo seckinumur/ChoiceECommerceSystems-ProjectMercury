@@ -17,8 +17,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = KategoriRepo.Kategoriler();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = KategoriRepo.Kategoriler();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Kategoriler Sayfa Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "4750";
+                    return RedirectToAction("Hata");
+                }
             }
             else
             {
@@ -33,52 +42,61 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Sil")
+                try
                 {
-                    bool sonucu = KategoriRepo.KategoriSil(Data.KategoriID);
-                    if (sonucu == true)
+                    if (Data.Gorev == "Sil")
                     {
-                        return RedirectToAction("Kategori");
+                        bool sonucu = KategoriRepo.KategoriSil(Data.KategoriID);
+                        if (sonucu == true)
+                        {
+                            return RedirectToAction("Kategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kategori Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0051";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Guncelle")
+                    {
+                        bool sonuc = KategoriRepo.KategoriGuncelle(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Kategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kategori Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0052";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Ekle")
+                    {
+                        bool sonuc = KategoriRepo.KategoriKaydet(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Kategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kategori Ekleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0053";
+                            return RedirectToAction("Hata");
+                        }
                     }
                     else
                     {
-                        TempData["Hata"] = "Kategori Silme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0051";
+                        TempData["Hata"] = "Kategori İşlemleri Başarısız Oldu!";
+                        TempData["HataKodu"] = "0050";
                         return RedirectToAction("Hata");
                     }
                 }
-                else if (Data.Gorev == "Guncelle")
+                catch
                 {
-                    bool sonuc = KategoriRepo.KategoriGuncelle(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("Kategori");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Kategori Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0052";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else if (Data.Gorev == "Ekle")
-                {
-                    bool sonuc = KategoriRepo.KategoriKaydet(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("Kategori");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Kategori Ekleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0053";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else
-                {
-                    TempData["Hata"] = "Kategori İşlemleri Başarısız Oldu!";
-                    TempData["HataKodu"] = "0050";
+                    TempData["Hata"] = "Kategoriler İşlemleri Başarısız Oldu!";
+                    TempData["HataKodu"] = "4650";
                     return RedirectToAction("Hata");
                 }
             }
@@ -94,8 +112,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = AltKategoriRepo.AltKategoriler();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = AltKategoriRepo.AltKategoriler();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Alt Kategoriler Sayfa Gosterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "3650";
+                    return RedirectToAction("Hata");
+                }
             }
             else
             {
@@ -110,52 +137,61 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Sil")
+                try
                 {
-                    bool sonucu = AltKategoriRepo.AltKategoriSil(Data.AltKategoriID);
-                    if (sonucu == true)
+                    if (Data.Gorev == "Sil")
                     {
-                        return RedirectToAction("AltKategoriler");
+                        bool sonucu = AltKategoriRepo.AltKategoriSil(Data.AltKategoriID);
+                        if (sonucu == true)
+                        {
+                            return RedirectToAction("AltKategoriler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Alt Kategori Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0061";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Guncelle")
+                    {
+                        bool sonuc = AltKategoriRepo.AltKategoriGuncelle(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("AltKategoriler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Alt Kategori Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0062";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Ekle")
+                    {
+                        bool sonuc = AltKategoriRepo.AltKategoriKaydet(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("AltKategoriler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Alt Kategori Ekleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0063";
+                            return RedirectToAction("Hata");
+                        }
                     }
                     else
                     {
-                        TempData["Hata"] = "Alt Kategori Silme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0061";
+                        TempData["Hata"] = "Alt Kategori İşlemleri Başarısız Oldu!";
+                        TempData["HataKodu"] = "0050";
                         return RedirectToAction("Hata");
                     }
                 }
-                else if (Data.Gorev == "Guncelle")
+                catch
                 {
-                    bool sonuc = AltKategoriRepo.AltKategoriGuncelle(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("AltKategoriler");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Alt Kategori Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0062";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else if (Data.Gorev == "Ekle")
-                {
-                    bool sonuc = AltKategoriRepo.AltKategoriKaydet(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("AltKategoriler");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Alt Kategori Ekleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0063";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else
-                {
-                    TempData["Hata"] = "Alt Kategori İşlemleri Başarısız Oldu!";
-                    TempData["HataKodu"] = "0050";
+                    TempData["Hata"] = "Alt Kategori Sayfa Gosterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "3350";
                     return RedirectToAction("Hata");
                 }
             }
@@ -171,8 +207,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = UrunKategoriRepo.UrunKategorileri();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = UrunKategoriRepo.UrunKategorileri();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Ürün Kategori Sayfası Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "1250";
+                    return RedirectToAction("Hata");
+                }
             }
             else
             {
@@ -187,54 +232,63 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Sil")
+                try
                 {
-                    bool sonucu = UrunKategoriRepo.UrunKategoriSil(Data.UrunKategoriID);
-                    if (sonucu == true)
+                    if (Data.Gorev == "Sil")
                     {
-                        return RedirectToAction("UrunKategori");
+                        bool sonucu = UrunKategoriRepo.UrunKategoriSil(Data.UrunKategoriID);
+                        if (sonucu == true)
+                        {
+                            return RedirectToAction("UrunKategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Kategori Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0071";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Guncelle")
+                    {
+                        bool sonuc = UrunKategoriRepo.UrunKategoriGuncelle(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("UrunKategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Kategori Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0072";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Ekle")
+                    {
+                        bool sonuc = UrunKategoriRepo.UrunKategoriKaydet(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("UrunKategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Kategori Ekleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0073";
+                            return RedirectToAction("Hata");
+                        }
                     }
                     else
                     {
-                        TempData["Hata"] = "Ürün Kategori Silme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0071";
+                        TempData["Hata"] = "Kategori İşlemleri Başarısız Oldu!";
+                        TempData["HataKodu"] = "0050";
                         return RedirectToAction("Hata");
                     }
                 }
-                else if (Data.Gorev == "Guncelle")
+                catch
                 {
-                    bool sonuc = UrunKategoriRepo.UrunKategoriGuncelle(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("UrunKategori");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Ürün Kategori Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0072";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else if (Data.Gorev == "Ekle")
-                {
-                    bool sonuc = UrunKategoriRepo.UrunKategoriKaydet(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("UrunKategori");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Ürün Kategori Ekleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0073";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else
-                {
-                    TempData["Hata"] = "Kategori İşlemleri Başarısız Oldu!";
-                    TempData["HataKodu"] = "0050";
+                    TempData["Hata"] = "Ürün Kategori Sayfası Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "0150";
                     return RedirectToAction("Hata");
-                }
+                } 
             }
             else
             {
@@ -248,8 +302,17 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = MarkaRepo.Markalar();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = MarkaRepo.Markalar();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Marka Güncelleme Sayfası Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "0882";
+                    return RedirectToAction("Hata");
+                }
             }
             else
             {
@@ -264,52 +327,61 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                if (Data.Gorev == "Sil")
+                try
                 {
-                    bool sonucu = MarkaRepo.MarkaSil(Data.MarkaID);
-                    if (sonucu == true)
+                    if (Data.Gorev == "Sil")
                     {
-                        return RedirectToAction("Marka");
+                        bool sonucu = MarkaRepo.MarkaSil(Data.MarkaID);
+                        if (sonucu == true)
+                        {
+                            return RedirectToAction("Marka");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Marka Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0081";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Guncelle")
+                    {
+                        bool sonuc = MarkaRepo.MarkaGuncelle(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Marka");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Marka Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0082";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Ekle")
+                    {
+                        bool sonuc = MarkaRepo.MarkaKaydet(Data);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Marka");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Marka Ekleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "0083";
+                            return RedirectToAction("Hata");
+                        }
                     }
                     else
                     {
-                        TempData["Hata"] = "Marka Silme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0081";
+                        TempData["Hata"] = "Marka İşlemleri Başarısız Oldu!";
+                        TempData["HataKodu"] = "0050";
                         return RedirectToAction("Hata");
                     }
                 }
-                else if (Data.Gorev == "Guncelle")
+                catch
                 {
-                    bool sonuc = MarkaRepo.MarkaGuncelle(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("Marka");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Marka Güncelleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0082";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else if (Data.Gorev == "Ekle")
-                {
-                    bool sonuc = MarkaRepo.MarkaKaydet(Data);
-                    if (sonuc == true)
-                    {
-                        return RedirectToAction("Marka");
-                    }
-                    else
-                    {
-                        TempData["Hata"] = "Marka Ekleme İşlemi Başarısız Oldu!";
-                        TempData["HataKodu"] = "0083";
-                        return RedirectToAction("Hata");
-                    }
-                }
-                else
-                {
-                    TempData["Hata"] = "Marka İşlemleri Başarısız Oldu!";
-                    TempData["HataKodu"] = "0050";
+                    TempData["Hata"] = "Marka Güncelleme İşlemi Başarısız Oldu!";
+                    TempData["HataKodu"] = "0082";
                     return RedirectToAction("Hata");
                 }
             }
@@ -459,8 +531,18 @@ namespace ProjectMercury.WEB.Controllers
         {
             if (Session["Login"] != null)
             {
-                var Gonder = AnalizRepo.UrunKaydetKategori();
-                return View(Gonder);
+                try
+                {
+                    var Gonder = AnalizRepo.UrunKaydetKategori();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Ekleme Sayfası Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "6111";
+                    return RedirectToAction("Hata");
+                }
+                
             }
             else
             {
@@ -521,7 +603,17 @@ namespace ProjectMercury.WEB.Controllers
                     ViewBag.Kategori = Al.kategori;
                     ViewBag.AltKategori = Al.altkategoriadi;
                     ViewBag.UrunKategori = Al.urunkategoriadi;
-                    return View(UrunRepo.UrunBul(ID));
+                    var Data = UrunRepo.UrunBul(ID);
+                    if(Data != null)
+                    {
+                        return View(Data);
+                    }
+                    else
+                    {
+                        TempData["Hata"] = "Database Bağlantısı Sağlanamadı Ürün Bulma İşlemi Başarısız Oldu!";
+                        TempData["HataKodu"] = "2111";
+                        return RedirectToAction("Hata");
+                    }
                 }
                 catch
                 {
