@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectMercury.Entity</RootNamespace>
     <AssemblyName>ProjectMercury.Entity</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,12 +55,14 @@
     <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Kullanicilar.cs" />
     <Compile Include="Models\Marka.cs" />
+    <Compile Include="Models\Satis.cs" />
     <Compile Include="Models\Sepet.cs" />
     <Compile Include="Models\Siparis.cs" />
     <Compile Include="Models\SiteBilgileri.cs" />
     <Compile Include="Models\Slider.cs" />
     <Compile Include="Models\Urun.cs" />
     <Compile Include="Models\UrunKategori.cs" />
+    <Compile Include="Models\UrunSepet.cs" />
     <Compile Include="Models\Uyeler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

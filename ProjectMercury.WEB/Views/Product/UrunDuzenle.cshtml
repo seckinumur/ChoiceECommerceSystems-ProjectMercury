@@ -1,6 +1,6 @@
 ﻿@model ProjectMercury.DAL.VMModels.VMUrun
 @{
-    ViewBag.Title = "UrunDuzenle";
+    ViewBag.Title = "Choice Admin Control Systems V.1.5 / Ürün Düzenle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -146,10 +146,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    @*$('#selectpicker').selectpicker('val', ['@Model.Marka', '@Model.Kategori', '@Model.AltKategori', '@Model.UrunKategori']);*@
-    @*$('#Marka').selectpicker('val', '@Model.Marka');*@
-
-       @*$('#UrunKategori').val('@Model.UrunKategori');*@
     $(document).ready(function () {
         $('#Marka').selectpicker('val', '@Model.Marka');
         $('#Kategori').selectpicker('val', '@Model.Kategori');

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectMercury.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,13 @@ namespace ProjectMercury.DAL.VMModels
     public class VMSiparis
     {
         public int SiparisID { get; set; }
-        public string Uye { get; set; }
-        public int UyeID { get; set; }
+        public int SepetID { get; set; }
+        public Uyeler Uyeler { get; set; }
         public string SiparisTarihi { get; set; }
         public string GonderimTarihi { get; set; }
+        public string Gorev { get; set; }
+        public bool Onaylandimi { get; set; }
+        public bool Gonderildimi { get; set; }
+        public bool İptal { get; set; }
     }
 }

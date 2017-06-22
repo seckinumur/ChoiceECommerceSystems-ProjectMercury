@@ -9,13 +9,13 @@ namespace ProjectMercury.Entity.Models
    public class Siparis
     {
         public int SiparisID { get; set; }
-        public int UyelerID { get; set; }
+        public int SepetID { get; set; }
         public string SiparisTarihi { get; set; }
         public string GonderimTarihi { get; set; }
         public bool Onaylandimi { get; set; }
         public bool Gonderildimi { get; set; }
+        public bool İptal { get; set; }
 
-        public virtual List<Urun> Urun { get; set; }
-        public virtual Uyeler Uyeler { get; set; }
+        public virtual Sepet Sepet { get; set; }
     }
 }

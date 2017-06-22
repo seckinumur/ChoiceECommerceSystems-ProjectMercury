@@ -1,7 +1,7 @@
 ﻿@model ProjectMercury.DAL.VMModels.VMAnaliz
 
 @{
-    ViewBag.Title = "Admin";
+    ViewBag.Title = "Choice Admin Control Systems V.1.5";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -138,34 +138,11 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">@Model.Gönderilen</div>
-                            <div>Gönderilen Ürünler</div>
+                            <div>Gönderilen Siparişler</div>
                         </div>
                     </div>
                 </div>
-                <a href="~/Admin/IndirimsizUrunler">
-                    <div class="panel-footer">
-                        <span class="pull-left">Tümünü Listele</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-cube fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">@Model.Gonderilmeyen</div>
-                            <div>Gönderilmeyen Ürünler</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="~/Admin/IndirimsizUrunler">
+                <a href="~/Siparis/Gonderilen">
                     <div class="panel-footer">
                         <span class="pull-left">Tümünü Listele</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -180,11 +157,34 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
+                            <i class="fa fa-cube fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@Model.Gonderilmeyen</div>
+                            <div>Gönderilmeyen Siparişler</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="~/Siparis/Gonderilmeyen">
+                    <div class="panel-footer">
+                        <span class="pull-left">Tümünü Listele</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
                             <i class="fa fa-times fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">@Model.OnayBekleyen</div>
-                            <div>Onaylanmayan Siparişler</div>
+                            <div>İptal Edilen Siparişler</div>
                         </div>
                     </div>
                 </div>

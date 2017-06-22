@@ -23,6 +23,8 @@ namespace ProjectMercury.Entity.DBContext
         public virtual DbSet<Urun> Urun { get; set; }
         public virtual DbSet<UrunKategori> UrunKategori { get; set; }
         public virtual DbSet<Uyeler> Uyeler { get; set; }
+        public virtual DbSet<Satis> Satis { get; set; }
+        public virtual DbSet<UrunSepet> UrunSepet { get; set; }
     }
     public class DBCONInitializer : CreateDatabaseIfNotExists<DBCON> //Otomatik database Oluþturma
     {
@@ -90,6 +92,18 @@ namespace ProjectMercury.Entity.DBContext
                 KullaniciSifre = "1234",
                 Master = true,
                 System = false
+            });
+            db.SaveChanges();
+            db.Uyeler.Add(new Uyeler
+            {
+                KullaniciAdi = "demo",
+                Sifre = "1234",
+                Adres="demo adres",
+                Banlimi=false,
+                MailAdresi="deneme@deneme.com",
+                Tarih=DateTime.Now.ToShortDateString(),
+                Telefon="33333333",
+                UyeAdiSoyadi="demo demo"
             });
             db.SaveChanges();
         }

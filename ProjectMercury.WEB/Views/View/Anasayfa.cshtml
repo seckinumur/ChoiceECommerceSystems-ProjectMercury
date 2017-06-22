@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjectMercury.DAL.VMModels.UrunAI
 @{
     ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/_LayoutView.cshtml";
@@ -147,78 +147,72 @@
 
         <hr class="spacer-30 no-border" />
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="widget">
-                    <h5 class="subtitle text-uppercase"><span class="text-primary">Yeni</span> Ürünler</h5>
+       <div class="row">
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h5 class="subtitle text-uppercase"><span class="text-primary">Yeni</span> Ürünler</h5>
+                        @{ foreach (var yeniurun in Model.EnYeni)
+                            {
+                                <ul class="items">
+                                    <li>
+                                        <a href="shop-single-product-v1.html" class="product-image">
+                                            <img src="@yeniurun.Image" alt="Sample Product ">
+                                        </a>
+                                        <div class="product-details">
+                                            <h6 class="regular">
+                                                <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
+                                            </h6>
+                                            <span class="price text-primary">@yeniurun.IndirimliFiyati</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                        }
+                    </div>
+                </div>
+               
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h5 class="subtitle text-uppercase"><span class="text-primary">Günün Fırsatı</span> Ürünler</h5>
 
-                    <ul class="items">
-
-                        <li>
-                            <a href="shop-single-product-v1.html" class="product-image">
-                                <img src="img/products/men_01.jpg" alt="Sample Product ">
-                            </a>
-                            <div class="product-details">
-                                <h6 class="regular">
-                                    <a href="shop-single-product-v1.html">Printed Summer Dress</a>
-                                </h6>
-                                <span class="price text-primary">$19.99</span>
-                                <div class="rate text-warning">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                        <ul class="items">
+                            <li>
+                                <a href="shop-single-product-v1.html" class="product-image">
+                                    <img src="img/products/men_02.jpg" alt="Sample Product ">
+                                </a>
+                                <div class="product-details">
+                                    <h6 class="regular">
+                                        <a href="shop-single-product-v1.html">Printed Summer Dress</a>
+                                    </h6>
+                                    <span class="price text-primary">$19.99</span>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
 
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h5 class="subtitle text-uppercase"><span class="text-primary">En Çok Satılan</span> Ürünler</h5>
+
+                        <ul class="items">
+
+                            <li>
+                                <a href="shop-single-product-v1.html" class="product-image">
+                                    <img src="img/products/men_06.jpg" alt="Sample Product ">
+                                </a>
+                                <div class="product-details">
+                                    <h6 class="regular">
+                                        <a href="shop-single-product-v1.html">Printed Summer Dress</a>
+                                    </h6>
+                                    <span class="price text-primary">$19.99</span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-sm-4">
-                <div class="widget">
-                    <h5 class="subtitle text-uppercase"><span class="text-primary">Günün Fırsatı</span> Ürünler</h5>
-
-                    <ul class="items">
-                        <li>
-                            <a href="shop-single-product-v1.html" class="product-image">
-                                <img src="img/products/men_02.jpg" alt="Sample Product ">
-                            </a>
-                            <div class="product-details">
-                                <h6 class="regular">
-                                    <a href="shop-single-product-v1.html">Printed Summer Dress</a>
-                                </h6>
-                                <span class="price text-primary">$19.99</span>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
             </div>
-
-            <div class="col-sm-4">
-                <div class="widget">
-                    <h5 class="subtitle text-uppercase"><span class="text-primary">En Çok Satılan</span> Ürünler</h5>
-
-                    <ul class="items">
-
-                        <li>
-                            <a href="shop-single-product-v1.html" class="product-image">
-                                <img src="img/products/men_06.jpg" alt="Sample Product ">
-                            </a>
-                            <div class="product-details">
-                                <h6 class="regular">
-                                    <a href="shop-single-product-v1.html">Printed Summer Dress</a>
-                                </h6>
-                                <span class="price text-primary">$19.99</span>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>

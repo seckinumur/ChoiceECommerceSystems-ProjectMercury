@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectMercury.DAL</RootNamespace>
     <AssemblyName>ProjectMercury.DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,16 +55,20 @@
     <Compile Include="Repository\KullanicilarRepo.cs" />
     <Compile Include="Repository\MarkaRepo.cs" />
     <Compile Include="Repository\SepetRepo.cs" />
+    <Compile Include="Repository\SiparisRepo.cs" />
     <Compile Include="Repository\SiteBilgileriRepo.cs" />
     <Compile Include="Repository\UrunKategoriRepo.cs" />
     <Compile Include="Repository\UrunRepo.cs" />
     <Compile Include="Repository\UyelerRepo.cs" />
+    <Compile Include="Repository\ViewRepo.cs" />
+    <Compile Include="VMModels\UrunAI.cs" />
     <Compile Include="VMModels\VMAltKategori.cs" />
     <Compile Include="VMModels\VMAnaliz.cs" />
     <Compile Include="VMModels\VMKategori.cs" />
     <Compile Include="VMModels\VMKullanicilar.cs" />
     <Compile Include="VMModels\VMMArka.cs" />
     <Compile Include="VMModels\VMSiparis.cs" />
+    <Compile Include="VMModels\VMSiparisUrun.cs" />
     <Compile Include="VMModels\VMUrun.cs" />
     <Compile Include="VMModels\VMUrunKategori.cs" />
     <Compile Include="VMModels\VMUrunModel.cs" />
