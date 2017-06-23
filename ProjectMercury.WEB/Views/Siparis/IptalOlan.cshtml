@@ -1,6 +1,6 @@
-﻿@model List<ProjectMercury.DAL.VMModels.VMSiparis>
+﻿+@model List<ProjectMercury.DAL.VMModels.VMSiparis>
 @{
-    ViewBag.Title = "Choice Admin Control Systems V.1.5 / Gönderilmemiş Siparişler";
+    ViewBag.Title = "Choice Admin Control Systems V.1.5 / İptal Edilen Siparişler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <h1 class="page-header">Gönderilmemiş Siparişler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+            <h1 class="page-header">İptal Edilen Siparişler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
 
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Tüm Gönderilmemiş Siparişler Gösteriliyor
+                    Tüm İptal Edilen Siparişler Gösteriliyor
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -42,9 +42,7 @@
 
                                             <button data-toggle="modal" data-target="#SepetModal" class="btn btn-primary" onclick="sepet('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi','@item.SiparisTarihi')">Sepet</button>
 
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#gonder" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Gönder</button>
-
-                                            <button class="btn btn-info" data-toggle="modal" data-target="#Iptal" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">İptal</button>
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#gonder" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Gerial</button>
 
                                             <button class="btn btn-warning" data-toggle="modal" data-target="#sil" onclick="sil('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Sil</button>
                                         </td>
@@ -71,9 +69,9 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Henüz Göndermediğiniz Siparişlerinizle İlgili Detayları Görmektesiniz.
-                                    Buradan Sipariş İçersindeki Sepette Bulunan Ürünleri İnceleybilir, Siparişlerin Göndermeye Hazırsa Gönderebilir,
-                                    Siparişi İptal Edebilir Yada Üye Hakkında Bilgi Alabilirsiniz.
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada İptal Ettiğiniz Siparişlerinizle İlgili Detayları Görmektesiniz.
+                                    Buradan Sipariş İçersindeki Sepette Bulunan Ürünleri İnceleybilir, İptal Edilmiş Siparileri İptal Listesinden
+                                    Çıkarabilirsiniz, Yada Üye Hakkında Bilgi Alabilirsiniz.
                                     <hr class="danger-background" />
                                     <strong class="text-danger">Eğer Siparişi Silerseniz Hem Üye Hemde Siz Artık Siparişi Göremezsiniz!</strong>
                                 </p>
@@ -117,45 +115,20 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Sipariş Gönderme</h4>
+                        <h4 class="modal-title" id="myModalLabel">Sipariş İptal Listesinden Kaldırma</h4>
                     </div>
                     <form role="form" method="post">
                         <div class="modal-body">
                             <input type="hidden" name="SiparisID" id="SilIDg" />
-                            <input type="hidden" name="Gorev" value="Gonder" />
-                            <div class="form-group">
-                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecekg">
-                                <label style="color:orangered">Bu Sipariş Gönderilecek Devam Edilsin mi?</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                            <button type="submit" class="btn btn-warning">Siparişi Gönder</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="Iptal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Sipariş İptal</h4>
-                    </div>
-                    <form role="form" method="post">
-                        <div class="modal-body">
-                            <input type="hidden" name="SiparisID" id="SilIDi" />
                             <input type="hidden" name="Gorev" value="Iptal" />
                             <div class="form-group">
-                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silineceki">
-                                <label style="color:orangered">Bu Sipariş İptal Edilecek Devam Edilsin mi?</label>
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecekg">
+                                <label style="color:orangered">Bu Sipariş İptal Listesinden Çıkarılacak Devam Edilsin mi?</label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                            <button type="submit" class="btn btn-warning">Siparişi İptal Et</button>
+                            <button type="submit" class="btn btn-warning">Siparişi Onaylanmayanlara Gönder</button>
                         </div>
                     </form>
                 </div>
@@ -167,7 +140,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Siparişteki Gönderilmeyen Ürünler</h4>
+                        <h4 class="modal-title" id="myModalLabel">Siparişteki İptal Edilen Ürünler</h4>
                     </div>
 
 
@@ -279,7 +252,5 @@
     function Islem(obj, obj2) {
         document.getElementById("SilIDg").value = obj;
         document.getElementById("Silinecekg").value = obj2;
-        document.getElementById("SilIDi").value = obj;
-        document.getElementById("Silineceki").value = obj2;
     }
 </script>

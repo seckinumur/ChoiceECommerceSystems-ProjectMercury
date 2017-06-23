@@ -70,6 +70,30 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool SiparisİptalEtme(int ID)
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal != true);
+                    Siparis.Onaylandimi = false;
+                    Siparis.İptal = false;
+                    foreach (var item in Siparis.Sepet.UrunSepet)
+                    {
+                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
+                        bul.SatisAdedi = bul.SatisAdedi++;
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static void SiparisSil(int ID)
         {
             using (DBCON db = new DBCON())
@@ -212,7 +236,6 @@ namespace ProjectMercury.DAL.Repository
                     });
                 }
                 return liste;
-
             }
         }
     }

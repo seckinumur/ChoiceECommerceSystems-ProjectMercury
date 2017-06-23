@@ -15,6 +15,7 @@ namespace ProjectMercury.DAL.VMModels
         public int Onaylanan { get; set; }
         public int Gönderilen { get; set; }
         public int Gonderilmeyen { get; set; }
+        public int Iptal { get; set; }
         public int Uyeler { get; set; }
         public int Kullanıcılar { get; set; }
     }

@@ -22,6 +22,7 @@ namespace ProjectMercury.DAL.Repository
                 int Kullanicilar = db.Kullanicilar.Where(p=> p.System==false).ToList().Count();
                 int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true).Count();
                 int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false).Count();
+                int IptalEdilen = db.Siparis.Where(p => p.İptal == true).Count();
                 int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false).Count();
                 int Onaylananlar = db.Siparis.Where(p => p.Onaylandimi == true).Count();
 
@@ -35,7 +36,8 @@ namespace ProjectMercury.DAL.Repository
                     OnayBekleyen = OnayBekleyenler,
                     Onaylanan = Onaylananlar,
                     ToplamUrun = ToplamUrun,
-                    Gonderilmeyen = Gonderilmeyenurunler
+                    Gonderilmeyen = Gonderilmeyenurunler,
+                    Iptal= IptalEdilen
                 };
                 return Analiz;
             }

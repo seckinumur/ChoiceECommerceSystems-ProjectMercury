@@ -84,6 +84,100 @@ namespace ProjectMercury.WEB.Controllers
                 return RedirectToAction("Login", "Admin");
             }
         }
+        [HttpPost]
+        public ActionResult Gonderilmeyen(VMSiparis Data)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (Data.Gorev == "Sil")
+                    {
+                        SiparisRepo.SiparisSil(Data.SiparisID);
+                    }
+                    else if (Data.Gorev == "Onayla")
+                    {
+                        SiparisRepo.SiparisOnayla(Data.SiparisID);
+                    }
+                    else if(Data.Gorev== "Iptal")
+                    {
+                        SiparisRepo.SiparisİptalEt(Data.SiparisID);
+                    }
+                    var Gonder = SiparisRepo.GonderilmeyenSiparisler();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "1811";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult IptalOlan()
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    var Gonder = SiparisRepo.IptalEdilenSiparisler();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "1811";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult IptalOlan(VMSiparis Data)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (Data.Gorev == "Sil")
+                    {
+                        SiparisRepo.SiparisSil(Data.SiparisID);
+                    }
+                    else if (Data.Gorev == "Iptal")
+                    {
+                        SiparisRepo.SiparisİptalEtme(Data.SiparisID);
+                    }
+                    var Gonder = SiparisRepo.IptalEdilenSiparisler();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Database Bağlantısı Sağlanamadı!";
+                    TempData["HataKodu"] = "1811";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
         public ActionResult sepetlistele(int id)
         {
             var gonder = SiparisRepo.UrunSepeti(id);

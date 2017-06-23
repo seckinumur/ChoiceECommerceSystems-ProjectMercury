@@ -281,6 +281,7 @@
     <Content Include="Views\View\Hata.cshtml" />
     <Content Include="Views\Siparis\Gonderilen.cshtml" />
     <Content Include="Views\Siparis\Gonderilmeyen.cshtml" />
+    <Content Include="Views\Siparis\IptalOlan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
