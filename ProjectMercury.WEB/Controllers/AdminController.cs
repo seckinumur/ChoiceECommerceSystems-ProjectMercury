@@ -42,8 +42,8 @@ namespace ProjectMercury.WEB.Controllers
         {
             try
             {
-                bool Kontrol = KullanicilarRepo.KullaniciGiris(Al);
-                if (Kontrol == true)
+                int Kontrol = KullanicilarRepo.KullaniciGiris(Al);
+                if (Kontrol != 0)
                 {
                     Session["Login"] = Kontrol;
                     return RedirectToAction("Admin");

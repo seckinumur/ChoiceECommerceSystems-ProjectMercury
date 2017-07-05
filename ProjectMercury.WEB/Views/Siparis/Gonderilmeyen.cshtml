@@ -42,7 +42,7 @@
 
                                             <button data-toggle="modal" data-target="#SepetModal" class="btn btn-primary" onclick="sepet('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi','@item.SiparisTarihi')">Sepet</button>
 
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#gonder" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Gönder</button>
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#Gonder" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Gönder</button>
 
                                             <button class="btn btn-info" data-toggle="modal" data-target="#Iptal" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">İptal</button>
 
@@ -112,7 +112,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="gonder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade" id="Gonder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -121,7 +121,7 @@
                     </div>
                     <form role="form" method="post">
                         <div class="modal-body">
-                            <input type="hidden" name="SiparisID" id="SilIDg" />
+                            <input type="hidden" name="SiparisID" id="IDGonder" />
                             <input type="hidden" name="Gorev" value="Gonder" />
                             <div class="form-group">
                                 <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecekg">
@@ -180,31 +180,31 @@
                             <label class="text-primary">Sipariş Tarih</label>
                             <input class="form-control" id="gonderimTarihi" readonly="readonly">
                         </div>
-                        <table id="UrunData" class="table table-striped table-bordered table-hover" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Kategori</th>
-                                    <th>Alt kategori</th>
-                                    <th>Ürün Kategori</th>
-                                    <th>Marka</th>
-                                    <th>Ürün Adı</th>
-                                    <th>Adet</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Kategori"></td>
-                                    <td id="AltKategori"></td>
-                                    <td id="UrunKategori"></td>
-                                    <td id="Marka"></td>
-                                    <td id="UrunAdi"></td>
-                                    <td id="UrunAdedi"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <table id="UrunData" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Kategori</th>
+                                            <th>Alt kategori</th>
+                                            <th>Ürün Kategori</th>
+                                            <th>Marka</th>
+                                            <th>Ürün Adı</th>
+                                            <th>Adet</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="Kategori"></td>
+                                            <td id="AltKategori"></td>
+                                            <td id="UrunKategori"></td>
+                                            <td id="Marka"></td>
+                                            <td id="UrunAdi"></td>
+                                            <td id="UrunAdedi"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                     </div>
-                </div>
-            </div>
+                        </div>
+                    </div>
         </div>
 
 
@@ -265,6 +265,7 @@
                     ],
                     destroy: true,
                     lengthChange: false,
+                    responsive: true,
                     dom: 'Bfrtip',
                     buttons: ['copy', 'excel', 'pdf', 'print']
                 });
@@ -277,7 +278,7 @@
         document.getElementById("Silinecek").value = obj2;
     }
     function Islem(obj, obj2) {
-        document.getElementById("SilIDg").value = obj;
+        document.getElementById("IDGonder").value = obj;
         document.getElementById("Silinecekg").value = obj2;
         document.getElementById("SilIDi").value = obj;
         document.getElementById("Silineceki").value = obj2;

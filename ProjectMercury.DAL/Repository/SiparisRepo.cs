@@ -11,6 +11,29 @@ namespace ProjectMercury.DAL.Repository
 {
     public class SiparisRepo
     {
+        public static bool SiparisKaydet(Sepet Data) //sepet olarak gelen datayı siparişe ekledik
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    db.Siparis.Add(new Siparis()
+                    {
+                        Gonderildimi = false,
+                        Onaylandimi = true,
+                        SepetID = Data.SepetID,
+                        SiparisTarihi = DateTime.Now.ToShortDateString(),
+                        İptal = false
+                    });
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static bool SiparisOnayla(int ID)
         {
             using (DBCON db = new DBCON())
@@ -19,24 +42,8 @@ namespace ProjectMercury.DAL.Repository
                 {
                     var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.Onaylandimi == false);
                     Siparis.Onaylandimi = true;
-                    foreach (var item in Siparis.Sepet.UrunSepet)
-                    {
-                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
-                        if (bul != null)
-                        {
-                            bul.SatisAdedi = bul.SatisAdedi++;
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            db.Satis.Add(new Satis()
-                            {
-                                SatisAdedi = 1,
-                                UrunID = item.UrunID
-                            });
-                            db.SaveChanges();
-                        }
-                    }
+                    Siparis.İptal = false;
+                    Siparis.Gonderildimi = false;
                     db.SaveChanges();
                     return true;
                 }
@@ -53,14 +60,9 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal != true);
-                    Siparis.Onaylandimi = false;
+                    Siparis.Onaylandimi = true;
                     Siparis.İptal = true;
-                    foreach (var item in Siparis.Sepet.UrunSepet)
-                    {
-                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
-                        bul.SatisAdedi = bul.SatisAdedi--;
-                        db.SaveChanges();
-                    }
+                    Siparis.Gonderildimi = false;
                     db.SaveChanges();
                     return true;
                 }
@@ -70,21 +72,16 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static bool SiparisİptalEtme(int ID)
+        public static bool SiparisİptalEtme(int ID) //iptal siparişi tekrar iptallikten çıkarma
         {
             using (DBCON db = new DBCON())
             {
                 try
                 {
-                    var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal != true);
-                    Siparis.Onaylandimi = false;
+                    var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal == true);
+                    Siparis.Onaylandimi = true;
                     Siparis.İptal = false;
-                    foreach (var item in Siparis.Sepet.UrunSepet)
-                    {
-                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
-                        bul.SatisAdedi = bul.SatisAdedi++;
-                        db.SaveChanges();
-                    }
+                    Siparis.Gonderildimi = false;
                     db.SaveChanges();
                     return true;
                 }
@@ -118,12 +115,32 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal != true && p.Onaylandimi == true);
+                    Siparis.Onaylandimi = true;
+                    Siparis.İptal = false;
                     Siparis.Gonderildimi = true;
                     Siparis.GonderimTarihi = DateTime.Now.ToShortDateString();
                     foreach (var item in Siparis.Sepet.UrunSepet)
                     {
                         item.Urun.UrunAdedi -= item.Adedi;
                         db.SaveChanges();
+                    }
+                    foreach (var item in Siparis.Sepet.UrunSepet)
+                    {
+                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
+                        if (bul != null)
+                        {
+                            bul.SatisAdedi = bul.SatisAdedi++;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            db.Satis.Add(new Satis()
+                            {
+                                SatisAdedi = 1,
+                                UrunID = item.UrunID
+                            });
+                            db.SaveChanges();
+                        }
                     }
                     db.SaveChanges();
                     return true;
@@ -138,7 +155,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Onaylandimi == false).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Onaylandimi == false && p.İptal != true && p.Gonderildimi !=true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,
@@ -151,7 +168,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Onaylandimi == true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Onaylandimi == true && p.İptal != true && p.Gonderildimi != true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,
@@ -164,7 +181,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.İptal == true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.İptal == true && p.Gonderildimi != true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,
@@ -177,7 +194,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Gonderildimi == true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Gonderildimi == true  && p.İptal != true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     GonderimTarihi = p.GonderimTarihi,
@@ -191,7 +208,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Gonderildimi == false).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Gonderildimi == false  && p.İptal != true && p.Onaylandimi==true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,
@@ -218,6 +235,27 @@ namespace ProjectMercury.DAL.Repository
             }
         }
         public static List<VMSiparisUrun> UrunSepeti(int ID)
+        {
+            using (DBCON db = new DBCON())
+            {
+                List<VMSiparisUrun> liste = new List<VMSiparisUrun>();
+                var ayir = db.Siparis.FirstOrDefault(p => p.SiparisID == ID);
+                foreach (var item in ayir.Sepet.UrunSepet)
+                {
+                    liste.Add(new VMSiparisUrun
+                    {
+                        AltKategori = item.Urun.AltKategori.AltKategoriAdi,
+                        Kategori = item.Urun.Kategori.KategoriAdi,
+                        Marka = item.Urun.Marka.MarkaAdi,
+                        UrunAdedi = item.Adedi,
+                        UrunAdi = item.Urun.UrunAdi,
+                        UrunKategori = item.Urun.UrunKategori.UrunKategoriAdi
+                    });
+                }
+                return liste;
+            }
+        }
+        public static List<VMSiparisUrun> UrunSepetiKullanici(int ID)
         {
             using (DBCON db = new DBCON())
             {

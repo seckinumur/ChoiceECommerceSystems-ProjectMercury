@@ -26,6 +26,7 @@
                             <tr>
                                 <th>Kategoriler</th>
                                 <th>İşlemler</th>
+                                <th class="text-danger">Force Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,9 @@
                                         <td>
                                             <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.KategoriID','@item.KategoriAdi')" disabled="@(item.UrunVarmi == true ? true : false)">Kategoriyi Sil</button>
                                             <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.KategoriID','@item.KategoriAdi')">Kategoriyi Düzenle</button>
+                                        </td>
+                                        <td>
+                                            <button data-toggle="modal" data-target="#Force" class="btn btn-success" onclick="Islem('@item.KategoriID','@item.KategoriAdi')">Tüm İçeriği Sil</button>
                                         </td>
                                     </tr>
 
@@ -68,6 +72,9 @@
                                     <hr />
                                     Eğer Sil Butonu Çalışmıyorsa Bir Veya Daha Fazla Ürün Silmeye Çalıştığınız Sınıfı
                                     Kullanıyor Demektir. Bu durumda Silemezseniz.
+                                    <hr class="text-danger" />
+                                    <strong class="text-info">FORCE DELETE</strong> Tüm Kategoriyi Ve İçersinde Bulunan Tüm Data'yı Yok Eder.
+                                    Bu Geri Dönülmez Bir Silme İşlemidir. Bu İşlemi Yapmadan Önce Dikkatli Olun.
                                 </p>
                             </div>
                             <div class="panel-footer">
@@ -98,6 +105,31 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                             <button type="submit" class="btn btn-warning">SİL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Force" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title text-danger" id="myModalLabel">FORCE DELETE</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="KategoriID" id="SilIDF" />
+                            <input type="hidden" name="Force" value="Sil" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="SilinecekF">
+                                <label>Bu Kategori ve Tüm İçeriği Tamamen Silenecek Devam Edilsin mi?</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Tüm Bilgileri Yok Et</button>
                         </div>
                     </form>
                 </div>
@@ -206,7 +238,9 @@
     {
         document.getElementById("kategoriAdi").value = obj2;
         document.getElementById("SilID").value = obj;
+        document.getElementById("SilIDF").value = obj;
         document.getElementById("ID").value = obj;
         document.getElementById("Silinecek").value = obj2;
+        document.getElementById("SilinecekF").value = obj2;
     }
 </script>

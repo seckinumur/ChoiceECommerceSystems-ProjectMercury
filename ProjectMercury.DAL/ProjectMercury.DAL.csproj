@@ -67,6 +67,7 @@
     <Compile Include="VMModels\VMKategori.cs" />
     <Compile Include="VMModels\VMKullanicilar.cs" />
     <Compile Include="VMModels\VMMArka.cs" />
+    <Compile Include="VMModels\VMSepet.cs" />
     <Compile Include="VMModels\VMSiparis.cs" />
     <Compile Include="VMModels\VMSiparisUrun.cs" />
     <Compile Include="VMModels\VMUrun.cs" />

@@ -25,6 +25,7 @@ namespace ProjectMercury.Entity.DBContext
         public virtual DbSet<Uyeler> Uyeler { get; set; }
         public virtual DbSet<Satis> Satis { get; set; }
         public virtual DbSet<UrunSepet> UrunSepet { get; set; }
+        public virtual DbSet<SanalSepet> SanalSepet { get; set; }
     }
     public class DBCONInitializer : CreateDatabaseIfNotExists<DBCON> //Otomatik database Oluþturma
     {

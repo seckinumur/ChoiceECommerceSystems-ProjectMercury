@@ -1,6 +1,6 @@
 ﻿@model List<ProjectMercury.DAL.VMModels.VMSiparis>
 @{
-    ViewBag.Title = "Choice Admin Control Systems V.1.5 / Gönderilen Siparişler";
+    ViewBag.Title = "Choice Admin Control Systems V.1.5 / Onay Bekleyen Siparişler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <h1 class="page-header">Gönderilen Siparişler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
+            <h1 class="page-header">Onay Bekleyen Siparişler <button class="btn btn-success" data-toggle="modal" data-target="#Comar"><i class="fa fa-paw"></i> Çomar Yardım</button> </h1>
 
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Tüm Gönderilen Siparişler Gösteriliyor
+                    Tüm Onay Bekleyen Siparişler Gösteriliyor
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -26,7 +26,6 @@
                                 <th>Sipariş No</th>
                                 <th>Uye Adı Soyadı</th>
                                 <th>Sipariş Tarihi</th>
-                                <th>Gönderim Tarihi</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -38,13 +37,14 @@
                                         <td>@item.SiparisID</td>
                                         <td>@item.Uyeler.UyeAdiSoyadi</td>
                                         <td>@item.SiparisTarihi</td>
-                                        <td>@item.GonderimTarihi</td>
                                         <td>
                                             <button data-toggle="modal" data-target="#Uyedetaymodal" class="btn btn-warning" onclick="uyeDetay('@item.Uyeler.UyeAdiSoyadi','@item.Uyeler.Adres','@item.Uyeler.MailAdresi','@item.Uyeler.Telefon')">Üye Detay</button>
 
-                                            <button data-toggle="modal" data-target="#SepetModal" class="btn btn-info" onclick="sepet('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi','@item.GonderimTarihi','@item.SiparisTarihi')">Sepet</button>
+                                            <button data-toggle="modal" data-target="#SepetModal" class="btn btn-primary" onclick="sepet('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi','@item.SiparisTarihi')">Sepet</button>
 
-                                            <button class="btn btn-warning" data-toggle="modal" data-target="#sil" onclick="sil('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Siparişi Sil</button>
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#Gonder" onclick="Islem('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Onayla</button>
+
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#sil" onclick="sil('@item.SiparisID','@item.Uyeler.UyeAdiSoyadi')">Sil</button>
                                         </td>
                                     </tr>
                                 }
@@ -69,14 +69,15 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Gönderdiğiniz Siparişlerinizle İlgili Detayları Görmektesiniz.
-                                    Buradan Sipariş İçersindeki Sepette Bulunan Ürünleri İnceleybilir Ve Üye Hakkında Bilgi Alabilirsiniz.
-                                    <hr class="danger-background"/>
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Üyelerden Gelen Ve henüz Onaylamadığınız Siparişleri Görebilirsiniz
+                                    Onaylanmamış Siparişler Üyelere Onay Bekliyor Diye Gösterilir. Onay Verdiğiniz Siparişler Hazırlanıyor Diye
+                                    Gösterilir.
+                                    <hr class="danger-background" />
                                     <strong class="text-danger">Eğer Siparişi Silerseniz Hem Üye Hemde Siz Artık Siparişi Göremezsiniz!</strong>
                                 </p>
                             </div>
                             <div class="panel-footer">
-                                Haydi Hazırsanız Şimdi Biraz İnceleyelim...
+                                Haydi Hazırsanız Şimdi Siparişlere Onay Verelim...
                             </div>
                         </div>
                     </div>
@@ -94,6 +95,7 @@
                     <form role="form" method="post">
                         <div class="modal-body">
                             <input type="hidden" name="SiparisID" id="SilID" />
+                            <input type="hidden" name="Gorev" value="Sil" id="SilIDg" />
                             <div class="form-group">
                                 <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
                                 <label style="color:orangered">Bu Sipariş Silenecek Devam Edilsin mi?</label>
@@ -108,51 +110,72 @@
             </div>
         </div>
 
+        <div class="modal fade" id="Gonder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Sipariş Onaylama</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="SiparisID" id="IDGonder" />
+                            <input type="hidden" name="Gorev" value="Gonder" />
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecekg">
+                                <label style="color:orangered">Bu Sipariş Onaylanacak Devam Edilsin mi?</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Siparişi Onayla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="SepetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Siparişteki Giden Ürünler</h4>
+                        <h4 class="modal-title" id="myModalLabel">Siparişteki Ürünler</h4>
                     </div>
 
-                   
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="text-primary">Gönderilen Sipariş Sahibi</label>
-                                <input class="form-control" id="adSoyad" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Sipariş Tarih</label>
-                                <input class="form-control" id="siparistarihi" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Gönderilen Tarih</label>
-                                <input class="form-control" id="gonderimTarihi" readonly="readonly">
-                            </div>
-                                <table id="UrunData" class="table table-striped table-bordered table-hover" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Kategori</th>
-                                            <th>Alt kategori</th>
-                                            <th>Ürün Kategori</th>
-                                            <th>Marka</th>
-                                            <th>Ürün Adı</th>
-                                            <th>Adet</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="Kategori"></td>
-                                            <td id="AltKategori"></td>
-                                            <td id="UrunKategori"></td>
-                                            <td id="Marka"></td>
-                                            <td id="UrunAdi"></td>
-                                            <td id="UrunAdedi"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="text-primary">Sipariş Sahibi Üye</label>
+                            <input class="form-control" id="adSoyad" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">Sipariş Tarih</label>
+                            <input class="form-control" id="gonderimTarihi" readonly="readonly">
+                        </div>
+                        <table id="UrunData" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Kategori</th>
+                                    <th>Alt kategori</th>
+                                    <th>Ürün Kategori</th>
+                                    <th>Marka</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Adet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="Kategori"></td>
+                                    <td id="AltKategori"></td>
+                                    <td id="UrunKategori"></td>
+                                    <td id="Marka"></td>
+                                    <td id="UrunAdi"></td>
+                                    <td id="UrunAdedi"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,24 +188,24 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myModalLabel">Üye Detay</h4>
                     </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="text-primary">Üye Adı</label>
-                                <input class="form-control" id="UyeAdi" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Adresi</label>
-                                <input class="form-control"  id="Tel" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">E-Mail</label>
-                                <input class="form-control"  id="Email" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Telefon</label>
-                                <input class="form-control"  id="Adres" readonly="readonly">
-                            </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="text-primary">Üye Adı</label>
+                            <input class="form-control" id="UyeAdi" readonly="readonly">
                         </div>
+                        <div class="form-group">
+                            <label class="text-primary">Adresi</label>
+                            <input class="form-control" id="Tel" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">E-Mail</label>
+                            <input class="form-control" id="Email" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">Telefon</label>
+                            <input class="form-control" id="Adres" readonly="readonly">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -195,10 +218,9 @@
         document.getElementById("Email").value = obj2;
         document.getElementById("Adres").value = obj3;
     }
-    function sepet(obj, obj2, obj3,obj4) {
+    function sepet(obj, obj2, obj3) {
         document.getElementById("adSoyad").value = obj2;
         document.getElementById("gonderimTarihi").value = obj3;
-        document.getElementById("siparistarihi").value = obj4;
         $.ajax({
             url: '/Siparis/sepetlistele/' + obj,
             type: 'POST',
@@ -216,15 +238,20 @@
                     ],
                     destroy: true,
                     lengthChange: false,
+                    responsive: true,
                     dom: 'Bfrtip',
                     buttons: ['copy', 'excel', 'pdf', 'print']
                 });
-                
+
             }
         });
     }
     function sil(obj, obj2) {
         document.getElementById("SilID").value = obj;
         document.getElementById("Silinecek").value = obj2;
+    }
+    function Islem(obj, obj2) {
+        document.getElementById("IDGonder").value = obj;
+        document.getElementById("Silinecekg").value = obj2;
     }
 </script>

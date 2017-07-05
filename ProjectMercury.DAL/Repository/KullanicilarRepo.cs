@@ -106,26 +106,18 @@ namespace ProjectMercury.DAL.Repository
             }
         }
 
-        public static bool KullaniciGiris(Kullanicilar Al) //Kullanıcı Giriş
+        public static int KullaniciGiris(Kullanicilar Al) //Kullanıcı Giriş
         {
             using (DBCON db = new DBCON())
             {
-                bool Bul = db.Kullanicilar.Any(p => p.KullaniciAdi == Al.KullaniciAdi);
-                if (Bul == true)
+                try
                 {
-                    bool BulSifre = db.Kullanicilar.Any(P => P.KullaniciSifre == Al.KullaniciSifre);
-                    if (BulSifre == true)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    var bul = db.Kullanicilar.FirstOrDefault(p => p.KullaniciAdi == Al.KullaniciAdi && p.KullaniciSifre == Al.KullaniciSifre);
+                    return bul.KullanicilarID;
                 }
-                else
+                catch
                 {
-                    return false;
+                    return 0;
                 }
             }
         }

@@ -58,6 +58,20 @@ namespace ProjectMercury.WEB.Controllers
                             return RedirectToAction("Hata");
                         }
                     }
+                    else if (Data.Gorev == "Force")
+                    {
+                        bool sonuc = KategoriRepo.KategoriSilForce(Data.KategoriID);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Kategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kategori Force Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "88052";
+                            return RedirectToAction("Hata");
+                        }
+                    }
                     else if (Data.Gorev == "Guncelle")
                     {
                         bool sonuc = KategoriRepo.KategoriGuncelle(Data);

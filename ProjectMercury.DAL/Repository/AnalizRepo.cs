@@ -20,11 +20,10 @@ namespace ProjectMercury.DAL.Repository
                 int Indirimsiz = db.Urun.Where(p => p.IndirimVarmi == false).Count();
                 int Musteriler = db.Uyeler.Count();
                 int Kullanicilar = db.Kullanicilar.Where(p=> p.System==false).ToList().Count();
-                int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true).Count();
-                int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false).Count();
-                int IptalEdilen = db.Siparis.Where(p => p.İptal == true).Count();
-                int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false).Count();
-                int Onaylananlar = db.Siparis.Where(p => p.Onaylandimi == true).Count();
+                int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true && p.İptal==false).Count();
+                int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false  && p.İptal == false && p.Onaylandimi==true).Count();
+                int IptalEdilen = db.Siparis.Where(p => p.İptal == true && p.Gonderildimi == false).Count();
+                int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false && p.Gonderildimi == false && p.İptal == false).Count();
 
                 VMAnaliz Analiz = new VMAnaliz
                 {
@@ -34,10 +33,9 @@ namespace ProjectMercury.DAL.Repository
                     Kullanıcılar = Kullanicilar,
                     Uyeler = Musteriler,
                     OnayBekleyen = OnayBekleyenler,
-                    Onaylanan = Onaylananlar,
                     ToplamUrun = ToplamUrun,
                     Gonderilmeyen = Gonderilmeyenurunler,
-                    Iptal= IptalEdilen
+                    Iptal = IptalEdilen
                 };
                 return Analiz;
             }

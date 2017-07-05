@@ -140,6 +140,8 @@
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.min.css" />
     <Content Include="Content\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\datatables\css\MainSelect.css" />
+    <Content Include="Content\datatables\css\select.bootstrap.min.css" />
     <Content Include="Content\datatables\images\favicon.ico" />
     <Content Include="Content\datatables\images\sort_asc.png" />
     <Content Include="Content\datatables\images\sort_asc_disabled.png" />
@@ -210,6 +212,7 @@
     <Content Include="Scripts\buttons.jqueryui.min.js" />
     <Content Include="Scripts\buttons.print.min.js" />
     <Content Include="Scripts\dataTables.buttons.min.js" />
+    <Content Include="Scripts\dataTables.select.min.js" />
     <Content Include="Scripts\defaults-tr_TR.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -282,6 +285,8 @@
     <Content Include="Views\Siparis\Gonderilen.cshtml" />
     <Content Include="Views\Siparis\Gonderilmeyen.cshtml" />
     <Content Include="Views\Siparis\IptalOlan.cshtml" />
+    <Content Include="Views\Siparis\OnayBekleyen.cshtml" />
+    <Content Include="Views\Siparis\SiparisOlustur.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,4 @@
-﻿+@model List<ProjectMercury.DAL.VMModels.VMSiparis>
+﻿@model List<ProjectMercury.DAL.VMModels.VMSiparis>
 @{
     ViewBag.Title = "Choice Admin Control Systems V.1.5 / İptal Edilen Siparişler";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -95,7 +95,7 @@
                     <form role="form" method="post">
                         <div class="modal-body">
                             <input type="hidden" name="SiparisID" id="SilID" />
-                            <input type="hidden" name="Gorev" value="Sil" id="SilIDg" />
+                            <input type="hidden" name="Gorev" value="Sil"/>
                             <div class="form-group">
                                 <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
                                 <label style="color:orangered">Bu Sipariş Silenecek Devam Edilsin mi?</label>
