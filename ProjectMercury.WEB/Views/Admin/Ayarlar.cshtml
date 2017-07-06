@@ -63,13 +63,15 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Sisteme Erişebilecek Kullanıcıları Düzenleyebilir, Sitenizin İletişim Bilgilerini Ekleyebilir veya
-                                    Değiştirebilirsiniz.<strong style="color:red">
-                                        DİKKAT!!! Bu Sayfada yapılan tüm işlemler site güvenliğiniz için çok önemlidir. Bu Sayfanın
-                                        Tüm Sorumluluğu Yazılımı Kullanan Sorumlulara Aittir. Kullanıcılar Kendi Datalarının Güvenliğinden Kendileri Sorumludur. Hiçbir Şekilde
-                                        Geliştirici Sistemin Açıklarından yada kullanıcıların açıklarından kaynaklı Hack ile ortaya çıkan maddi manevi tüm Olaylardan sorumlu tutulamaz.
-                                        Kullanıclar Yazılımı Kullanarak Bunu Kabul Etmiş olurlar.
-                                    </strong> Lütfen Güvenli Bir Şifre Belirleyin Ve Kimseyle Paylaşmayın.
+                                    Merhaba! Ben SiteRobotu Çomar. Bu Sayfada Sitenizin Bilgilerini Düzenleyebilir, Sisteme Erişimi Olan Kullanıcıları
+                                    Düzenleyebilirsiniz. Sitenizin Logosunu Yükleyebilir Değiştirebilirsiniz. Logo Otomatik Ölçeklendirilecektir.
+                                    <hr />
+                                    <strong class="text-danger">Lütfen Dikkat!</strong>
+                                    <hr />
+                                    <strong>Sisteme Erişim Vericeğiniz Kullanıcıların Tüm Yetkilere Sahip Olacağını Unutmayın.</strong> Bu Versiyonda Kullanıcı
+                                    Yetkilendirme Sistemi Mevcut Olmadığı İçin Tüm Kullanıcılar Admin Modda Çalışır. Bu Konuda Oluşabilecek Tüm Veri Kayıpları
+                                    Kullanıcılara Aittir. Bu Beyan Sorumluluk Reddi Yerine Geçer Ve Tüm Kullanıcılar Sistemi Kullanarak İşbu Sözleşmeyi Kabul Etmiş
+                                    Sayılır.
                                 </p>
                             </div>
                             <div class="panel-footer">
@@ -121,13 +123,13 @@
                                 <label>Bu Kullanıcı Değiştirilecek Devam Edilsin mi?</label>
                                 <div class="form-group">
                                     <label>Kullanıcı Adı</label>
-                                    <input class="form-control" name="KatAdi" id="kadi">
+                                    <input class="form-control" name="KullaniciAdi" id="kadi" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Eski Şifre</label>
                                     <input class="form-control" readonly="readonly" style="color:orangered" id="ksifre">
                                     <label>Yeni Şifre</label>
-                                    <input class="form-control" name="KatSifre" type="password">
+                                    <input class="form-control" name="KullaniciSifre" required>
                                 </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -168,11 +170,11 @@
                                 <label>Kullanıcı Eklenecek Devam Edilsin mi?</label>
                                 <div class="form-group">
                                     <label>Kullanıcı Adı</label>
-                                    <input class="form-control" name="KatAdi">
+                                    <input class="form-control" name="KullaniciAdi" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Kullanıcı Şifresi</label>
-                                    <input class="form-control" name="KatSifre" type="password">
+                                    <input class="form-control" name="KullaniciSifre" required>
                                 </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -205,49 +207,73 @@
             </div>
             <hr />
             <div>
-                <h3 class="text-warning">Site Bilgileri</h3>
+                <div class="col-lg-12">
+                    <img src="@Model.Logo" class="img-responsive pull-left" /><h3 class="text-warning pull-right"> <strong class="text-danger">Site Bilgileri</strong> / Sitenizin Temel Bilgileri Düzenleme Alanı</h3>
+                </div>
                 <hr />
-                <form role="form" method="post">
+                <form role="form" method="post" enctype="multipart/form-data">
 
                     <input type="hidden" name="Gorev" value="Company" />
 
-                    <div class="form-group">
-                        <label>Adres</label>
-                        <textarea class="form-control" name="Adres">@Model.Adres</textarea>
+                    <div class="form-group col-lg-6">
+                        <label>Site Adı</label>
+                        <input class="form-control" name="SiteAdi" value="@Model.SiteAdi" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
+                        <label>Adres</label>
+                        <textarea class="form-control" name="Adres" required>@Model.Adres</textarea>
+                    </div>
+
+                    <div class="form-group col-lg-6">
                         <label>Telefon</label>
                         <input class="form-control" name="Telefon" value="@Model.Telefon">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
                         <label>Mobil Telefon</label>
-                        <input class="form-control" name="MobilTelefon" value="@Model.MobilTelefon">
+                        <input class="form-control" name="MobilTelefon" value="@Model.MobilTelefon" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
                         <label>Facebook</label>
                         <input class="form-control" name="Facebook" value="@Model.Facebook">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
                         <label>Twitter</label>
                         <input class="form-control" name="Twitter" value="@Model.Twitter">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
                         <label>Whatsapp</label>
                         <input class="form-control" name="Whatsapp" value="@Model.Whatsapp">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-lg-6">
                         <label>Instagram</label>
                         <input class="form-control" name="Instagram" value="@Model.Instagram">
                     </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Güncelle/Ekle</button>
+                    <div class="form-group col-lg-6">
+                        <label>Mail Adresi</label>
+                        <textarea class="form-control" name="MailAdresi" required>@Model.MailAdresi</textarea>
+                    </div>
+                    
+                    <div class="form-group col-lg-6">
+                        <div class="fileinput fileinput-new col-lg-12" data-provides="fileinput">
+                            <div class="fileinput-preview fileinput-exists thumbnail img-responsive col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <span class="btn btn-warning btn-file col-lg-6 form-control"><span class="fileinput-new">Logo Değiştir</span><span class="fileinput-exists">Yeniden Seç</span><input type="file" name="Resim"></span>
+                                <br /><br />
+                                <a href="#" class="btn btn-danger fileinput-exists col-lg-6 form-control " data-dismiss="fileinput">Sil</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <input  name="Logo" value="@Model.Logo" hidden="hidden">
+                        <button type="submit" class="btn btn-success col-lg-12">Güncelle/Ekle</button>
                     </div>
 
                 </form>
@@ -262,7 +288,7 @@
         document.getElementById("Silinecek").value = obj2;
     }
     function Islem2(obj, obj2, obj3) {
-        document.getElementById("idal").value = al2;
+        document.getElementById("idal").value = obj;
         document.getElementById("kadi").value = obj2;
         document.getElementById("ksifre").value = obj3;
     }

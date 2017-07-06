@@ -28,5 +28,9 @@ namespace ProjectMercury.WEB.Controllers
         {
             return View();
         }
+        public ActionResult HataBulunamadi()
+        {
+            return View();
+        }
     }
 }

@@ -29,8 +29,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -55,8 +54,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -79,8 +77,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -116,8 +113,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -140,8 +136,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -173,8 +168,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -211,8 +205,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -266,8 +259,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -290,8 +282,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
@@ -323,8 +314,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }

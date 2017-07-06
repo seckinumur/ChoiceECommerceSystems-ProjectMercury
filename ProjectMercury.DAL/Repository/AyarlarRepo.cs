@@ -21,4 +21,3 @@ namespace ProjectMercury.DAL.Repository
         }
     }
 }
-//seçkin ben yatıyorum sen database yaratılırken site bilgilerini ekle burada patlıyor null geliyor hadi koçum

@@ -20,5 +20,11 @@ namespace ProjectMercury.DAL.VMModels
         public string SiteAdi { get; set; }
         public string MailAdresi { get; set; }
         public List<Kullanicilar> Kullanicilar { get; set; }
+
+        public string Gorev { get; set; }
+
+        public int KullanicilarID { get; set; }
+        public string KullaniciAdi { get; set; }
+        public string KullaniciSifre { get; set; }
     }
 }

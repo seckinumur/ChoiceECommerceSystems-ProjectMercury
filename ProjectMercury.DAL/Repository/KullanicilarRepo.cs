@@ -40,6 +40,34 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool KullaniciKaydetTekMod(string Ad,string Sifre) //Kullanıcı Kaydet
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    bool Control = db.Kullanicilar.Any(p => p.KullaniciAdi == Ad && p.KullaniciSifre == Sifre);
+                    if (Control != true)
+                    {
+                        db.Kullanicilar.Add(new Kullanicilar()
+                        {
+                            KullaniciAdi = Ad,
+                            KullaniciSifre = Sifre
+                        });
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static bool KullaniciGuncelle(VMKullanicilar Al) //Kullanıcı Güncelle
         {
             using (DBCON db = new DBCON())
@@ -49,6 +77,24 @@ namespace ProjectMercury.DAL.Repository
                     var Bul = db.Kullanicilar.FirstOrDefault(p => p.KullanicilarID == Al.KullanicilarID);
                     Bul.KullaniciAdi = Al.KullaniciAdi;
                     Bul.KullaniciSifre = Al.KullaniciSifre;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool KullaniciGuncelleTekMod(int ID,string Ad,string Sifre) //Kullanıcı Güncelle
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Kullanicilar.FirstOrDefault(p => p.KullanicilarID ==ID);
+                    Bul.KullaniciAdi = Ad;
+                    Bul.KullaniciSifre = Sifre;
                     db.SaveChanges();
                     return true;
                 }

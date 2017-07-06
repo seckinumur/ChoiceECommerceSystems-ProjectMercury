@@ -1,9 +1,12 @@
 ﻿using ProjectMercury.DAL.Repository;
+using ProjectMercury.DAL.VMModels;
 using ProjectMercury.Entity.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace ProjectMercury.WEB.Controllers
@@ -14,6 +17,8 @@ namespace ProjectMercury.WEB.Controllers
         {
             try
             {
+                TempData["UyariTipi"] = "text-primary";
+                TempData["Sonuc"] = "Kullanıcı Adı ve Şifrenizi Girin!";
                 return View();
             }
             catch
@@ -50,8 +55,7 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 else
                 {
-                    TempData["UyariTipi"] = "alert alert-danger";
-                    TempData["Uyari"] = false;
+                    TempData["UyariTipi"] = "text-danger";
                     TempData["Sonuc"] = "Kullanıcı Adı Yada Parolası Hatalı!";
                     return View();
                 }
@@ -81,8 +85,7 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login");
             }
@@ -105,8 +108,114 @@ namespace ProjectMercury.WEB.Controllers
             }
             else
             {
-                TempData["UyariTipi"] = "alert alert-danger";
-                TempData["Uyari"] = false;
+                TempData["UyariTipi"] = "text-danger";
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login");
+            }
+        }
+        [HttpPost]
+        public ActionResult Ayarlar(VMAyarlar Data, HttpPostedFileBase Resim)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (Data.Gorev == "Sil")
+                    {
+                        bool Sonucu = KullanicilarRepo.KullaniciSil(Data.KullanicilarID);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("Ayarlar");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kullanıcı Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "188831";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else if (Data.Gorev == "Degistir")
+                    {
+                        bool Sonucu = KullanicilarRepo.KullaniciGuncelleTekMod(Data.KullanicilarID, Data.KullaniciAdi, Data.KullaniciSifre);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("Ayarlar");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kullanıcı Düzenleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "134442";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else if (Data.Gorev == "Ekle")
+                    {
+                        bool Sonucu = KullanicilarRepo.KullaniciKaydetTekMod(Data.KullaniciAdi, Data.KullaniciSifre);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("Ayarlar");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Kullanıcı Düzenleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "1344332";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else if (Data.Gorev == "Company")
+                    {
+                        if (System.IO.File.Exists(Server.MapPath("~" + Data.Logo)))
+                        {
+                            System.IO.File.Delete(Server.MapPath("~" + Data.Logo));
+                        }
+                        WebImage img = new WebImage(Resim.InputStream);
+                        FileInfo imginfo = new FileInfo(Resim.FileName);
+                        string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
+                        img.Resize(275,90);
+                        img.Save("~/images/Company/" + newfoto);
+                        Data.Logo = "/images/Company/" + newfoto;
+                        SiteBilgileri data = new SiteBilgileri()
+                        {
+                            Adres = Data.Adres,
+                            MailAdresi = Data.MailAdresi,
+                            SiteAdi = Data.SiteAdi,
+                            Facebook = Data.Facebook,
+                            Instagram = Data.Instagram,
+                            Logo = Data.Logo,
+                            MobilTelefon = Data.MobilTelefon,
+                            Telefon = Data.Telefon,
+                            Twitter = Data.Twitter,
+                            Whatsapp = Data.Whatsapp
+                        };
+                        bool Sonucu = SiteBilgileriRepo.Guncelle(data);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("Ayarlar");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Site Düzenleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "199932";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Hata"] = "Sistem Ayarlar Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                        TempData["HataKodu"] = "559866";
+                        return RedirectToAction("Hata", "Product");
+                    }
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Ayarlar Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "559866";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "text-danger";
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login");
             }
