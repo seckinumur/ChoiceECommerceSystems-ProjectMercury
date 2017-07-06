@@ -73,6 +73,29 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool MarkaSilForce(int ID) //Marka Sil
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Marka.FirstOrDefault(p => p.MarkaID == ID);
+                    bool kontrol = db.Urun.Any(p => p.MarkaID == ID);
+                    if (kontrol == true)
+                    {
+                        var urunsil = db.Urun.Where(p => p.MarkaID == ID).ToList();
+                        db.Urun.RemoveRange(urunsil);
+                    }
+                    db.Marka.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static Marka MarkaBul(string ID) //Marka Bul
         {
             int id = int.Parse(ID);

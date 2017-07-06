@@ -87,5 +87,29 @@ namespace ProjectMercury.WEB.Controllers
                 return RedirectToAction("Login");
             }
         }
+        public ActionResult Ayarlar()
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    var Gonder = AyarlarRepo.AyarlariListele();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Ayarlar Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "559866";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "alert alert-danger";
+                TempData["Uyari"] = false;
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login");
+            }
+        }
     }
 }

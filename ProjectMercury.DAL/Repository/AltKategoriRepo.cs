@@ -15,6 +15,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
+               
                 try
                 {
                     bool Control = db.AltKategori.Any(p => p.AltKategoriAdi == Al.AltKategoriAdi);
@@ -68,6 +69,29 @@ namespace ProjectMercury.DAL.Repository
                 {
                     var Bul = db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID);
                     db.AltKategori.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool AltKategoriSilForce(int ID) //AltKategori Sil
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bulalt = db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID);
+                    bool kontrol = db.Urun.Any(p => p.AltKategoriID == ID);
+                    if (kontrol == true)
+                    {
+                        var urunsil = db.Urun.Where(p => p.AltKategoriID == ID).ToList();
+                        db.Urun.RemoveRange(urunsil);
+                    }
+                    db.AltKategori.Remove(Bulalt);
                     db.SaveChanges();
                     return true;
                 }

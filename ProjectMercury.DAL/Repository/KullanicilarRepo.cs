@@ -106,6 +106,14 @@ namespace ProjectMercury.DAL.Repository
             }
         }
 
+        public static List<Kullanicilar> KullanicilariListele() //Kullanıcı Listele normal
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.Kullanicilar.Where(p => p.System == false).ToList();
+            }
+        }
+
         public static int KullaniciGiris(Kullanicilar Al) //Kullanıcı Giriş
         {
             using (DBCON db = new DBCON())

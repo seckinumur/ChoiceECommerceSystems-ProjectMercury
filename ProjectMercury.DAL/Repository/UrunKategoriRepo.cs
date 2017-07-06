@@ -73,6 +73,29 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool UrunKategoriSilForce(int ID) //Ürün Kategori Silme
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == ID);
+                    bool kontrol = db.Urun.Any(p => p.UrunKategoriID == ID);
+                    if(kontrol == true)
+                    {
+                        var urunsil = db.Urun.Where(p => p.UrunKategoriID == ID).ToList();
+                        db.Urun.RemoveRange(urunsil);
+                    }
+                    db.UrunKategori.Remove(Bul);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static UrunKategori UrunKategoriBul(string ID) 
         {
             int id = int.Parse(ID);

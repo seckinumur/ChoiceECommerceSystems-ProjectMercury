@@ -167,6 +167,20 @@ namespace ProjectMercury.WEB.Controllers
                             return RedirectToAction("Hata");
                         }
                     }
+                    else if (Data.Gorev == "Force")
+                    {
+                        bool sonuc = AltKategoriRepo.AltKategoriSilForce(Data.AltKategoriID);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("AltKategoriler");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Alt Kategori Force Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "82052";
+                            return RedirectToAction("Hata");
+                        }
+                    }
                     else if (Data.Gorev == "Guncelle")
                     {
                         bool sonuc = AltKategoriRepo.AltKategoriGuncelle(Data);
@@ -262,6 +276,20 @@ namespace ProjectMercury.WEB.Controllers
                             return RedirectToAction("Hata");
                         }
                     }
+                    else if (Data.Gorev == "Force")
+                    {
+                        bool sonuc = UrunKategoriRepo.UrunKategoriSilForce(Data.UrunKategoriID);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("UrunKategori");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Kategori Force Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "98052";
+                            return RedirectToAction("Hata");
+                        }
+                    }
                     else if (Data.Gorev == "Guncelle")
                     {
                         bool sonuc = UrunKategoriRepo.UrunKategoriGuncelle(Data);
@@ -354,6 +382,20 @@ namespace ProjectMercury.WEB.Controllers
                         {
                             TempData["Hata"] = "Marka Silme İşlemi Başarısız Oldu!";
                             TempData["HataKodu"] = "0081";
+                            return RedirectToAction("Hata");
+                        }
+                    }
+                    else if (Data.Gorev == "Force")
+                    {
+                        bool sonuc = MarkaRepo.MarkaSilForce(Data.MarkaID);
+                        if (sonuc == true)
+                        {
+                            return RedirectToAction("Marka");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Marka Force Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "28052";
                             return RedirectToAction("Hata");
                         }
                     }

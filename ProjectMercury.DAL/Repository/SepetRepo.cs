@@ -17,7 +17,7 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici && p.UrunID==urun);
+                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici && p.UrunID == urun);
                     bul.Adet += adet;
                     db.SaveChanges();
                     return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
@@ -115,31 +115,38 @@ namespace ProjectMercury.DAL.Repository
                 {
                     int uyelerid = int.Parse(UyeID);
                     var bul = db.SanalSepet.Where(p => p.KullanicilarID == KullaniciID).ToList();
-                    var liste = bul.Select(p=> new UrunSepet
+                    if (bul.Count != 0)
                     {
-                        Adedi = p.Adet,
-                        UrunID = p.Urun.UrunID
-                    }).ToList();
+                        var liste = bul.Select(p => new UrunSepet
+                        {
+                            Adedi = p.Adet,
+                            UrunID = p.Urun.UrunID
+                        }).ToList();
 
-                    db.Sepet.Add(new Sepet()
-                    {
-                        SiparisTamamlandimi = true,
-                        UyelerID = uyelerid,
-                        UrunSepet = liste,
-                        Manuel = true,
-                        Aktifmi=true
-                    });
-                    db.SaveChanges();
+                        db.Sepet.Add(new Sepet()
+                        {
+                            SiparisTamamlandimi = true,
+                            UyelerID = uyelerid,
+                            UrunSepet = liste,
+                            Manuel = true,
+                            Aktifmi = true
+                        });
+                        db.SaveChanges();
 
-                    var bulsepet = db.Sepet.FirstOrDefault(p => p.Aktifmi == true);
-                    bool sonuc = SiparisRepo.SiparisKaydet(bulsepet);
-                    if(sonuc == true)
-                    {
-                        bulsepet.Aktifmi = false;
+                        var bulsepet = db.Sepet.FirstOrDefault(p => p.Aktifmi == true);
+                        bool sonuc = SiparisRepo.SiparisKaydet(bulsepet);
+                        if (sonuc == true)
+                        {
+                            bulsepet.Aktifmi = false;
+                        }
+                        db.SanalSepet.RemoveRange(bul);
+                        db.SaveChanges();
+                        return true;
                     }
-                    db.SanalSepet.RemoveRange(bul);
-                    db.SaveChanges();
-                    return true;
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch
                 {
@@ -147,7 +154,7 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static bool SepetiSilKullanici(int KullaniciID) //Kullanıcı Modunda Manuel Sepeti Ekle
+        public static bool SepetiSilKullanici(int KullaniciID) //Kullanıcı Modunda Manuel Sepeti Sil
         {
             using (DBCON db = new DBCON())
             {

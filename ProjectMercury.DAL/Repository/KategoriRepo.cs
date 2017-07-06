@@ -79,12 +79,19 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    var bulalt = db.AltKategori.Where(p => p.KategoriID == ID).ToList();
                     var Bul = db.Kategori.FirstOrDefault(p => p.KategoriID == ID);
-                    var urunsil = db.Urun.Where(p => p.KategoriID == ID).ToList();
+                    bool kontrol = db.Urun.Any(p => p.KategoriID == ID),kontrol2 = db.AltKategori.Any(p=> p.KategoriID==ID);
+                    if (kontrol == true)
+                    {
+                        var urunsil = db.Urun.Where(p => p.KategoriID == ID).ToList();
+                        db.Urun.RemoveRange(urunsil);
+                    }
+                    if (kontrol2 == true)
+                    {
+                        var bulalt = db.AltKategori.Where(p => p.KategoriID == ID).ToList();
+                        db.AltKategori.RemoveRange(bulalt);
+                    }
                     db.Kategori.Remove(Bul);
-                    db.AltKategori.RemoveRange(bulalt);
-                    db.Urun.RemoveRange(urunsil);
                     db.SaveChanges();
                     return true;
                 }
