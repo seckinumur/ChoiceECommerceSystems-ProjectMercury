@@ -16,21 +16,37 @@ namespace ProjectMercury.DAL.Repository
             using (DBCON db = new DBCON())
             {
                 UrunAI Liste = new UrunAI();
+                List<Urun> GunufirsatiListe = new List<Urun>();
                 Random rnd = new Random();
-                var urunlistesi = db.Urun.OrderByDescending(p => p.UrunID).ToList();
+                var urunlistesi = db.Urun.ToList();
                 var indirimliUrun = db.Urun.Where(p => p.IndirimVarmi == true).ToList();
-                
+                int encoksatan = db.Satis.Count();
+
                 if (urunlistesi.Count != 5)
                 {
-                    Liste.EnYeni.AddRange(urunlistesi.Take(urunlistesi.Count));
-                    Liste.EnCokSatan.AddRange(db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).Take(urunlistesi.Count).ToList());
-                    for (int i = 0; i < urunlistesi.Count; i++){Liste.GununFirsati.Add(indirimliUrun[rnd.Next(0, indirimliUrun.Count)]);}
+                    Liste.EnYeni = urunlistesi.OrderByDescending(p => p.UrunID).Take(urunlistesi.Count).ToList();
                 }
                 else
                 {
-                    Liste.EnYeni.AddRange(urunlistesi.Take(5));
-                    Liste.EnCokSatan.AddRange(db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).Take(5).ToList());
-                    for (int i = 0; i < 5; i++){Liste.GununFirsati.Add(indirimliUrun[rnd.Next(0, indirimliUrun.Count)]); }
+                    Liste.EnYeni = urunlistesi.OrderByDescending(p => p.UrunID).Take(5).ToList();
+                }
+                if (encoksatan != 5 && encoksatan != 0)
+                {
+                    Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).ToList();
+                }
+                else
+                {
+                    Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).Take(5).ToList();
+                }
+                if (indirimliUrun.Count != 5)
+                {
+                    for (int i = 0; i < urunlistesi.Count; i++) { GunufirsatiListe.Add(indirimliUrun[rnd.Next(1, indirimliUrun.Count)]); }
+                    Liste.GununFirsati = GunufirsatiListe;
+                }
+                else
+                {
+                    for (int i = 0; i < 5; i++) { GunufirsatiListe.Add(indirimliUrun[rnd.Next(1, indirimliUrun.Count)]); }
+                    Liste.GununFirsati = GunufirsatiListe;
                 }
                 return Liste;
             }

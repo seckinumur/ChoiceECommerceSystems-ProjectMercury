@@ -97,11 +97,10 @@ namespace ProjectMercury.Entity.DBContext
             db.SaveChanges();
             db.Uyeler.Add(new Uyeler
             {
-                KullaniciAdi = "demo",
                 Sifre = "1234",
                 Adres="demo adres",
                 Banlimi=false,
-                MailAdresi="deneme@deneme.com",
+                MailAdresi="demo@demo.com",
                 Tarih=DateTime.Now.ToShortDateString(),
                 Telefon="33333333",
                 UyeAdiSoyadi="demo demo"
@@ -120,6 +119,12 @@ namespace ProjectMercury.Entity.DBContext
                 Twitter= "https://twitter.com/SeckinUmur",
                 Whatsapp="+905423428009",
                 Logo= "/images/Company/projectmercury.PNG"
+            });
+            db.SaveChanges();
+
+            db.Slider.Add(new Slider()
+            {
+                Image = "/images/Company/Slider/Slider1.JPG"
             });
             db.SaveChanges();
         }

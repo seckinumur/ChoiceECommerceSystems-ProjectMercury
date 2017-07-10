@@ -1,6 +1,5 @@
 ﻿@model ProjectMercury.DAL.VMModels.UrunAI
 @{
-    ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/_LayoutView.cshtml";
 }
 
@@ -11,88 +10,46 @@
                 <div class="navbar-vertical">
                     <ul class="nav nav-stacked">
                         <li class="header">
-                            <h6 class="text-uppercase">Categories <i class="fa fa-navicon pull-right"></i></h6>
+                            <h6 class="text-uppercase">Kategoriler <i class="fa fa-navicon pull-right"></i></h6>
                         </li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Mens <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0);">Shirts</a></li>
-                                <li><a href="javascript:void(0);">Coats & Jackets</a></li>
-                                <li><a href="javascript:void(0);">Underwear</a></li>
-                                <li><a href="javascript:void(0);">Sunglasses</a></li>
-                                <li><a href="javascript:void(0);">Socks</a></li>
-                                <li><a href="javascript:void(0);">Belts</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Womens <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0);">Dresses</a></li>
-                                <li><a href="javascript:void(0);">T-shirts</a></li>
-                                <li><a href="javascript:void(0);">Skirts</a></li>
-                                <li><a href="javascript:void(0);">Jeans</a></li>
-                                <li><a href="javascript:void(0);">Pullover</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="javascript:void(0);">Kids</a></li>
-                        <li><a href="javascript:void(0);">Fashion</a></li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                                SportWear <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0);">Shoes</a></li>
-                                <li><a href="javascript:void(0);">Bags</a></li>
-                                <li><a href="javascript:void(0);">Pants</a></li>
-                                <li><a href="javascript:void(0);">Swimwear</a></li>
-                                <li><a href="javascript:void(0);">Bicycles</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="javascript:void(0);">Bags</a></li>
-                        <li><a href="javascript:void(0);">Shoes</a></li>
-                        <li><a href="javascript:void(0);">HouseHolds</a></li>
-                        <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                                Technology <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0);">Television</a></li>
-                                <li><a href="javascript:void(0);">Camera</a></li>
-                                <li><a href="javascript:void(0);">Speakers</a></li>
-                                <li><a href="javascript:void(0);">Mobile</a></li>
-                                <li><a href="javascript:void(0);">PC</a></li>
-                            </ul>
-                        </li>
+                        @{
+                            foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
+                            {
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        @item.KategoriAdi <i class="fa fa-angle-right pull-right"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @{
+                                            foreach (var sonuc in ProjectMercury.DAL.Repository.AltKategoriRepo.AltKategorileriListele())
+                                            {
+                                                if (sonuc.KategoriID == item.KategoriID)
+                                                {
+                                                    <li><a href="~/Product/AltKategoriListele/@sonuc.AltKategoriID">@sonuc.AltKategoriAdi</a></li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
             <div class="col-sm-8 col-md-9">
                 <div class="owl-carousel slider owl-theme">
-                    <div class="item">
-                        <figure>
-                            <a href="javascript:void(0);">
-                                <img src="img/slider/slider_10.jpg" alt="" />
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="item">
-                        <figure>
-                            <a href="javascript:void(0);">
-                                <img src="img/slider/slider_09.jpg" alt="" />
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="item">
-                        <figure>
-                            <a href="javascript:void(0);">
-                                <img src="img/slider/slider_08.jpg" alt="" />
-                            </a>
-                        </figure>
-                    </div>
+                    @{
+                        foreach (var item in ProjectMercury.DAL.Repository.SliderRepo.SliderList())
+                        {
+                            <div class="item">
+                                <figure>
+                                    <a href="javascript:void(0);">
+                                        <img src="@item.Image"/>
+                                    </a>
+                                </figure>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -101,52 +58,9 @@
 <!-- Kampanyalı Ürünler -->
 <section class="section white-backgorund">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="title-wrap">
-                    <h2 class="title"><span class="text-primary">Kampanyalı</span> Ürünler</h2>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="owl-demo" class="owl-carousel column-3 owl-theme">
-
-                    <div class="item">
-                        <div class="thumbnail blog">
-                            <div class="header">
-                                <figure>
-                                    <img src="img/blog/blog_04.jpg" alt="">
-                                </figure>
-                                <div class="meta">
-                                    <span><i class="fa fa-calendar mr-5"></i>Oct 25, 2016</span>
-                                    <span><i class="fa fa-comment mr-5"></i>(15)</span>
-                                    <span><i class="fa fa-heart mr-5"></i>(35)</span>
-                                </div>
-                            </div>
-                            <div class="caption">
-                                <h6><a href="blog-article-v1.html">Decorating Tips</a></h6>
-                                <div class="author-category">
-                                    <span class="author mr-20">
-                                        <i class="fa fa-user mr-5"></i><a href="javascript:void(0);">Joe Doe</a>
-                                    </span>
-                                    <span class="category">
-                                        <a href="javascript:void(0);">Post Formats</a>
-                                    </span>
-                                </div>
-                                <p>Aenean semper lacus sed molestie sollicitudin. In semper, tellus id posuere interdum.</p>
-                                <a href="blog-article-v1.html" class="btn btn-default semi-circle btn-sm">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <hr class="spacer-30 no-border" />
-
+        <h5 class=" text-center text-success"><i class="fa fa-diamond"></i> Hit 5 Ürünle Herşey</h5>
+        <hr class="spacer-20 no-border" />
        <div class="row">
                 <div class="col-sm-4">
                     <div class="widget">
@@ -156,13 +70,13 @@
                                 <ul class="items">
                                     <li>
                                         <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="@yeniurun.Image" alt="Sample Product ">
+                                            <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
                                         </a>
                                         <div class="product-details">
                                             <h6 class="regular">
                                                 <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
                                             </h6>
-                                            <span class="price text-primary">@yeniurun.IndirimliFiyati</span>
+                                            <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -175,42 +89,46 @@
                     <div class="widget">
                         <h5 class="subtitle text-uppercase"><span class="text-primary">Günün Fırsatı</span> Ürünler</h5>
 
-                        <ul class="items">
-                            <li>
-                                <a href="shop-single-product-v1.html" class="product-image">
-                                    <img src="img/products/men_02.jpg" alt="Sample Product ">
-                                </a>
-                                <div class="product-details">
-                                    <h6 class="regular">
-                                        <a href="shop-single-product-v1.html">Printed Summer Dress</a>
-                                    </h6>
-                                    <span class="price text-primary">$19.99</span>
-                                </div>
-                            </li>
-
-                        </ul>
+                        @{ foreach (var yeniurun in Model.GununFirsati)
+                            {
+                                <ul class="items">
+                                    <li>
+                                        <a href="shop-single-product-v1.html" class="product-image">
+                                            <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
+                                        </a>
+                                        <div class="product-details">
+                                            <h6 class="regular">
+                                                <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
+                                            </h6>
+                                            <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                        }
                     </div>
                 </div>
 
                 <div class="col-sm-4">
                     <div class="widget">
                         <h5 class="subtitle text-uppercase"><span class="text-primary">En Çok Satılan</span> Ürünler</h5>
-
-                        <ul class="items">
-
-                            <li>
-                                <a href="shop-single-product-v1.html" class="product-image">
-                                    <img src="img/products/men_06.jpg" alt="Sample Product ">
-                                </a>
-                                <div class="product-details">
-                                    <h6 class="regular">
-                                        <a href="shop-single-product-v1.html">Printed Summer Dress</a>
-                                    </h6>
-                                    <span class="price text-primary">$19.99</span>
-                                </div>
-                            </li>
-
-                        </ul>
+                        @{ foreach (var yeniurun in Model.EnCokSatan)
+                            {
+                                <ul class="items">
+                                    <li>
+                                        <a href="shop-single-product-v1.html" class="product-image">
+                                            <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
+                                        </a>
+                                        <div class="product-details">
+                                            <h6 class="regular">
+                                                <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
+                                            </h6>
+                                            <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                        }
                     </div>
                 </div>
             </div>

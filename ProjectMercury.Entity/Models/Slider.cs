@@ -10,8 +10,5 @@ namespace ProjectMercury.Entity.Models
     {
         public int SliderID { get; set; }
         public string Image { get; set; }
-        public int KategoriID { get; set; }
-
-        public virtual Kategori Kategori { get; set; }
     }
 }

@@ -2,22 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Plus - E-Commerce Template</title>
+    <title>@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().SiteAdi Project Mercury V.1.5</title>
     <meta charset="utf-8">
-    <meta name="description" content="Plus E-Commerce Template">
+    <meta name="description" content="Project Mercury V.1.5 E-Ticaret Sistemi">
     <meta name="author" content="Seçkin Umur" />
-    <meta name="keywords" content="plus, html5, css3, template, ecommerce, e-commerce, bootstrap, responsive, creative" />
+    <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="~/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Logo" type="image/x-icon">
+    <link rel="icon" href="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Logo" type="image/x-icon">
 
     <link href="~/Content/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/css/owl.carousel.min.css"type="text/css" rel="stylesheet" />
+    <link href="~/Content/css/owl.carousel.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/owl.theme.default.min.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/animate.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/swiper.css" type="text/css" rel="stylesheet" />
@@ -32,14 +32,14 @@
         <div class="container">
             <div class="topBar">
                 <div class="container">
-                        <a href="javascript:void(0);" class="pull-left"><i class="fa fa-flask mr-5"></i> ©2017 Choice Corporation Project Mercury V.1.5 (Beta)</a>
+                    <a href="javascript:void(0);" class="pull-left"><i class="fa fa-flask mr-5"></i> ©2017 Choice Corporation Project Mercury V.1.5 (Beta)</a>
                 </div>
             </div>
             <div class="row display-table">
 
                 <div class="col-xs-3 vertical-align hidden-xs">
                     <a href="javascript:void(0);">
-                        <img height="90" src="img/projectmercury.png" class="pull-right img-responsive" alt="Project Mercury" />
+                        <img height="90" src="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Logo" class="pull-right img-responsive" alt="Project Mercury" />
                     </a>
                 </div>
 
@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="javascript:void(0);" class="navbar-brand visible-xs">
-                    <img src="img/projectmercurylogo.png" alt="logo">
+                    <img height="47" src="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Logo" alt="logo">
                 </a>
             </div>
             <div id="navbar-collapse-3" class="navbar-collapse collapse">
@@ -78,63 +78,33 @@
                             Kategoriler<i class="fa fa-bars ml-5"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Mens</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Shirts</a></li>
-                                    <li><a href="category.html">Coats & Jackets</a></li>
-                                    <li><a href="category.html">Underwear</a></li>
-                                    <li><a href="category.html">Sunglasses</a></li>
-                                    <li><a href="category.html">Socks</a></li>
-                                    <li><a href="category.html">Belts</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Womens</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Bresses</a></li>
-                                    <li><a href="category.html">T-shirts</a></li>
-                                    <li><a href="category.html">Skirts</a></li>
-                                    <li><a href="category.html">Jeans</a></li>
-                                    <li><a href="category.html">Pullover</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);">Kids</a></li>
-                            <li><a href="javascript:void(0);">Fashion</a></li>
-                            <li class="dropdown-submenu">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">SportWear</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">Shoes</a></li>
-                                    <li><a href="category.html">Bags</a></li>
-                                    <li><a href="category.html">Pants</a></li>
-                                    <li><a href="category.html">SwimWear</a></li>
-                                    <li><a href="category.html">Bicycles</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);">Bags</a></li>
-                            <li><a href="javascript:void(0);">Shoes</a></li>
-                            <li><a href="javascript:void(0);">HouseHolds</a></li>
-                            <li class="dropdown-submenu">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Technology</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="category.html">TV</a></li>
-                                    <li><a href="category.html">Camera</a></li>
-                                    <li><a href="category.html">Speakers</a></li>
-                                    <li><a href="category.html">Mobile</a></li>
-                                    <li><a href="category.html">PC</a></li>
-                                </ul>
-                            </li>
+                            @{
+                                foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
+                                {
+                                    <li>
+                                        <a href="~/Product/KategoriListele/@item.KategoriID"><i class="fa fa-database"></i> @item.KategoriAdi</a>
+                                    </li>
+                                }
+                            }
                         </ul>
                     </li>
 
-                    <li><a href="elements.html">Elements</a></li>
-
                     <li class="dropdown active">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Kullanıcı <i class="fa fa-user mr-5"></i></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle"> @ViewBag.User <i class="fa fa-user mr-5"></i></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="home-v1.html">Profil <i class="fa fa-user mr-5"></i></a></li>
-                            <li><a href="home-v2.html">Siparişlerim <i class="glyphicon glyphicon-shopping-cart mr-5"></i></a></li>
-                            <li><a href="home-v3.html">Çıkış Yap <i class="glyphicon glyphicon-log-out mr-5"></i></a></li>
+                            @{
+                                if (ViewBag.User == "Misafir Kullanıcı")
+                                {
+                                    <li><a href="~/Admin/Login">Sisteme Giriş Yap <i class="fa fa-user mr-5"></i></a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="home-v1.html">@ViewBag.User <i class="fa fa-user mr-5"></i></a></li>
+                                    <li><a href="home-v2.html">Siparişlerim <i class="glyphicon glyphicon-shopping-cart mr-5"></i></a></li>
+                                    <li><a href="home-v3.html">Çıkış Yap <i class="glyphicon glyphicon-log-out mr-5"></i></a></li>
+                                }
+                            }
+
                         </ul>
                     </li>
 
@@ -206,18 +176,18 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <h5 class="title">Firma Adı</h5>
+                    <h5 class="title">@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().SiteAdi</h5>
                     <ul class="items">
-                        <li>Adres: filanca mahallesi filanca sokak no:12/5B ümraniye İstanbul</li>
-                        <li>Telefon: +905423428009 </li>
+                        <li>Adres: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Adres</li>
+                        <li>Telefon: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Telefon</li>
                     </ul>
                     <hr class="spacer-10 no-border">
                     <h5 class="title">Sosyal Ağlar</h5>
                     <br>
                     <ul class="social-icons style2">
-                        <li class="facebook"><a class="semi-circle" href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a class="semi-circle" href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                        <li class="instagram"><a class="semi-circle" href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
+                        <li class="facebook"><a class="semi-circle" href="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li class="twitter"><a class="semi-circle" href="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="instagram"><a class="semi-circle" href="@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Instagram"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
                 <div class="col-sm-8">

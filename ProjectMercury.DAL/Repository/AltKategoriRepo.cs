@@ -137,5 +137,12 @@ namespace ProjectMercury.DAL.Repository
                 return result;
             }
         }
+        public static List<AltKategori> AltKategorileriListele() //AltKategorileri Bul
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.AltKategori.ToList();
+            }
+        }
     }
 }

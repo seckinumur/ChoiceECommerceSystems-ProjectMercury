@@ -24,10 +24,9 @@
                             <thead>
                                 <tr>
                                     <th>Üye Adı Soyadı</th>
-                                    <th>Kullanıcı Adı</th>
+                                    <th>Mail Adresi</th>
                                     <th>Şifre</th>
                                     <th>Telefon</th>
-                                    <th>Mail</th>
                                     <th>Adres</th>
                                     <th>Üye Tarihi</th>
                                     <th>İşlemler</th>
@@ -39,15 +38,14 @@
                                     {
                                         <tr>
                                             <td>@item.UyeAdiSoyadi</td>
-                                            <td>@item.KullaniciAdi</td>
+                                            <td>@item.MailAdresi</td>
                                             <td>@item.Sifre</td>
                                             <td>@item.Telefon</td>
-                                            <td>@item.MailAdresi</td>
                                             <td>@item.Adres</td>
                                             <td>@item.Tarih</td>
                                             <td>
                                                 <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UyelerID','@item.UyeAdiSoyadi')">Sil</button>
-                                                <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.UyelerID','@item.UyeAdiSoyadi','@item.KullaniciAdi','@item.Sifre','@item.Telefon','@item.MailAdresi','@item.Adres')">Düzenle</button>
+                                                <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.UyelerID','@item.UyeAdiSoyadi','@item.MailAdresi','@item.Sifre','@item.Telefon','@item.Adres')">Düzenle</button>
                                                 <button class="btn btn-warning" data-toggle="modal" data-target="#Banla" disabled="@(item.Banlimi == true ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Banla</button>
                                                 <button class="btn btn-success" data-toggle="modal" data-target="#BANKaldir" disabled="@(item.Banlimi == false ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Ban Kaldır</button>
                                             </td>
@@ -97,7 +95,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="myModalLabel">Ürün Silme</h4>
+                            <h4 class="modal-title" id="myModalLabel">Üye Silme</h4>
                         </div>
                         <form role="form" method="post">
                             <div class="modal-body">
@@ -105,7 +103,7 @@
                                 <input type="hidden" name="Gorev" value="Sil" />
                                 <div class="form-group">
                                     <input class="form-control" readonly="readonly" style="color:orangered" id="Silinecek">
-                                    <label style="color:orangered">Ürün Silenecek Devam Edilsin mi?</label>
+                                    <label style="color:orangered">Üye Silenecek Devam Edilsin mi?</label>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -179,21 +177,24 @@
                                 <input type="hidden" name="UyelerID" id="DuzenleID" />
                                 <input type="hidden" name="Gorev" value="Duzenle" />
                                     <div class="form-group">
+                                        <label class="text-primary">Üye Adı Soyadı</label>
                                         <input class="form-control" name="UyeAdiSoyadi" id="UyeAdi" placeholder="Üye Adı Soyadı" required>
                                     </div>
+                                <div class="form-group">
+                                    <label class="text-primary">E-Mail</label>
+                                    <input class="form-control" name="MailAdresi" id="Email" placeholder="E-Mail" required>
+                                </div>
                                     <div class="form-group">
-                                        <input class="form-control" name="KullaniciAdi" id="KullaniciAdi" placeholder="Kullanıcı Adı" required>
-                                    </div>
-                                    <div class="form-group">
+                                        <label class="text-primary">Şifre</label>
                                         <input class="form-control" name="Sifre" id="Sifresi" placeholder="Şifre" required>
                                     </div>
                                     <div class="form-group">
+                                        <label class="text-primary">Telefon</label>
                                         <input class="form-control" name="Telefon" id="Tel" placeholder="Telefon" required>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <input class="form-control" name="MailAdresi" id="Email" placeholder="E-Mail" required>
-                                    </div>
-                                    <div class="form-group">
+                                        <label class="text-primary">Adres</label>
                                         <input class="form-control" name="Adres" id="Adres" placeholder="Adres" required>
                                     </div>
                             </div>
@@ -221,7 +222,7 @@
                                     <input class="form-control"name="UyeAdiSoyadi"  placeholder="Üye Adı Soyadı" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="KullaniciAdi"  placeholder="Kullanıcı Adı" required>
+                                    <input class="form-control" name="MailAdresi" placeholder="E-Mail" required>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" name="Sifre" placeholder="Şifre" required>
@@ -229,9 +230,7 @@
                                 <div class="form-group">
                                     <input class="form-control" name="Telefon" placeholder="Telefon" required>
                                 </div>
-                                <div class="form-group">
-                                    <input class="form-control" name="MailAdresi" placeholder="E-Mail" required>
-                                </div>
+                                
                                 <div class="form-group">
                                     <input class="form-control" name="Adres" placeholder="Adres" required>
                                 </div>
@@ -254,13 +253,12 @@
         </div>
     </div>
     <script type="text/javascript">
-        function Duzenle(obj, obj1, obj2,obj3,obj4,obj5,obj6) {
+        function Duzenle(obj, obj1,obj3,obj4,obj5,obj6) {
             document.getElementById("DuzenleID").value = obj;
             document.getElementById("UyeAdi").value = obj1;
-            document.getElementById("KullaniciAdi").value = obj2;
-            document.getElementById("Sifresi").value = obj3;
-            document.getElementById("Tel").value = obj4;
-            document.getElementById("Email").value = obj5;
+            document.getElementById("Sifresi").value = obj4;
+            document.getElementById("Tel").value = obj5;
+            document.getElementById("Email").value = obj3;
             document.getElementById("Adres").value = obj6;
         }
         function BanIslemi(obj, ob2) {

@@ -183,9 +183,11 @@
     <Content Include="images\choice corporation2.png" />
     <Content Include="images\choice.png" />
     <Content Include="images\Company\projectmercury.png" />
+    <Content Include="images\Company\Slider\Slider1.jpg" />
     <Content Include="images\favicon.png" />
     <Content Include="images\ImageStore\Demo.jpg" />
     <Content Include="images\projectmercury.png" />
+    <Content Include="images\Slider1.jpg" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -298,6 +300,7 @@
     <Content Include="Views\Siparis\SiparisOlustur.cshtml" />
     <Content Include="Views\Admin\Ayarlar.cshtml" />
     <Content Include="Views\View\HataBulunamadi.cshtml" />
+    <Content Include="Views\View\Kategori.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

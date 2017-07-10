@@ -13,7 +13,6 @@ namespace ProjectMercury.Entity.Models
         public string Adres { get; set; }
         public string Telefon { get; set; }
         public string MailAdresi { get; set; }
-        public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }
         public bool Banlimi { get; set; }
         public string Tarih { get; set; }

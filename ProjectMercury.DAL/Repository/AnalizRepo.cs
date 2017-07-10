@@ -151,7 +151,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     Adres = p.Adres,
                     Banlimi = p.Banlimi,
-                    KullaniciAdi = p.KullaniciAdi,
                     MailAdresi = p.MailAdresi,
                     UyeAdiSoyadi = p.UyeAdiSoyadi,
                     Sifre = p.Sifre,

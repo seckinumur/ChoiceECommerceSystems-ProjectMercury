@@ -15,13 +15,12 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                bool Control = db.Uyeler.Any(p => p.KullaniciAdi == Al.KullaniciAdi && p.Sifre == Al.Sifre);
+                bool Control = db.Uyeler.Any(p => p.MailAdresi == Al.MailAdresi && p.Sifre == Al.Sifre);
                 if (Control != true)
                 {
                     db.Uyeler.Add(new Uyeler()
                     {
                         Adres = Al.Adres,
-                        KullaniciAdi = Al.KullaniciAdi,
                         MailAdresi = Al.MailAdresi,
                         UyeAdiSoyadi = Al.UyeAdiSoyadi,
                         Sifre = Al.Sifre,
@@ -47,7 +46,6 @@ namespace ProjectMercury.DAL.Repository
 
                     Bul.Adres = Al.Adres;
                     Bul.Banlimi = Al.Banlimi;
-                    Bul.KullaniciAdi = Al.KullaniciAdi;
                     Bul.MailAdresi = Al.MailAdresi;
                     Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi;
                     Bul.Sifre = Al.Sifre;
@@ -78,17 +76,16 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-       
+
         public static VMUyeler UyeListele(string ID) //Üye Bul
         {
             int id = int.Parse(ID);
             using (DBCON db = new DBCON())
             {
-                return db.Uyeler.Where(p=> p.UyelerID==id).Select(p => new VMUyeler
+                return db.Uyeler.Where(p => p.UyelerID == id).Select(p => new VMUyeler
                 {
                     Adres = p.Adres,
                     Banlimi = p.Banlimi,
-                    KullaniciAdi = p.KullaniciAdi,
                     MailAdresi = p.MailAdresi,
                     UyeAdiSoyadi = p.UyeAdiSoyadi,
                     Sifre = p.Sifre,
@@ -96,6 +93,14 @@ namespace ProjectMercury.DAL.Repository
                     Telefon = p.Telefon,
                     UyelerID = p.UyelerID
                 }).FirstOrDefault();
+            }
+        }
+        public static string UyeIsmi(string ID) //Üye İsmi Bul
+        {
+            using (DBCON db = new DBCON())
+            {
+                int id = int.Parse(ID);
+                return db.Uyeler.FirstOrDefault(p => p.UyelerID == id).UyeAdiSoyadi;
             }
         }
         public static List<VMUyeler> TumUyeler() //Üyelerin hepsi
@@ -106,7 +111,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     Adres = p.Adres,
                     Banlimi = p.Banlimi,
-                    KullaniciAdi = p.KullaniciAdi,
                     MailAdresi = p.MailAdresi,
                     UyeAdiSoyadi = p.UyeAdiSoyadi,
                     Sifre = p.Sifre,
@@ -147,6 +151,21 @@ namespace ProjectMercury.DAL.Repository
                 catch
                 {
                     return false;
+                }
+            }
+        }
+        public static int UyeGirisi(VMLogin Al) //Uye Giriş
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var bul = db.Uyeler.FirstOrDefault(p => p.MailAdresi == Al.KullaniciAdi && p.Sifre == Al.KullaniciSifre);
+                    return bul.UyelerID;
+                }
+                catch
+                {
+                    return 0;
                 }
             }
         }

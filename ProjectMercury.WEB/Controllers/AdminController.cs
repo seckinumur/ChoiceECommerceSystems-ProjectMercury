@@ -17,8 +17,6 @@ namespace ProjectMercury.WEB.Controllers
         {
             try
             {
-                TempData["UyariTipi"] = "text-primary";
-                TempData["Sonuc"] = "Kullanıcı Adı ve Şifrenizi Girin!";
                 return View();
             }
             catch
@@ -43,15 +41,21 @@ namespace ProjectMercury.WEB.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Login(Kullanicilar Al)
+        public ActionResult Login(VMLogin Al)
         {
             try
             {
-                int Kontrol = KullanicilarRepo.KullaniciGiris(Al);
-                if (Kontrol != 0)
+                int Admin = KullanicilarRepo.KullaniciGiris(Al);
+                int User = UyelerRepo.UyeGirisi(Al);
+                if (Admin != 0)
                 {
-                    Session["Login"] = Kontrol;
+                    Session["Login"] = Admin;
                     return RedirectToAction("Admin");
+                }
+                else if(User != 0)
+                {
+                    Session["User"] = User;
+                    return RedirectToAction("Anasayfa","View");
                 }
                 else
                 {
