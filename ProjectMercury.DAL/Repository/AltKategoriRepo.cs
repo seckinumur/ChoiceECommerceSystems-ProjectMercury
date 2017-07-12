@@ -108,7 +108,7 @@ namespace ProjectMercury.DAL.Repository
                 return db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID).AltKategoriAdi;
             }
         }
-        public static string AltKategoriKategoriBul(int ID) //AltKategori Bul
+        public static string AltKategoriKategoriBul(int ID) //AltKategori kategori Bul
         {
             using (DBCON db = new DBCON())
             {

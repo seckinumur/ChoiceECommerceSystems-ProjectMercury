@@ -104,6 +104,7 @@ namespace ProjectMercury.DAL.Repository
                 return db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == id);
             }
         }
+       
         public static List<VMUrunKategori> UrunKategorileri() //Ürün Kategorilerin Hepsi
         {
             using (DBCON db = new DBCON())

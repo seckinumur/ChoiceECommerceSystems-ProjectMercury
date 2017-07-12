@@ -1,8 +1,224 @@
-﻿
-@{
-    ViewBag.Title = "Kategori";
-    Layout = "~/Views/Shared/_LayoutView.cshtml";
-}
+﻿@model ProjectMercury.DAL.VMModels.VMViewKategori
+    @{
+        Layout = "~/Views/Shared/_LayoutView.cshtml";
+    }
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Pages</a></li>
+                        <li class="active">Shop Sidebar Left</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <section class="section white-backgorund">
+        <div class="container">
+            <div class="row">
 
+                <div class="col-sm-3 sidebar light-background">
+
+                    <div class="widget ">
+                        <div class="navbar-vertical">
+                            <ul class="nav nav-stacked ">
+                                <li class="header">
+                                    <h6 class="text-uppercase">Kategoriler <i class="fa fa-navicon pull-right"></i></h6>
+                                </li>
+                                @{
+                                    foreach (var item in Model.AltKategoriler)
+                                    {
+                                        <li>
+                                            <a class="dropdown-toggle"  href="~/Views/Product/AltKategoriListele/@item.AltKategoriID">
+                                                @item.AltKategoriAdi <i class="fa fa-angle-right pull-right"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                @{
+                                                    foreach (var item2 in Model.Urunler)
+                                                    {
+                                                        if (item.AltKategoriID == item2.AltKategoriID)
+                                                        {
+                                                            if (item2.UrunKategori.UrunKategoriAdi != "Ürün Kategori Yok")
+                                                            {
+                                                                <li><a href="#">@item2.UrunKategori.UrunKategoriAdi</a></li>
+                                                            }
+
+                                                        }
+                                                    }
+
+
+                                                }
+                                            </ul>
+                                        </li>
+                                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="sidebar-filter">
+                            <div class="sidebar-widget wow fadeInUp">
+                                <div class="widget-header">
+                                    <h4 class="widget-title">Markalar</h4>
+                                </div>
+                                <div class="sidebar-widget-body">
+                                    <ul class="list">
+                                        <li><a href="#">Forever 18</a></li>
+                                        <li><a href="#">Nike</a></li>
+                                        <li><a href="#">Dolce & Gabbana</a></li>
+                                        <li><a href="#">Alluare</a></li>
+                                        <li><a href="#">Chanel</a></li>
+                                        <li><a href="#">Other Brand</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="sidebar-widget wow fadeInUp">
+                            <div class="widget-header">
+                                <h6 class="widget-title">Fiyat Aralığı</h6>
+                                <form method="post" class="price-range" data-start-min="2" data-start-max="1000" data-min="2" data-max="1000" data-step="2">
+                                    <div class="ui-range-values">
+                                        <div class="ui-range-value-min">
+                                            ₺<span></span>
+                                            <input type="hidden">
+                                        </div> -
+                                        <div class="ui-range-value-max">
+                                            ₺<span></span>
+                                            <input type="hidden">
+                                        </div>
+                                    </div>
+                                    <div class="ui-range-slider"></div>
+                                    <button type="submit" class="btn btn-default btn-block btn-md">Filtrele</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-12 text-left">
+                            <h2 class="title">Kategori İsmi</h2>
+                        </div>
+                    </div>
+                    <hr class="spacer-5"><hr class="spacer-20 no-border">
+
+                    @{
+                        foreach (var item in Model.Urunler)
+                        {
+                            <div class="row column-3">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail store style1">
+                                        <div class="header">
+                                            <div class="badges">
+                                                <span class="product-badge top right danger-background text-white semi-circle">-20%</span>
+                                            </div>
+                                            <figure class="layer">
+                                                <a href="javascript:void(0);">
+                                                    <img src="@item.Image" alt="@item.UrunAdi">
+                                                </a>
+                                            </figure>
+                                            <div class="icons">
+                                                <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-cart-plus"></i></a>
+                                                <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="caption">
+                                            <h6 class="regular"><a href="shop-single-product-v1.html">@item.UrunAdi</a></h6>
+                                            <div class="price">
+                                                <small class="amount off">@item.UrunFiyati₺</small>
+                                                <span class="amount text-primary">@item.IndirimliFiyati₺</span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i>Sepete Ekle</a>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <a href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search mr-5"></i>Ürüne Bak</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    
+                    <hr class="spacer-10 no-border">
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li class="active"><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade productQuickView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="urunAdi"></h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class='carousel slide product-slider' data-ride='carousel' data-interval="false">
+                                            <div class='carousel-inner'>
+                                                <div class='item active'>
+                                                    <figure>
+                                                        <img id="urunResmi" />
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <h4 class="text-primary" id="urunIndirim">$79.00</h4>
+                                            <small id="urunFiyati" class="amount off"></small>
+                                        <hr class="text-danger" />
+                                        <div class="col-md-pull-12">
+                                            <p class="text-danger" id="urunAciklama"></p>
+                                        </div>
+                                        <hr class="spacer-10">
+                                        <ul class="list list-inline">
+                                            <li><button type="button" class="btn btn-default btn-md round"><i class="fa fa-shopping-basket mr-5"></i>Sepete Ekle</button></li>
+                                            <li>
+                                                <button type="button" class="btn btn-gray " data-dismiss="modal"><i class="fa fa-times-circle mr-5"></i>Pencereyi Kapat</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    function DataGom(obj, obj2, obj3, obj4, obj5) {
+        document.getElementById("urunAdi").innerHTML = obj;
+        document.getElementById("urunResmi").src = obj2;
+        document.getElementById("urunFiyati").innerHTML = "Ürün Fiyatı: "+obj3+"₺";
+        document.getElementById("urunIndirim").innerHTML = "İndirimli Fiyatı: " + obj4+"₺";
+        document.getElementById("urunAciklama").innerHTML = obj5;
+    }
+</script>

@@ -16,20 +16,9 @@
                             foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
                             {
                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        @item.KategoriAdi <i class="fa fa-angle-right pull-right"></i>
+                                    <a class="dropdown-toggle"  href="~/View/Kategori/@item.KategoriID">
+                                        @item.KategoriAdi
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        @{
-                                            foreach (var sonuc in ProjectMercury.DAL.Repository.AltKategoriRepo.AltKategorileriListele())
-                                            {
-                                                if (sonuc.KategoriID == item.KategoriID)
-                                                {
-                                                    <li><a href="~/Product/AltKategoriListele/@sonuc.AltKategoriID">@sonuc.AltKategoriAdi</a></li>
-                                                }
-                                            }
-                                        }
-                                    </ul>
                                 </li>
                             }
                         }
@@ -65,21 +54,24 @@
                 <div class="col-sm-4">
                     <div class="widget">
                         <h5 class="subtitle text-uppercase"><span class="text-primary">Yeni</span> Ürünler</h5>
-                        @{ foreach (var yeniurun in Model.EnYeni)
+                        @{ if (Model.EnYeni != null)
                             {
-                                <ul class="items">
-                                    <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
-                                            <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
-                                        </a>
-                                        <div class="product-details">
-                                            <h6 class="regular">
-                                                <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
-                                            </h6>
-                                            <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
-                                        </div>
-                                    </li>
-                                </ul>
+                                foreach (var yeniurun in Model.EnYeni)
+                                {
+                                    <ul class="items">
+                                        <li>
+                                            <a href="shop-single-product-v1.html" class="product-image">
+                                                <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
+                                            </a>
+                                            <div class="product-details">
+                                                <h6 class="regular">
+                                                    <a href="shop-single-product-v1.html">@yeniurun.UrunAdi</a>
+                                                </h6>
+                                                <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
                             }
                         }
                     </div>
@@ -89,8 +81,10 @@
                     <div class="widget">
                         <h5 class="subtitle text-uppercase"><span class="text-primary">Günün Fırsatı</span> Ürünler</h5>
 
-                        @{ foreach (var yeniurun in Model.GununFirsati)
+                        @{  if (Model.GununFirsati != null)
                             {
+                                foreach (var yeniurun in Model.GununFirsati)
+                                {
                                 <ul class="items">
                                     <li>
                                         <a href="shop-single-product-v1.html" class="product-image">
@@ -104,6 +98,7 @@
                                         </div>
                                     </li>
                                 </ul>
+                                }
                             }
                         }
                     </div>
@@ -112,8 +107,10 @@
                 <div class="col-sm-4">
                     <div class="widget">
                         <h5 class="subtitle text-uppercase"><span class="text-primary">En Çok Satılan</span> Ürünler</h5>
-                        @{ foreach (var yeniurun in Model.EnCokSatan)
+                        @{ if (Model.EnCokSatan != null)
                             {
+                                foreach (var yeniurun in Model.EnCokSatan)
+                                {
                                 <ul class="items">
                                     <li>
                                         <a href="shop-single-product-v1.html" class="product-image">
@@ -127,6 +124,7 @@
                                         </div>
                                     </li>
                                 </ul>
+                                }
                             }
                         }
                     </div>

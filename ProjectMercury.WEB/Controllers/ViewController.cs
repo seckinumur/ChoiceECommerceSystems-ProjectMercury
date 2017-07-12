@@ -18,7 +18,14 @@ namespace ProjectMercury.WEB.Controllers
                 {
                     ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
                     var Gonder = ViewRepo.VievIndexAI();
-                    return View(Gonder);
+                    if(Gonder == null)
+                    {
+                        return View(Gonder);
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 catch
                 {
@@ -33,7 +40,7 @@ namespace ProjectMercury.WEB.Controllers
                 {
                     ViewBag.User = "Misafir Kullanıcı";
                     var Gonder = ViewRepo.VievIndexAI();
-                    return View(Gonder);
+                        return View(Gonder);
                 }
                 catch
                 {
@@ -44,14 +51,14 @@ namespace ProjectMercury.WEB.Controllers
             }
 
         }
-        public ActionResult Kategori()
+        public ActionResult Kategori(int ID)
         {
             if (Session["User"] != null)
             {
                 try
                 {
                     ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
-                    var Gonder = ViewRepo.VievIndexAI();
+                    var Gonder = ViewRepo.KategoriyeGore(ID);
                     return View(Gonder);
                 }
                 catch
@@ -66,7 +73,7 @@ namespace ProjectMercury.WEB.Controllers
                 try
                 {
                     ViewBag.User = "Misafir Kullanıcı";
-                    var Gonder = ViewRepo.VievIndexAI();
+                    var Gonder = ViewRepo.KategoriyeGore(ID);
                     return View(Gonder);
                 }
                 catch

@@ -100,9 +100,9 @@ namespace ProjectMercury.Entity.DBContext
                 Sifre = "1234",
                 Adres="demo adres",
                 Banlimi=false,
-                MailAdresi="demo@demo.com",
+                MailAdresi="seckinumur@gmail.com",
                 Tarih=DateTime.Now.ToShortDateString(),
-                Telefon="33333333",
+                Telefon="05423428009",
                 UyeAdiSoyadi="demo demo"
             });
             db.SaveChanges();

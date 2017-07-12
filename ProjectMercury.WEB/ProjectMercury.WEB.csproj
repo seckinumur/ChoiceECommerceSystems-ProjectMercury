@@ -102,6 +102,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\buttons.bootstrap.min.css" />
     <Content Include="Content\css\buttons.dataTables.min.css" />
+    <Content Include="Content\css\catmain.css" />
     <Content Include="Content\css\cover.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\css\font-awesome.min.css" />
@@ -172,6 +173,7 @@
     <Content Include="Content\fonts\fontawesome-webfont5b62.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.html" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\fontawesome-webfont9efe.svg" />
     <Content Include="images\AdminBG1.jpg" />
     <Content Include="fonts\fontawesome-webfont5b62.html" />
     <Content Include="fonts\fontawesome-webfont5b62.svg" />
@@ -188,7 +190,9 @@
     <Content Include="images\ImageStore\Demo.jpg" />
     <Content Include="images\projectmercury.png" />
     <Content Include="images\Slider1.jpg" />
+    <Content Include="Scripts\bootstrap-hover-dropdown.min.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
+    <Content Include="Scripts\bootstrap-slider.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -213,6 +217,10 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="fonts\fontawesome-webfont9efe.eot" />
+    <Content Include="fonts\fontawesome-webfont9efe.ttf" />
+    <Content Include="fonts\fontawesome-webfont9efe.woff" />
+    <Content Include="fonts\fontawesome-webfont9efe.woff2" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\buttons.bootstrap.min.js" />
     <Content Include="Scripts\buttons.colVis.min.js" />
@@ -220,6 +228,7 @@
     <Content Include="Scripts\buttons.html5.min.js" />
     <Content Include="Scripts\buttons.jqueryui.min.js" />
     <Content Include="Scripts\buttons.print.min.js" />
+    <Content Include="Scripts\catscript.js" />
     <Content Include="Scripts\dataTables.buttons.min.js" />
     <Content Include="Scripts\dataTables.select.min.js" />
     <Content Include="Scripts\defaults-tr_TR.js" />
