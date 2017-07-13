@@ -310,6 +310,7 @@
     <Content Include="Views\Admin\Ayarlar.cshtml" />
     <Content Include="Views\View\HataBulunamadi.cshtml" />
     <Content Include="Views\View\Kategori.cshtml" />
+    <Content Include="Views\View\Odeme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -85,6 +85,40 @@ namespace ProjectMercury.WEB.Controllers
             }
 
         }
+        public ActionResult Odeme()
+        {
+            if (Session["User"] != null)
+            {
+                try
+                {
+                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                    
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                try
+                {
+                    ViewBag.User = "Misafir Kullanıcı";
+                    
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+
+        }
         public ActionResult Hata()
         {
             return View();
