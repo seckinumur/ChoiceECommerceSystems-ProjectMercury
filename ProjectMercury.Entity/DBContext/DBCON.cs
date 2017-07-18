@@ -110,15 +110,16 @@ namespace ProjectMercury.Entity.DBContext
             db.SiteBilgileri.Add(new SiteBilgileri()
             {
                 Adres = "Karþýyaka/ÝZMÝR",
-                Facebook= "https://www.facebook.com/seckinumur85",
-                Instagram="#",
-                Telefon="#",
-                MailAdresi= "mailto:seckinumur@gmail.com",
-                MobilTelefon= "tel:+905423428009",
-                SiteAdi= "Choice Admin Control Systems V.1.5",
-                Twitter= "https://twitter.com/SeckinUmur",
-                Whatsapp="+905423428009",
-                Logo= "/images/Company/projectmercury.PNG"
+                Facebook = "https://www.facebook.com/seckinumur85",
+                Instagram = "#",
+                Telefon = "#",
+                MailAdresi = "seckinumur@gmail.com",
+                MobilTelefon = "tel:+905423428009",
+                SiteAdi = "Choice Admin Control Systems V.1.5",
+                Twitter = "https://twitter.com/SeckinUmur",
+                Whatsapp = "+905423428009",
+                Logo = "/images/Company/projectmercury.PNG",
+                Hakkinda = "©2017 Choice Corporation All Rights Reserved."
             });
             db.SaveChanges();
 

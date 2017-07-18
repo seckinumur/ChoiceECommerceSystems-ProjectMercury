@@ -12,6 +12,7 @@ namespace ProjectMercury.Entity.Models
         public int SepetID { get; set; }
         public string SiparisTarihi { get; set; }
         public string GonderimTarihi { get; set; }
+        public string Not { get; set; }
         public bool Onaylandimi { get; set; }
         public bool Gonderildimi { get; set; }
         public bool İptal { get; set; }

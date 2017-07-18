@@ -27,6 +27,7 @@ namespace ProjectMercury.DAL.Repository
                     Bul.Telefon = Al.Telefon;
                     Bul.Twitter = Al.Twitter;
                     Bul.Whatsapp = Al.Whatsapp;
+                    Bul.Hakkinda = Al.Hakkinda;
                     db.SaveChanges();
                     return true;
                 }

@@ -18,8 +18,12 @@ namespace ProjectMercury.DAL.VMModels
         public string Instagram { get; set; }
         public string Logo { get; set; }
         public string SiteAdi { get; set; }
+        public string Hakkinda { get; set; }
         public string MailAdresi { get; set; }
         public List<Kullanicilar> Kullanicilar { get; set; }
+        public List<Slider> Sliderler { get; set; }
+        public string Slider { get; set; }
+        public int SliderId { get; set; }
 
         public string Gorev { get; set; }
 

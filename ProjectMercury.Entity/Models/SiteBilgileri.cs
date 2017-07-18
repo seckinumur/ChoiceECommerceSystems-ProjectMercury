@@ -19,5 +19,6 @@ namespace ProjectMercury.Entity.Models
         public string Logo { get; set; }
         public string SiteAdi { get; set; }
         public string MailAdresi { get; set; }
+        public string Hakkinda { get; set; }
     }
 }

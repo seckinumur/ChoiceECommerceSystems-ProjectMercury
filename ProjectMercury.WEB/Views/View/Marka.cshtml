@@ -1,0 +1,324 @@
+﻿@model ProjectMercury.DAL.VMModels.VMViewKategori
+@{
+    ViewBag.Title = "Marka";
+    Layout = "~/Views/Shared/_LayoutView.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <ul>
+                        <li><a href="~/View/Anasayfa">Ana Sayfa</a></li>
+                        <li><a  class="active" href="#">@Model.MarkaAdi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section white-backgorund">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 sidebar light-background">
+
+                <div class="widget ">
+                    <div class="navbar-vertical">
+                        <ul class="nav nav-stacked ">
+                            <li class="header">
+                                <h6 class="text-uppercase">@Model.MarkaAdi <i class="fa fa-navicon pull-right"></i></h6>
+                            </li>
+                            @{
+                                foreach (var item in Model.AltKategoriler)
+                                {
+                                    <li>
+                                        <a class="dropdown-toggle" href="~/View/AltKategori/@item.AltKategoriID">
+                                            @item.AltKategoriAdi <i class="fa fa-angle-right pull-right"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @{
+                                                foreach (var item2 in Model.Urunler)
+                                                {
+                                                    if (item.AltKategoriID == item2.AltKategoriID)
+                                                    {
+                                                        if (item2.UrunKategori.UrunKategoriAdi != "Ürün Kategori Yok")
+                                                        {
+                                                            <li><a href="~/View/UrunKategori/@item2.UrunKategoriID">@item2.UrunKategori.UrunKategoriAdi</a></li>
+                                                        }
+
+                                                    }
+                                                }
+
+
+                                            }
+                                        </ul>
+                                    </li>
+                                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="widget">
+                    <div class="sidebar-widget wow fadeInUp">
+                        <div class="widget-header">
+                            <h6 class="widget-title">Fiyat Aralığı</h6>
+                            <form method="post" class="price-range" data-start-min="2" data-start-max="1000" data-min="2" data-max="1000" data-step="2">
+                                <div class="ui-range-values">
+                                    <div class="ui-range-value-min">
+                                        ₺<span></span>
+                                        <input type="hidden">
+                                    </div> -
+                                    <div class="ui-range-value-max">
+                                        ₺<span></span>
+                                        <input type="hidden">
+                                    </div>
+                                </div>
+                                <div class="ui-range-slider"></div>
+                                <button type="submit" class="btn btn-default btn-block btn-md">Filtrele</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9" id="pages">
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <h2 class="title">@Model.MarkaAdi</h2>
+                    </div>
+                </div>
+                <hr class="spacer-5"><hr class="spacer-20 no-border">
+
+                @{
+                    foreach (var item in Model.Urunler)
+                    {
+
+
+                        <div class="page col-sm-3 ">
+                            <div class="thumbnail store style1">
+                                <div class="header">
+                                    <div class="badges">
+                                        <span class="product-badge top right danger-background text-white semi-circle">@item.IndirimliFiyati</span>
+                                    </div>
+                                    <figure class="layer">
+                                        <a href="javascript:void(0);">
+                                            <img src="@item.Image" alt="@item.UrunAdi">
+                                        </a>
+                                    </figure>
+                                    <div class="icons">
+                                        <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-cart-plus"></i></a>
+                                        <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <h6 class="regular" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><a href="shop-single-product-v1.html">@item.UrunAdi</a></h6>
+                                    <div class="price">
+                                        <small class="amount off">@item.UrunFiyati₺</small>
+                                        <span class="amount text-primary">@item.IndirimliFiyati₺</span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i><small class="amount">Sepet</small></a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search mr-5"></i><small class="amount">İncele</small></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <hr class="spacer-10 no-border">
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <nav>
+                            <ul class="pagination" id="myPager"></ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade productQuickView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 id="urunAdi"></h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class='carousel slide product-slider' data-ride='carousel' data-interval="false">
+                                        <div class='carousel-inner'>
+                                            <div class='item active'>
+                                                <figure>
+                                                    <img id="urunResmi" />
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <h4 class="text-primary" id="urunIndirim">$79.00</h4>
+                                    <small id="urunFiyati" class="amount off"></small>
+                                    <hr class="text-danger" />
+                                    <div class="col-md-pull-12">
+                                        <p class="text-danger" id="urunAciklama"></p>
+                                    </div>
+                                    <hr class="spacer-10">
+                                    <ul class="list list-inline">
+                                        <li><button type="button" class="btn btn-default btn-md round"><i class="fa fa-shopping-basket mr-5"></i>Sepete Ekle</button></li>
+                                        <li>
+                                            <button type="button" class="btn btn-gray " data-dismiss="modal"><i class="fa fa-times-circle mr-5"></i>Pencereyi Kapat</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+    function DataGom(obj, obj2, obj3, obj4, obj5) {
+        document.getElementById("urunAdi").innerHTML = obj;
+        document.getElementById("urunResmi").src = obj2;
+        document.getElementById("urunFiyati").innerHTML = "Ürün Fiyatı: " + obj3 + "₺";
+        document.getElementById("urunIndirim").innerHTML = "İndirimli Fiyatı: " + obj4 + "₺";
+        document.getElementById("urunAciklama").innerHTML = obj5;
+    }
+
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    $.fn.pageMe = function (opts) {
+        var $this = this,
+            defaults = {
+                perPage: 12,
+                showPrevNext: false,
+                numbersPerPage: 1,
+                hidePageNumbers: false
+            },
+            settings = $.extend(defaults, opts);
+
+        var listElement = $this;
+        var perPage = settings.perPage;
+        var children = listElement.children();
+        var pager = $('.pagination');
+
+        if (typeof settings.childSelector != "undefined") {
+            children = listElement.find(settings.childSelector);
+        }
+
+        if (typeof settings.pagerSelector != "undefined") {
+            pager = $(settings.pagerSelector);
+        }
+
+        var numItems = children.size();
+        var numPages = Math.ceil(numItems / perPage);
+
+        pager.data("curr", 0);
+
+        if (settings.showPrevNext) {
+            $('<li><a href="#" class="prev_link">«</a></li>').appendTo(pager);
+        }
+
+        var curr = 0;
+        while (numPages > curr && (settings.hidePageNumbers == false)) {
+            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo(pager);
+            curr++;
+        }
+
+        if (settings.numbersPerPage > 1) {
+            $('.page_link').hide();
+            $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
+        }
+
+        if (settings.showPrevNext) {
+            $('<li><a href="#" class="next_link">»</a></li>').appendTo(pager);
+        }
+
+        pager.find('.page_link:first').addClass('active');
+
+        if (numPages <= 1) {
+            pager.find('.next_link').hide();
+        }
+
+        pager.children().eq(1).addClass("active");
+
+        children.hide();
+        children.slice(0, perPage).show();
+
+        pager.find('li .page_link').click(function () {
+            var clickedPage = $(this).html().valueOf() - 1;
+            goTo(clickedPage, perPage);
+            return false;
+        });
+
+        pager.find('li .prev_link').click(function () {
+            previous();
+            return false;
+        });
+
+        pager.find('li .next_link').click(function () {
+            next();
+            return false;
+        });
+
+        function previous() {
+            var goToPage = parseInt(pager.data("curr")) - 1;
+            goTo(goToPage);
+        }
+
+        function next() {
+            goToPage = parseInt(pager.data("curr")) + 1;
+            goTo(goToPage);
+        }
+
+        function goTo(page) {
+            var startAt = page * perPage,
+                endOn = startAt + perPage;
+
+            children.css('display', 'none').slice(startAt, endOn).show();
+
+            if (page >= 1) {
+                pager.find('.prev_link').show();
+            }
+            else {
+                pager.find('.prev_link').hide();
+            }
+
+            if (page < (numPages - 1)) {
+                pager.find('.next_link').show();
+            }
+            else {
+                pager.find('.next_link').hide();
+            }
+
+            pager.data("curr", page);
+
+            if (settings.numbersPerPage > 1) {
+                $('.page_link').hide();
+                $('.page_link').slice(page, settings.numbersPerPage + page).show();
+            }
+
+            pager.children().removeClass("active");
+            pager.children().eq(page + 1).addClass("active");
+        }
+    };
+
+    $('#pages').pageMe({ pagerSelector: '#myPager', childSelector: '.page', showPrevNext: true, hidePageNumbers: false, perPage: 12 });
+
+</script>

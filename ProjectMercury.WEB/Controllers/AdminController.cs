@@ -189,7 +189,8 @@ namespace ProjectMercury.WEB.Controllers
                             MobilTelefon = Data.MobilTelefon,
                             Telefon = Data.Telefon,
                             Twitter = Data.Twitter,
-                            Whatsapp = Data.Whatsapp
+                            Whatsapp = Data.Whatsapp,
+                            Hakkinda= Data.Hakkinda
                         };
                         bool Sonucu = SiteBilgileriRepo.Guncelle(data);
                         if (Sonucu == true)
@@ -200,6 +201,31 @@ namespace ProjectMercury.WEB.Controllers
                         {
                             TempData["Hata"] = "Site Düzenleme İşlemi Başarısız Oldu!";
                             TempData["HataKodu"] = "199932";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else if (Data.Gorev == "Sliders")
+                    {
+                        if (System.IO.File.Exists(Server.MapPath("~" + Data.Slider)))
+                        {
+                            System.IO.File.Delete(Server.MapPath("~" + Data.Slider));
+                        }
+                        WebImage img = new WebImage(Resim.InputStream);
+                        FileInfo imginfo = new FileInfo(Resim.FileName);
+                        string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
+                        img.Resize(1200, 600);
+                        img.Save("~/images/Company/Slider/" + newfoto);
+                        Data.Slider = "/images/Company/Slider/" + newfoto;
+                        
+                        bool Sonucu = SliderRepo.SliderDuzenle(Data.SliderId, Data.Slider);
+                        if (Sonucu == true)
+                        {
+                            return RedirectToAction("Ayarlar");
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Slider İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "197932";
                             return RedirectToAction("Hata", "Product");
                         }
                     }

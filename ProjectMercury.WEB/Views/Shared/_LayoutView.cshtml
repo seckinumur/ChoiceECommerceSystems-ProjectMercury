@@ -78,7 +78,7 @@
                                 foreach (var item in ProjectMercury.DAL.Repository.KategoriRepo.Kategoriler())
                                 {
                                     <li>
-                                        <a href="~/Product/KategoriListele/@item.KategoriID"><i class="fa fa-database"></i> @item.KategoriAdi</a>
+                                        <a href="~/View/Kategori/@item.KategoriID"><i class="fa fa-database"></i> @item.KategoriAdi</a>
                                     </li>
                                 }
                             }
@@ -107,7 +107,7 @@
                     <li class="dropdown active">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sepet <i class="glyphicon glyphicon-shopping-cart ml-5"></i></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Lorem Ipsum dolor sit <strong>1 Adet</strong> <span class="price text-primary">₺59.99</span></a></li>
+                            <li><a href="#">@ViewBag.Sepet</a></li>
                         </ul>
                     </li>
 
@@ -128,8 +128,8 @@
                             <i class="fa fa-truck text-gray"></i>
                         </div>
                         <div class="box-content">
-                            <h6 class="alt-font text-light text-uppercase">Anlaşmalı Kargo</h6>
-                            <p class="text-gray">Firmamız en uygun ücretle anlaşılan kargo şirketini kullanır</p>
+                            <h6 class="alt-font text-light text-uppercase">Hızlı Teslima</h6>
+                            <p class="text-gray">Firmamız en En Kısa Sürede Ürününüzü Teslim Eder</p>
                         </div>
                     </div>
                 </div>
@@ -139,8 +139,8 @@
                             <i class="fa fa-life-ring text-gray"></i>
                         </div>
                         <div class="box-content">
-                            <h6 class="alt-font text-light text-uppercase">Destek 24/7</h6>
-                            <p class="text-gray">Sistem arıza tanıma sistemi sayesinde her zaman her saat destek</p>
+                            <h6 class="alt-font text-light text-uppercase">7/24 Destek</h6>
+                            <p class="text-gray">Olası Bir Sistem Arızasında En Kısa Sürede Destek</p>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="box-content">
                             <h6 class="alt-font text-light text-uppercase">Avantajlı Ürünler</h6>
-                            <p class="text-gray">Sistem Kullandığı yapay zeka sayasinde günlük ve haftalık avantajlı ürünler sunar</p>
+                            <p class="text-gray">günlük ve haftalık avantajlı ürünler</p>
                         </div>
                     </div>
                 </div>
@@ -161,8 +161,8 @@
                             <i class="fa fa-credit-card text-gray"></i>
                         </div>
                         <div class="box-content">
-                            <h6 class="alt-font text-light text-uppercase">Ödeme Güvenliği</h6>
-                            <p class="text-gray">Kredi Kartı üzerinden ödeme olmadığından daha güvenilir alışveriş ortamı sağlar</p>
+                            <h6 class="alt-font text-light text-uppercase">Kolay Alışveriş</h6>
+                            <p class="text-gray">3 Adımda Hızlı ve Kolay Alışveriş Sistemi</p>
                         </div>
                     </div>
                 </div>
@@ -176,6 +176,9 @@
                     <ul class="items">
                         <li>Adres: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Adres</li>
                         <li>Telefon: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Telefon</li>
+                        <li>Mobil: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().MobilTelefon</li>
+                        <li>Whatsapp: @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Whatsapp</li>
+                        <li>Mail: <a href="mailto:@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().MailAdresi">@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().MailAdresi</a></li>
                     </ul>
                     <hr class="spacer-10 no-border">
                     <h5 class="title">Sosyal Ağlar</h5>
@@ -199,7 +202,7 @@
                             </div>
                             <div class="panel-collapse collapse in" id="collapseOneStyle2" role="tabpanel" aria-expanded="true" aria-labelledby="headingOneStyle2">
                                 <div class="panel-body">
-                                    <p>Choice Corp. Bu Yazılımı En Son ASP.NET MVC Teknolojilerini Kullanarak Geliştirmiştir. Ve Güvenlik Protokollerini Eksiksiz Uygular.</p>
+                                    <p>Choice Corp. Bu Yazılımı En Son ASP.NET MVC Teknolojilerini Kullanarak Geliştirmiştir. Ve Güvenlik Protokollerini Eksiksiz Uygular. Kişisel Bilgilerin Gizliliği Kanunu Kapsamında Temel Kimlik Bilgileri Haricinde Hiçbir Zaman Üyelerin Kimlik Bilgilerini Depolamayız, Paylaşmayız.</p>
                                 </div>
                             </div>
                         </div>
@@ -214,7 +217,7 @@
                             </div>
                             <div class="panel-collapse collapse" id="collapseTwoStyle2" role="tabpanel" aria-expanded="false" aria-labelledby="headingTwoStyle2" style="height: 0px;">
                                 <div class="panel-body">
-                                    <p>Choice Corp. Kullanıcı bilgilerinin İzinsiz Kullanılmasına Karşıdır. Geliştiridiği Sistemlerde Kullanıcı Verileri İzinsiz Kullanılamaz.</p>
+                                    <p>Choice Corp. Kullanıcı bilgilerinin İzinsiz Kullanılmasına Karşıdır. Geliştiridiği Sistemlerde Temel (Kullanıcı Adı,E-mail,Telefon,Adres) Kimlik Bilgileri Haricinde Hiçbir Kişisel Bilgiyi Server'lerde Depolamaz ve Mevcut Temel Kimlik Bilgilerini Reklam Amacıyla Kullanmaz.</p>
                                 </div>
                             </div>
                         </div>
@@ -223,13 +226,13 @@
                             <div class="panel-heading" id="headingThreeStyle2" role="tab">
                                 <h4 class="panel-title">
                                     <a class="collapsed" aria-expanded="false" aria-controls="collapseThreeStyle2" href="#collapseThreeStyle2" data-toggle="collapse" data-parent="#accordionStyle2">
-                                        Choice Corporation Kullanıcı Verileri Kullanımı İlkesi
+                                        @ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().SiteAdi Hakkında
                                     </a>
                                 </h4>
                             </div>
                             <div class="panel-collapse collapse" id="collapseThreeStyle2" role="tabpanel" aria-expanded="false" aria-labelledby="headingThreeStyle2" style="height: 0px;">
                                 <div class="panel-body">
-                                    <p>Choice Corp. Hiçbir Şekilde Kullanıcı Verilerini Toplamaz Veya Dağıtmaz. Bu Yüzden Kesinlikle TC Kimlik No Ve Anne Kızlık Soyadı Ve Diğer Kimlik Bilgilerini Kaydetmez. Kaydedilmesine İzin Vermez.</p>
+                                    <p>@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Hakkinda</p>
                                 </div>
                             </div>
                         </div>
