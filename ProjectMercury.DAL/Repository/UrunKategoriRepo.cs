@@ -17,6 +17,7 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
+                    var bul = db.AltKategori.FirstOrDefault(p => p.AltKategoriAdi == Al.AltKategoriAdi);
                     bool Control = db.UrunKategori.Any(p => p.UrunKategoriAdi == Al.UrunKategoriAdi);
                     if (Control == true)
                     {
@@ -26,7 +27,8 @@ namespace ProjectMercury.DAL.Repository
                     {
                         UrunKategori Ekle = new UrunKategori
                         {
-                            UrunKategoriAdi = Al.UrunKategoriAdi
+                            UrunKategoriAdi = Al.UrunKategoriAdi,
+                            AltKategoriID= bul.AltKategoriID
                         };
                         db.UrunKategori.Add(Ekle);
                         db.SaveChanges();
@@ -45,8 +47,10 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
+                    var bul1 = db.AltKategori.FirstOrDefault(p => p.AltKategoriAdi == Al.AltKategoriAdi);
                     var Bul = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == Al.UrunKategoriID);
                     Bul.UrunKategoriAdi = Al.UrunKategoriAdi;
+                    Bul.AltKategoriID = bul1.AltKategoriID;
                     db.SaveChanges();
                     return true;
                 }
@@ -112,7 +116,9 @@ namespace ProjectMercury.DAL.Repository
                 var result = db.UrunKategori.Where(p=> p.UrunKategoriAdi != "Ürün Kategori Yok").Select(p => new VMUrunKategori
                 {
                     UrunKategoriAdi = p.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID
+                    UrunKategoriID = p.UrunKategoriID,
+                    AltKategoriID= p.AltKategoriID,
+                    AltKategoriAdi= db.AltKategori.FirstOrDefault(e => e.AltKategoriID == p.AltKategoriID).AltKategoriAdi
                 }).ToList();
                 foreach (var item in result)
                 {

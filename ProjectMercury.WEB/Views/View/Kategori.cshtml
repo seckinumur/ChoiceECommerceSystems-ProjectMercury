@@ -38,19 +38,13 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 @{
-                                                    foreach (var item2 in Model.Urunler)
+                                                    foreach (var item2 in Model.ÜrünKategorileri)
                                                     {
                                                         if (item.AltKategoriID == item2.AltKategoriID)
                                                         {
-                                                            if (item2.UrunKategori.UrunKategoriAdi != "Ürün Kategori Yok")
-                                                            {
-                                                                <li><a href="~/View/UrunKategori/@item2.UrunKategoriID">@item2.UrunKategori.UrunKategoriAdi</a></li>
-                                                            }
-
+                                                                <li><a href="~/View/UrunKategori/@item2.UrunKategoriID">@item2.UrunKategoriAdi</a></li>
                                                         }
                                                     }
-
-
                                                 }
                                             </ul>
                                         </li>
@@ -88,13 +82,14 @@
                                     <div class="ui-range-values">
                                         <div class="ui-range-value-min">
                                             ₺<span></span>
-                                            <input type="hidden">
+                                            <input type="hidden" name="data">
                                         </div> -
                                         <div class="ui-range-value-max">
                                             ₺<span></span>
-                                            <input type="hidden">
+                                            <input type="hidden" name="data2">
                                         </div>
                                     </div>
+                                    <input type="hidden" name="Gorev" value="Siralama">
                                     <div class="ui-range-slider"></div>
                                     <button type="submit" class="btn btn-default btn-block btn-md">Filtrele</button>
                                 </form>
@@ -122,7 +117,7 @@
                                                     </div>
                                                     <figure class="layer">
                                                         <a href="javascript:void(0);">
-                                                            <img src="@item.Image"  alt="@item.UrunAdi">
+                                                            <img src="@item.Image"  alt="@item.UrunAdi" class="img-responsive">
                                                         </a>
                                                     </figure>
                                                     <div class="icons">
@@ -135,12 +130,6 @@
                                                     <div class="price">
                                                         <small class="amount off">@item.UrunFiyati₺</small>
                                                         <span class="amount text-primary">@item.IndirimliFiyati₺</span>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <a href="javascript:void(0);"><i class="fa fa-cart-plus mr-5"></i><small class="amount">Sepet</small></a>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <a href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search mr-5"></i><small class="amount">İncele</small></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,6 +200,27 @@
         document.getElementById("urunIndirim").innerHTML = "İndirimli Fiyatı: " + obj4+"₺";
         document.getElementById("urunAciklama").innerHTML = obj5;
     }
+
+    function SepeteEkle(obj,obj2) {
+        var urunId = obj;
+        var gorev = obj2;
+
+        var data = JSON.stringify({
+            'urunId': urunId,
+            'Gorev': gorev
+        })
+        $.ajax({
+            type: 'POST',
+            url: '/Siparis/sepetekle',
+            data: data,
+            contentType: 'application/json',
+            success: function (data) {
+               
+            },
+            error: function (response) {
+            }
+        })
+    };
 
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

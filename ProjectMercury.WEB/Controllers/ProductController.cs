@@ -605,7 +605,7 @@ namespace ProjectMercury.WEB.Controllers
                     WebImage img = new WebImage(Resim.InputStream);
                     FileInfo imginfo = new FileInfo(Resim.FileName);
                     string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
-                    img.Resize(300, 400);
+                    img.Resize(300, 400,false);
                     img.Save("~/images/ImageStore/" + newfoto);
                     Data.Image = "/images/ImageStore/" + newfoto;
                     bool sonuc = UrunRepo.UrunKaydet(Data);

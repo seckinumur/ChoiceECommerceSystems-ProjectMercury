@@ -12,5 +12,9 @@ namespace ProjectMercury.DAL.VMModels
         public List<Urun> EnCokSatan { get; set; }
         public List<Urun> EnYeni { get; set; }
         public List<Urun> GununFirsati { get; set; }
+        public string slider1 { get; set; }
+        public string slider2 { get; set; }
+        public string slider3 { get; set; }
+        public string slider4 { get; set; }
     }
 }

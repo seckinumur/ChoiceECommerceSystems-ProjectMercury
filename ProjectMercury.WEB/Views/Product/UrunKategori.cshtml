@@ -23,6 +23,7 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
+                            <th>Alt Kategoriler</th>
                             <th>Ürün Kategoriler</th>
                             <th>İşlemler</th>
                             <th class="text-danger">Force Delete</th>
@@ -33,10 +34,11 @@
                             foreach (var item in Model)
                             {
                                 <tr>
+                                    <td>@item.AltKategoriAdi</td>
                                     <td>@item.UrunKategoriAdi</td>
                                     <td>
                                         <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UrunKategoriID','@item.UrunKategoriAdi')" disabled="@(item.UrunVarmi == true ? true : false)">Ürün Kategoriler Sil</button>
-                                        <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.UrunKategoriID','@item.UrunKategoriAdi')">Ürün Kategoriler Düzenle</button>
+                                        <button data-toggle="modal" data-target="#Duzenle" class="btn btn-info" onclick="Islem('@item.UrunKategoriID','@item.UrunKategoriAdi','@item.AltKategoriAdi')">Ürün Kategoriler Düzenle</button>
                                     </td>
                                     <td>
                                         <button data-toggle="modal" data-target="#Force" class="btn btn-success" onclick="Islem('@item.UrunKategoriID','@item.UrunKategoriAdi')">Tüm İçeriği Sil</button>
@@ -147,9 +149,21 @@
                         <div class="form-group">
                             <label>Bu Ürün Kategori Güncellenecek Devam Edilsin mi?</label>
                             <div class="form-group">
-                                <label>Alt Kategori Adı</label>
+                                <label>Ürün Kategori Adı</label>
                                 <input class="form-control" name="UrunKategoriAdi" id="kategoriAdi" required>
                             </div>
+                            <div class="form-group">
+                                <label>Alt Kategori</label>
+                                <select class="selectpicker form-control" data-live-search="true" name="AltKategoriAdi" id="Altkategoriyaz">
+                                    @{
+                                        foreach (var item in ProjectMercury.DAL.Repository.AltKategoriRepo.AltKategorileriListele())
+                                        {
+                                            <option data-tokens="@item.AltKategoriAdi">@item.AltKategoriAdi</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     ÇOMAR AI V.1.2 (ALPHA)
@@ -191,6 +205,17 @@
                         <div class="form-group">
                             <label>Yeni Bir Ürün Kategori Eklenecek Devam Edilsin mi?</label>
                             <div class="form-group">
+                                <label>Alt Kategori</label>
+                                <select class="selectpicker form-control" data-live-search="true" name="AltKategoriAdi" id="Altkategoriyaz">
+                                    @{
+                                        foreach (var item in ProjectMercury.DAL.Repository.AltKategoriRepo.AltKategorileriListele())
+                                        {
+                                            <option data-tokens="@item.AltKategoriAdi">@item.AltKategoriAdi</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label>Alt Kategori Adı</label>
                                 <input class="form-control" name="UrunKategoriAdi" required>
                             </div>
@@ -231,7 +256,7 @@
 </div>
 </div>
 <script type="text/javascript">
-    function Islem(obj,obj2)
+    function Islem(obj,obj2,obj3)
     {
         document.getElementById("kategoriAdi").value = obj2;
         document.getElementById("SilID").value = obj;
@@ -239,6 +264,7 @@
         document.getElementById("Silinecek").value = obj2;
         document.getElementById("SilIDF").value = obj;
         document.getElementById("SilinecekF").value = obj2;
+        $('#Altkategoriyaz').selectpicker('val', obj3);
     }
 </script>
 

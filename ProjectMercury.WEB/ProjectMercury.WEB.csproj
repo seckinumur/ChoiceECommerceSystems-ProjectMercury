@@ -186,6 +186,9 @@
     <Content Include="images\choice.png" />
     <Content Include="images\Company\projectmercury.png" />
     <Content Include="images\Company\Slider\Slider1.jpg" />
+    <Content Include="images\Company\Slider\Slider2.jpg" />
+    <Content Include="images\Company\Slider\Slider3.jpg" />
+    <Content Include="images\Company\Slider\Slider4.jpg" />
     <Content Include="images\favicon.png" />
     <Content Include="images\ImageStore\Demo.jpg" />
     <Content Include="images\projectmercury.png" />

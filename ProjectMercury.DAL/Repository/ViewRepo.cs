@@ -24,7 +24,7 @@ namespace ProjectMercury.DAL.Repository
                     var indirimliUrun = db.Urun.Where(p => p.IndirimVarmi == true).ToList();
                     int encoksatan = db.Satis.Count();
 
-                    if (urunlistesi.Count != 5)
+                    if (urunlistesi.Count < 5)
                     {
                         Liste.EnYeni = urunlistesi.OrderByDescending(p => p.UrunID).Take(urunlistesi.Count).ToList();
                     }
@@ -32,7 +32,7 @@ namespace ProjectMercury.DAL.Repository
                     {
                         Liste.EnYeni = urunlistesi.OrderByDescending(p => p.UrunID).Take(5).ToList();
                     }
-                    if (encoksatan != 5 && encoksatan != 0)
+                    if (encoksatan < 5 && encoksatan != 0)
                     {
                         Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).ToList();
                     }
@@ -40,7 +40,7 @@ namespace ProjectMercury.DAL.Repository
                     {
                         Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).Take(5).ToList();
                     }
-                    if (indirimliUrun.Count != 5)
+                    if (indirimliUrun.Count < 5)
                     {
                         for (int i = 0; i < urunlistesi.Count; i++) { GunufirsatiListe.Add(indirimliUrun[rnd.Next(1, indirimliUrun.Count)]); }
                         Liste.GununFirsati = GunufirsatiListe;
@@ -50,6 +50,10 @@ namespace ProjectMercury.DAL.Repository
                         for (int i = 0; i < 5; i++) { GunufirsatiListe.Add(indirimliUrun[rnd.Next(1, indirimliUrun.Count)]); }
                         Liste.GununFirsati = GunufirsatiListe;
                     }
+                    Liste.slider1 = db.Slider.FirstOrDefault(p => p.SliderID == 1).Image;
+                    Liste.slider2 = db.Slider.FirstOrDefault(p => p.SliderID == 2).Image;
+                    Liste.slider3 = db.Slider.FirstOrDefault(p => p.SliderID == 3).Image;
+                    Liste.slider4 = db.Slider.FirstOrDefault(p => p.SliderID == 4).Image;
                     return Liste;
                 }
                 catch
@@ -57,6 +61,10 @@ namespace ProjectMercury.DAL.Repository
                     Liste.EnCokSatan = null;
                     Liste.EnYeni = null;
                     Liste.GununFirsati = null;
+                    Liste.slider1 = db.Slider.FirstOrDefault(p => p.SliderID == 1).Image;
+                    Liste.slider2 = db.Slider.FirstOrDefault(p => p.SliderID == 2).Image;
+                    Liste.slider3 = db.Slider.FirstOrDefault(p => p.SliderID == 3).Image;
+                    Liste.slider4 = db.Slider.FirstOrDefault(p => p.SliderID == 4).Image;
                     return Liste;
                 }
                 
@@ -72,8 +80,8 @@ namespace ProjectMercury.DAL.Repository
                 var kategori = db.Kategori.FirstOrDefault(p => p.KategoriID == ID);
                 liste.AltKategoriler = db.AltKategori.Where(p => p.KategoriID == ID).ToList();
                 liste.Urunler = db.Urun.Where(p => p.KategoriID == ID).OrderBy(p=> p.IndirimliFiyati).ToList();
-                var urunkategori = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.UrunKategori).ToList();
-                var marka = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.Marka).ToList();
+                var urunkategori = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.UrunKategori).OrderBy(P=> P.UrunKategoriID).ToList();
+                var marka = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.Marka).OrderBy(p=> p.MarkaID).ToList();
                 
                 int data = 0;
                 foreach (var urk in urunkategori)
@@ -110,8 +118,8 @@ namespace ProjectMercury.DAL.Repository
                 var Urunler = db.Urun.Where(p => p.AltKategoriID == ID).OrderBy(p=> p.IndirimliFiyati).ToList();
                 liste.AltKategoriler = db.AltKategori.Where(p => p.AltKategoriID == ID).ToList();
                 liste.Urunler = Urunler;
-                var urunkategori = db.Urun.Where(p => p.AltKategoriID == ID).Select(p => p.UrunKategori).ToList();
-                var marka = db.Urun.Where(p => p.AltKategoriID == ID).Select(p => p.Marka).ToList();
+                var urunkategori = db.UrunKategori.Where(p => p.AltKategoriID == ID).OrderBy(p=> p.AltKategoriID).ToList();
+                var marka = db.Urun.Where(p => p.AltKategoriID == ID).Select(p => p.Marka).OrderBy(P=> P.MarkaID).ToList();
 
                 int data = 0;
                 foreach (var urk in urunkategori)
@@ -144,15 +152,16 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                int altkategoriid = db.Urun.FirstOrDefault(p => p.UrunKategoriID == ID).AltKategoriID;
                 VMViewKategori liste = new VMViewKategori();
                 List<UrunKategori> Urunkategorilistesi = new List<UrunKategori>();
                 List<Marka> MarkalarListesi = new List<Marka>();
+                List<AltKategori> altkategorilistesi = new List<AltKategori>();
+                var altkategorisi = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == ID);
                 var Urunler = db.Urun.Where(p => p.UrunKategoriID == ID).OrderBy(p => p.IndirimliFiyati).ToList();
-                liste.AltKategoriler = db.AltKategori.Where(p => p.AltKategoriID == altkategoriid).ToList();
+                var altKategoriler = db.AltKategori.Where(p => p.AltKategoriID == altkategorisi.AltKategoriID).OrderBy(p=> p.AltKategoriID).ToList();
                 liste.Urunler = Urunler;
-                var urunkategori = db.Urun.Where(p => p.UrunKategoriID == ID).Select(p=> p.UrunKategori).ToList();
-                var marka = db.Urun.Where(p => p.UrunKategoriID == ID).Select(p => p.Marka).ToList();
+                var urunkategori = db.Urun.Where(p => p.UrunKategoriID == ID).Select(p=> p.UrunKategori).OrderBy(p=> p.UrunKategoriID).ToList();
+                var marka = db.Urun.Where(p => p.UrunKategoriID == ID).Select(p => p.Marka).OrderBy(P=> P.MarkaID).ToList();
 
                 int data = 0;
                 foreach (var urk in urunkategori)
@@ -164,7 +173,16 @@ namespace ProjectMercury.DAL.Repository
                         data = urk.UrunKategoriID;
                     }
                 }
+                data = 0;
+                foreach (var urk in altKategoriler)
+                {
 
+                    if (urk.AltKategoriID != data)
+                    {
+                        altkategorilistesi.Add(urk);
+                        data = urk.AltKategoriID;
+                    }
+                }
                 data = 0;
                 foreach (var ma in marka)
                 {
@@ -175,6 +193,7 @@ namespace ProjectMercury.DAL.Repository
                     }
                 }
 
+                liste.AltKategoriler = altkategorilistesi;
                 liste.KategoriAdi = Urunler.FirstOrDefault(p => p.UrunKategoriID == ID).Kategori.KategoriAdi;
                 liste.Markalar = MarkalarListesi;
                 liste.AltKategoriAdi = db.Urun.FirstOrDefault(p => p.UrunKategoriID == ID).AltKategori.AltKategoriAdi;

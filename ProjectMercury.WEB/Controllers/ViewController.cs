@@ -88,6 +88,42 @@ namespace ProjectMercury.WEB.Controllers
                 }
             }
         }
+        [HttpPost]
+        public ActionResult Kategori(int data,int data2)
+        {
+            if (Session["User"] != null)
+            {
+                try
+                {
+                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                    ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                    //var Gonder = ViewRepo.KategoriyeGore(ID);
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                try
+                {
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    //var Gonder = ViewRepo.KategoriyeGore(ID);
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+        }
         public ActionResult AltKategori(int ID)
         {
             if (Session["User"] != null)

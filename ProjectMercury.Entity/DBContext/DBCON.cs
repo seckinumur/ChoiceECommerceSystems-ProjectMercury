@@ -46,13 +46,8 @@ namespace ProjectMercury.Entity.DBContext
 
             db.UrunKategori.Add(new UrunKategori
             {
-                UrunKategoriAdi = "Ürün Kategori Yok"
-            });
-            db.SaveChanges();
-
-            db.UrunKategori.Add(new UrunKategori
-            {
-                UrunKategoriAdi = "KPSS Konu Anlatýmý"
+                UrunKategoriAdi = "KPSS Konu Anlatýmý",
+                AltKategoriID=1
             });
             db.SaveChanges();
 
@@ -74,7 +69,7 @@ namespace ProjectMercury.Entity.DBContext
                 UrunAdi="Murat Yayýnlarý KPSS Eðitim Bilimleri Konu Anlatýmlý Modüler Set(2017)",
                 UrunFiyati="59,50",
                 Yorum="1456 Sayfa 19.50 x 27.50 cm 1.Hamur Kaðýt Poþet Ambalaj",
-                UrunKategoriID=2,
+                UrunKategoriID=1,
                 Image= "/images/ImageStore/Demo.JPG"
             });
             db.SaveChanges();
@@ -126,6 +121,24 @@ namespace ProjectMercury.Entity.DBContext
             db.Slider.Add(new Slider()
             {
                 Image = "/images/Company/Slider/Slider1.JPG"
+            });
+            db.SaveChanges();
+
+            db.Slider.Add(new Slider()
+            {
+                Image = "/images/Company/Slider/Slider2.JPG"
+            });
+            db.SaveChanges();
+
+            db.Slider.Add(new Slider()
+            {
+                Image = "/images/Company/Slider/Slider3.JPG"
+            });
+            db.SaveChanges();
+
+            db.Slider.Add(new Slider()
+            {
+                Image = "/images/Company/Slider/Slider4.JPG"
             });
             db.SaveChanges();
         }

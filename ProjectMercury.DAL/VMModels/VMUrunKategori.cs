@@ -10,6 +10,8 @@ namespace ProjectMercury.DAL.VMModels
     {
         public int UrunKategoriID { get; set; }
         public string UrunKategoriAdi { get; set; }
+        public int AltKategoriID { get; set; }
+        public string AltKategoriAdi { get; set; }
         public bool UrunVarmi { get; set; }
         public string Gorev { get; set; }
     }
