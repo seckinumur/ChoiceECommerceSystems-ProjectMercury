@@ -317,6 +317,7 @@
     <Content Include="Views\View\AltKategori.cshtml" />
     <Content Include="Views\View\UrunKategori.cshtml" />
     <Content Include="Views\View\Marka.cshtml" />
+    <Content Include="Views\Admin\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

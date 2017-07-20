@@ -121,7 +121,7 @@
                                                         </a>
                                                     </figure>
                                                     <div class="icons">
-                                                        <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-cart-plus"></i></a>
+                                                        <a class="icon semi-circle" href="javascript:void(0);" onclick="SepeteEkle('@item.UrunID','Ekle');"><i class="fa fa-cart-plus"></i></a>
                                                         <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search"></i></a>
                                                     </div>
                                                 </div>
@@ -153,6 +153,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 <h5 id="urunAdi"></h5>
                             </div>
                             <div class="modal-body">
@@ -175,13 +176,6 @@
                                         <div class="col-md-pull-12">
                                             <p class="text-danger" id="urunAciklama"></p>
                                         </div>
-                                        <hr class="spacer-10">
-                                        <ul class="list list-inline">
-                                            <li><button type="button" class="btn btn-default btn-md round"><i class="fa fa-shopping-basket mr-5"></i>Sepete Ekle</button></li>
-                                            <li>
-                                                <button type="button" class="btn btn-gray " data-dismiss="modal"><i class="fa fa-times-circle mr-5"></i>Pencereyi Kapat</button>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -211,13 +205,16 @@
         })
         $.ajax({
             type: 'POST',
-            url: '/Siparis/sepetekle',
+            url: '/Siparis/sep',
             data: data,
             contentType: 'application/json',
             success: function (data) {
-               
+                alert(meraba);
             },
-            error: function (response) {
+            error: function (hata, ajaxOptions, thrownError) {
+                alert(hata.status);
+                alert(thrownError);
+                alert(hata.responseText);
             }
         })
     };

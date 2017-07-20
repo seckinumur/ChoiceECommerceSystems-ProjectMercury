@@ -36,6 +36,36 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool UyeKaydetHızlı(VMRegister Al) //Üye Kaydet
+        {
+            using (DBCON db = new DBCON())
+            {
+                if (Al.KullaniciSifre == Al.KullaniciSifreTekrar)
+                {
+                    bool Control = db.Uyeler.Any(p => p.MailAdresi == Al.EMail);
+                    if (Control != true)
+                    {
+                        db.Uyeler.Add(new Uyeler()
+                        {
+                            MailAdresi = Al.EMail,
+                            Sifre = Al.KullaniciSifre,
+                            UyeAdiSoyadi= Al.UyeAdiSoyadi,
+                            Tarih = DateTime.Now.ToShortDateString()
+                        });
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public static bool UyeGuncelle(VMUyeler Al) //Üye Guncelle
         {
             using (DBCON db = new DBCON())
@@ -161,6 +191,21 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var bul = db.Uyeler.FirstOrDefault(p => p.MailAdresi == Al.KullaniciAdi && p.Sifre == Al.KullaniciSifre);
+                    return bul.UyelerID;
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
+        public static int UyeGirisiHizli(VMRegister Al) //Uye Giriş
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var bul = db.Uyeler.FirstOrDefault(p => p.MailAdresi == Al.EMail && p.Sifre == Al.KullaniciSifre);
                     return bul.UyelerID;
                 }
                 catch

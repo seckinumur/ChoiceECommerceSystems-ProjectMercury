@@ -26,6 +26,7 @@ namespace ProjectMercury.Entity.DBContext
         public virtual DbSet<Satis> Satis { get; set; }
         public virtual DbSet<UrunSepet> UrunSepet { get; set; }
         public virtual DbSet<SanalSepet> SanalSepet { get; set; }
+        public virtual DbSet<SanalSepetUye> SanalSepetUye { get; set; }
     }
     public class DBCONInitializer : CreateDatabaseIfNotExists<DBCON> //Otomatik database Oluþturma
     {
@@ -114,7 +115,8 @@ namespace ProjectMercury.Entity.DBContext
                 Twitter = "https://twitter.com/SeckinUmur",
                 Whatsapp = "+905423428009",
                 Logo = "/images/Company/projectmercury.PNG",
-                Hakkinda = "©2017 Choice Corporation All Rights Reserved."
+                Hakkinda = "©2017 Choice Corporation All Rights Reserved.",
+                FLogo= "/images/Company/favicon.PNG"
             });
             db.SaveChanges();
 

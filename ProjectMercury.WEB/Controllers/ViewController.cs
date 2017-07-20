@@ -19,14 +19,7 @@ namespace ProjectMercury.WEB.Controllers
                     ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
                     ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
                     var Gonder = ViewRepo.VievIndexAI();
-                    if(Gonder == null)
-                    {
-                        return View(Gonder);
-                    }
-                    else
-                    {
-                        return View();
-                    }
+                    return View(Gonder);
                 }
                 catch
                 {
@@ -42,7 +35,7 @@ namespace ProjectMercury.WEB.Controllers
                     ViewBag.User = "Misafir Kullanıcı";
                     ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
                     var Gonder = ViewRepo.VievIndexAI();
-                        return View(Gonder);
+                    return View(Gonder);
                 }
                 catch
                 {
@@ -89,7 +82,7 @@ namespace ProjectMercury.WEB.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Kategori(int data,int data2)
+        public ActionResult Kategori(int data, int data2)
         {
             if (Session["User"] != null)
             {
@@ -261,8 +254,47 @@ namespace ProjectMercury.WEB.Controllers
                     return RedirectToAction("Hata");
                 }
             }
-
         }
+
+        public ActionResult Uye()
+        {
+            if (Session["User"] != null)
+            {
+                try
+                {
+                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                    ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                try
+                {
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    return View();
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "9866";
+                    return RedirectToAction("Hata");
+                }
+            }
+        }
+        //[HttpPost]
+        //public Action Sepet(int UrunID,string Gorev)
+        //{
+
+        //    return Json(gonder, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult Hata()
         {
             return View();

@@ -26,6 +26,45 @@ namespace ProjectMercury.WEB.Controllers
                 return RedirectToAction("Hata","Product");
             }
         }
+        public ActionResult Register()
+        {
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                TempData["Hata"] = "Sistem Register Sayfasını Göstermeyi Denedi Ancak Gösterim Başarısız Oldu. Bu Kritik Bir Sistem Hatasıdır.";
+                TempData["HataKodu"] = "6766";
+                return RedirectToAction("Hata", "Product");
+            }
+        }
+        [HttpPost]
+        public ActionResult Register(VMRegister Al)
+        {
+            try
+            {
+                bool Kontrol = UyelerRepo.UyeKaydetHızlı(Al);
+                if (Kontrol != true)
+                {
+                    TempData["UyariTipi"] = "text-danger";
+                    TempData["Sonuc"] = "Bu E-Mail Adresinden Daha Önce Sisteme Kayıt Yapılmış!";
+                    return View();
+                }
+                else 
+                {
+                    int ID = UyelerRepo.UyeGirisiHizli(Al);
+                    Session["User"] = ID;
+                    return RedirectToAction("Anasayfa", "View");
+                }
+            }
+            catch
+            {
+                TempData["Hata"] = "Sistem Login işlemini Gerçekleştirmek İçin Çağrıda Bulundu Ancak Database Bu İşleme Yanıt Vermedi Yada Yanıt Verme Süresi Sona Erdi. Bu Kritik Bir Sistem Hatasıdır.";
+                TempData["HataKodu"] = "9966";
+                return RedirectToAction("Hata", "Product");
+            }
+        }
         public ActionResult Logoff()
         {
             try
@@ -172,12 +211,26 @@ namespace ProjectMercury.WEB.Controllers
                         {
                             System.IO.File.Delete(Server.MapPath("~" + Data.Logo));
                         }
+                        if (System.IO.File.Exists(Server.MapPath("~" + Data.FLogo)))
+                        {
+                            System.IO.File.Delete(Server.MapPath("~" + Data.FLogo));
+                        }
+                        WebImage imgl = new WebImage(Resim.InputStream);
+                        FileInfo imginfol = new FileInfo(Resim.FileName);
+                        string newfotol = Guid.NewGuid().ToString() + imginfol.Extension;
+                        imgl.Resize(48,48);
+
                         WebImage img = new WebImage(Resim.InputStream);
                         FileInfo imginfo = new FileInfo(Resim.FileName);
                         string newfoto = Guid.NewGuid().ToString() + imginfo.Extension;
-                        img.Resize(275,90);
+                        img.Resize(275, 90);
+
+                        imgl.Save("~/images/Company/" + newfoto);
+                        Data.FLogo = "/images/Company/" + newfoto;
+
                         img.Save("~/images/Company/" + newfoto);
                         Data.Logo = "/images/Company/" + newfoto;
+
                         SiteBilgileri data = new SiteBilgileri()
                         {
                             Adres = Data.Adres,
@@ -190,7 +243,8 @@ namespace ProjectMercury.WEB.Controllers
                             Telefon = Data.Telefon,
                             Twitter = Data.Twitter,
                             Whatsapp = Data.Whatsapp,
-                            Hakkinda= Data.Hakkinda
+                            Hakkinda= Data.Hakkinda,
+                            FLogo= Data.FLogo
                         };
                         bool Sonucu = SiteBilgileriRepo.Guncelle(data);
                         if (Sonucu == true)

@@ -17,6 +17,7 @@ namespace ProjectMercury.DAL.VMModels
         public string Whatsapp { get; set; }
         public string Instagram { get; set; }
         public string Logo { get; set; }
+        public string FLogo { get; set; }
         public string SiteAdi { get; set; }
         public string Hakkinda { get; set; }
         public string MailAdresi { get; set; }

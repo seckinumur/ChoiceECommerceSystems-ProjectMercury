@@ -56,6 +56,7 @@
     <Compile Include="Models\Kullanicilar.cs" />
     <Compile Include="Models\Marka.cs" />
     <Compile Include="Models\SanalSepet.cs" />
+    <Compile Include="Models\SanalSepetUye.cs" />
     <Compile Include="Models\Satis.cs" />
     <Compile Include="Models\Sepet.cs" />
     <Compile Include="Models\Siparis.cs" />
