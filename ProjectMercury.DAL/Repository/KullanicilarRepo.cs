@@ -22,8 +22,8 @@ namespace ProjectMercury.DAL.Repository
                     {
                         db.Kullanicilar.Add(new Kullanicilar()
                         {
-                            KullaniciAdi = Al.KullaniciAdi,
-                            KullaniciSifre = Al.KullaniciSifre,
+                            KullaniciAdi = Al.KullaniciAdi.Trim(),
+                            KullaniciSifre = Al.KullaniciSifre.Trim(),
                             Master = Al.Master
                         });
                         db.SaveChanges();
@@ -51,8 +51,8 @@ namespace ProjectMercury.DAL.Repository
                     {
                         db.Kullanicilar.Add(new Kullanicilar()
                         {
-                            KullaniciAdi = Ad,
-                            KullaniciSifre = Sifre
+                            KullaniciAdi = Ad.Trim(),
+                            KullaniciSifre = Sifre.Trim()
                         });
                         db.SaveChanges();
                         return true;
@@ -75,8 +75,8 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.Kullanicilar.FirstOrDefault(p => p.KullanicilarID == Al.KullanicilarID);
-                    Bul.KullaniciAdi = Al.KullaniciAdi;
-                    Bul.KullaniciSifre = Al.KullaniciSifre;
+                    Bul.KullaniciAdi = Al.KullaniciAdi.Trim();
+                    Bul.KullaniciSifre = Al.KullaniciSifre.Trim();
                     db.SaveChanges();
                     return true;
                 }
@@ -93,8 +93,8 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.Kullanicilar.FirstOrDefault(p => p.KullanicilarID ==ID);
-                    Bul.KullaniciAdi = Ad;
-                    Bul.KullaniciSifre = Sifre;
+                    Bul.KullaniciAdi = Ad.Trim();
+                    Bul.KullaniciSifre = Sifre.Trim();
                     db.SaveChanges();
                     return true;
                 }

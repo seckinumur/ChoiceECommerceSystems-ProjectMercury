@@ -22,7 +22,7 @@ namespace ProjectMercury.DAL.Repository
                     Random rnd = new Random();
                     var urunlistesi = db.Urun.ToList();
                     var indirimliUrun = db.Urun.Where(p => p.IndirimVarmi == true).ToList();
-                    int encoksatan = db.Satis.Count();
+                    int encoksatan = db.EnCokSatan.Count();
 
                     if (urunlistesi.Count < 5)
                     {
@@ -34,11 +34,11 @@ namespace ProjectMercury.DAL.Repository
                     }
                     if (encoksatan < 5 && encoksatan != 0)
                     {
-                        Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).ToList();
+                        Liste.EnCokSatan = db.EnCokSatan.OrderBy(p => p.Adet).Select(P => P.Urun).ToList();
                     }
                     else
                     {
-                        Liste.EnCokSatan = db.Satis.OrderBy(p => p.SatisAdedi).Select(P => P.Urun).Take(5).ToList();
+                        Liste.EnCokSatan = db.EnCokSatan.OrderBy(p => p.Adet).Select(P => P.Urun).Take(5).ToList();
                     }
                     if (indirimliUrun.Count < 5)
                     {
@@ -250,7 +250,7 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                         int id = int.Parse(ID);
-                        int adet = db.Sepet.Where(p => p.UyelerID == id && p.Aktifmi == true).Count();
+                        int adet = db.SanalSepetUye.Where(p => p.UyelerID == id).Sum(P=> P.Adet);
                         return "Sepette " + adet + " Adet Ürün Bekliyor.";
                 }
                 catch

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjectMercury.Entity.Models
 {
-   public class Satis
+   public class EnCokSatan
     {
-        public int SatisID { get; set; }
+        public int EncokSatanID { get; set; }
         public int UrunID { get; set; }
-        public int SatisAdedi { get; set; }
+        public int Adet { get; set; }
 
         public virtual Urun Urun { get; set; }
     }

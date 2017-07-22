@@ -46,6 +46,7 @@
                                         <td>@item.IndirimliFiyati</td>
                                         <td>@item.UrunAdedi</td>
                                         <td>
+                                            <button data-toggle="modal" data-target="#Stok" class="btn btn-success" onclick="Islem2('@item.UrunID','@item.UrunAdi','@item.UrunAdedi')">Stok Ekle</button>
                                             <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UrunID','@item.UrunAdi')">Ürün Sil</button>
                                             <a  class="btn btn-info"  href="~/Product/UrunDuzenle/@item.UrunID">Detay</a>
                                         </td>
@@ -110,6 +111,39 @@
             </div>
         </div>
 
+        <div class="modal fade" id="Stok" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Stok Ekleme</h4>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" name="UrunID" id="SilIDS" />
+                            <input type="hidden" name="Gorev" value="Stok" />
+                            <div class="form-group">
+                                <label style="color:orangered">Adlı Ürüne Stok Girişi</label>
+                                <input class="form-control" readonly="readonly" style="color:orangered" id="SilinecekS">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:forestgreen">Bu Ürünün Stoktaki Mevcut Adeti</label>
+                                <input class="form-control" type="number" readonly="readonly" style="color:blue" id="Adett">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:forestgreen">Stoktaki Adedine Eklenecek Ürün Adedi</label>
+                                <input class="form-control" type="number" min="1" value="1" style="color:firebrick" name="UrunAdedi">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-12">
             <div>
                 <a class="btn btn-info col-lg-12" href="~/Product/UrunEkle">Ürün Ekle</a>
@@ -123,6 +157,11 @@
     function Islem(obj, obj2) {
         document.getElementById("SilID").value = obj;
         document.getElementById("Silinecek").value = obj2;
+    }
+    function Islem2(obj, obj2, obj3) {
+        document.getElementById("SilIDS").value = obj;
+        document.getElementById("SilinecekS").value = obj2;
+        document.getElementById("Adett").value = obj3;
     }
 </script>
 

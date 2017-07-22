@@ -9,45 +9,36 @@ using System.Threading.Tasks;
 
 namespace ProjectMercury.DAL.Repository
 {
-   public class UyeSepetRepo
+    public class UyeSepetRepo
     {
-        public static List<VMUrun> SanalSepeteEkle(int kullanici, int urun, int adet) //Sanal sepet
+        public static bool Ekle(int kullanici, int urun) //Sanal sepet ekle
         {
             using (DBCON db = new DBCON())
             {
                 try
                 {
-                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici && p.UrunID == urun);
-                    bul.Adet += adet;
+                    var bul = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == kullanici && p.UrunID == urun);
+                    bul.Adet += 1;
                     db.SaveChanges();
-                    return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
-                    {
-                        AltKategori = p.Urun.AltKategori.AltKategoriAdi,
-                        Kategori = p.Urun.Kategori.KategoriAdi,
-                        Marka = p.Urun.Marka.MarkaAdi,
-                        UrunAdedi = p.Adet,
-                        UrunAdi = p.Urun.UrunAdi,
-                        UrunKategori = p.Urun.UrunKategori.UrunKategoriAdi
-                    }).ToList();
+                    return true;
                 }
                 catch
                 {
-                    db.SanalSepet.Add(new SanalSepet()
+                    try
                     {
-                        Adet = adet,
-                        KullanicilarID = kullanici,
-                        UrunID = urun
-                    });
-                    db.SaveChanges();
-                    return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
+                        db.SanalSepetUye.Add(new SanalSepetUye()
+                        {
+                            Adet = 1,
+                            UyelerID = kullanici,
+                            UrunID = urun
+                        });
+                        db.SaveChanges();
+                        return true;
+                    }
+                    catch
                     {
-                        AltKategori = p.Urun.AltKategori.AltKategoriAdi,
-                        Kategori = p.Urun.Kategori.KategoriAdi,
-                        Marka = p.Urun.Marka.MarkaAdi,
-                        UrunAdedi = p.Adet,
-                        UrunAdi = p.Urun.UrunAdi,
-                        UrunKategori = p.Urun.UrunKategori.UrunKategoriAdi
-                    }).ToList();
+                        return false;
+                    }
                 }
             }
         }
@@ -55,23 +46,29 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                bool varmi = db.SanalSepet.Any(p => p.KullanicilarID == ID);
+                bool varmi = db.SanalSepetUye.Any(p => p.UyelerID == ID);
                 return varmi;
             }
         }
-        public static List<VMUrun> SanalSepeteListe(int kullanici) //Sanal sepet
+        public static VMSiparisSepeti Liste(string id) //Sanal sepet liste
         {
             using (DBCON db = new DBCON())
             {
-                return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
+                int kullanici = int.Parse(id);
+                var urunler =  db.SanalSepetUye.Where(p => p.SanalSepetUyeID == kullanici).Select(p => new VMUrun
                 {
-                    AltKategori = p.Urun.AltKategori.AltKategoriAdi,
-                    Kategori = p.Urun.Kategori.KategoriAdi,
-                    Marka = p.Urun.Marka.MarkaAdi,
-                    UrunAdedi = p.Adet,
+                    Image = p.Urun.Image,
                     UrunAdi = p.Urun.UrunAdi,
-                    UrunKategori = p.Urun.UrunKategori.UrunKategoriAdi
+                    UrunFiyati = p.Urun.IndirimliFiyati,
+                    UrunAdedi = db.SanalSepetUye.Where(s => s.UyelerID == kullanici).Sum(m => m.Adet),
+                    ToplamFiyat = db.SanalSepetUye.Where(s => s.UyelerID == kullanici).Sum(m => m.Urun.IndirimliFiyati)
                 }).ToList();
+                var uye = db.Uyeler.FirstOrDefault(p => p.UyelerID == kullanici);
+                return new VMSiparisSepeti()
+                {
+                    Urunler = urunler,
+                    Uye = uye
+                };
             }
         }
         public static List<VMUrun> SanalSepeteCikar(int kullanici, int urun, int adet) //Sanal sepet
@@ -80,10 +77,10 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici);
+                    var bul = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == kullanici);
                     bul.Adet -= adet;
                     db.SaveChanges();
-                    return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
+                    return db.SanalSepetUye.Where(p => p.UyelerID == kullanici).Select(p => new VMUrun
                     {
                         AltKategori = p.Urun.AltKategori.AltKategoriAdi,
                         Kategori = p.Urun.Kategori.KategoriAdi,
@@ -95,7 +92,7 @@ namespace ProjectMercury.DAL.Repository
                 }
                 catch
                 {
-                    return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
+                    return db.SanalSepetUye.Where(p => p.UyelerID == kullanici).Select(p => new VMUrun
                     {
                         AltKategori = p.Urun.AltKategori.AltKategoriAdi,
                         Kategori = p.Urun.Kategori.KategoriAdi,
@@ -114,7 +111,7 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     int uyelerid = int.Parse(UyeID);
-                    var bul = db.SanalSepet.Where(p => p.KullanicilarID == KullaniciID).ToList();
+                    var bul = db.SanalSepetUye.Where(p => p.UyelerID == KullaniciID).ToList();
                     if (bul.Count != 0)
                     {
                         var liste = bul.Select(p => new UrunSepet
@@ -139,7 +136,7 @@ namespace ProjectMercury.DAL.Repository
                         {
                             bulsepet.Aktifmi = false;
                         }
-                        db.SanalSepet.RemoveRange(bul);
+                        db.SanalSepetUye.RemoveRange(bul);
                         db.SaveChanges();
                         return true;
                     }
@@ -160,8 +157,8 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    var sil = db.SanalSepet.Where(p => p.KullanicilarID == KullaniciID).ToList();
-                    db.SanalSepet.RemoveRange(sil);
+                    var sil = db.SanalSepetUye.Where(p => p.UyelerID == KullaniciID).ToList();
+                    db.SanalSepetUye.RemoveRange(sil);
                     db.SaveChanges();
                     return true;
                 }

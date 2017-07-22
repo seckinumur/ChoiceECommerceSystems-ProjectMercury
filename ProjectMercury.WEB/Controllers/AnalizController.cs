@@ -1,5 +1,6 @@
 ﻿using ProjectMercury.DAL.Repository;
 using ProjectMercury.DAL.VMModels;
+using ProjectMercury.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,65 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Tüm Ürünler Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["Hata"] = "Stok Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "8965";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "text-danger";
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        [HttpPost]
+        public ActionResult TumUrunler(VMUrun Data)
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    if (Data.Gorev == "Stok")
+                    {
+                        bool Sonucu = UrunRepo.UrunStokEkle(Data);
+                        if (Sonucu == true)
+                        {
+                            var Gonder = AnalizRepo.ToplamUrun();
+                            return View(Gonder);
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Stok Güncelleme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "02241";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else if (Data.Gorev == "Sil")
+                    {
+                        bool sonucu = UrunRepo.UrunSil(Data.UrunID);
+                        if (sonucu == true)
+                        {
+                            var Gonder = AnalizRepo.ToplamUrun();
+                            return View(Gonder);
+                        }
+                        else
+                        {
+                            TempData["Hata"] = "Ürün Silme İşlemi Başarısız Oldu!";
+                            TempData["HataKodu"] = "1090";
+                            return RedirectToAction("Hata", "Product");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Hata"] = "Ürün İndirim Güncelleme İşlemi Başarısız Oldu!";
+                        TempData["HataKodu"] = "0040";
+                        return RedirectToAction("Hata");
+                    }
+                }
+                catch
+                {
+                    TempData["Hata"] = "Stok Sayfasının Gösterimi Başarısız Oldu!";
                     TempData["HataKodu"] = "8966";
                     return RedirectToAction("Hata", "Product");
                 }
@@ -163,6 +222,62 @@ namespace ProjectMercury.WEB.Controllers
                 TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
                 return RedirectToAction("Login", "Admin");
             }
+        }
+        public ActionResult Ciro()
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    var Gonder = AnalizRepo.CiroAylik();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Ciro Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "773386";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "text-danger";
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult UrunEndeks()
+        {
+            if (Session["Login"] != null)
+            {
+                try
+                {
+                    var Gonder = AnalizRepo.CiroAylik();
+                    return View(Gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Toplam Satış Sayfasının Gösterimi Başarısız Oldu!";
+                    TempData["HataKodu"] = "7733386";
+                    return RedirectToAction("Hata", "Product");
+                }
+            }
+            else
+            {
+                TempData["UyariTipi"] = "text-danger";
+                TempData["Sonuc"] = "Tarayıcıda Oturum Süreniz Dolmuş! Lütfen Tekrar Oturum Açın!";
+                return RedirectToAction("Login", "Admin");
+            }
+        }
+        public ActionResult CiroGun(string Yil, string Ay)
+        {
+            var gonder = AnalizRepo.CiroGunluk(Yil,Ay);
+            return Json(gonder, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ToplamGun(string Yil, string Ay)
+        {
+            var gonder = AnalizRepo.ToplamGunluk(Yil, Ay);
+            return Json(gonder, JsonRequestBehavior.AllowGet);
         }
     }
 }

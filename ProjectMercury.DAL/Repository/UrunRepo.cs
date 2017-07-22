@@ -17,28 +17,27 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    double id = Double.Parse(Al.IndirimliFiyati);
-                    if (id == 0)
+                    if (Al.IndirimliFiyati == 0)
                     {
                         Al.IndirimVarmi = false;
-                        Al.IndirimliFiyati = "0";
+                        Al.IndirimliFiyati = 0;
                     }
                     else
                     {
                         Al.IndirimVarmi = true;
                     }
-                    if(Al.UrunKategori== "Ürün Kategori Yok")
+                    if (Al.UrunKategori == "Ürün Kategori Yok")
                     {
                         Al.UrunKategoriID = 1;
                     }
                     else
                     {
-                        Al.UrunKategoriID =  db.UrunKategori.FirstOrDefault(p => p.UrunKategoriAdi == Al.UrunKategori).UrunKategoriID;
+                        Al.UrunKategoriID = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriAdi == Al.UrunKategori).UrunKategoriID;
                     }
                     var marka = db.Marka.FirstOrDefault(p => p.MarkaAdi == Al.Marka);
                     var kategori = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.Kategori);
                     var altkategori = db.AltKategori.FirstOrDefault(p => p.AltKategoriAdi == Al.AltKategori);
-                   
+
 
                     bool Control = db.Urun.Any(p => p.UrunAdi == Al.UrunAdi && p.MarkaID == marka.MarkaID);
                     if (Control == true)
@@ -50,18 +49,16 @@ namespace ProjectMercury.DAL.Repository
                         db.Urun.Add(new Urun
                         {
                             AltKategoriID = altkategori.AltKategoriID,
-                            Gramaj = Al.Gramaj,
                             Image = Al.Image,
                             IndirimliFiyati = Al.IndirimliFiyati,
                             IndirimVarmi = Al.IndirimVarmi,
                             KategoriID = kategori.KategoriID,
                             MarkaID = marka.MarkaID,
-                            UrunAciklama = Al.UrunAciklama,
+                            UrunAciklama = Al.UrunAciklama.Trim(),
                             UrunAdedi = Al.UrunAdedi,
-                            UrunAdi = Al.UrunAdi,
+                            UrunAdi = Al.UrunAdi.Trim(),
                             UrunFiyati = Al.UrunFiyati,
-                            UrunKategoriID = Al.UrunKategoriID,
-                            Yorum = Al.Yorum
+                            UrunKategoriID = Al.UrunKategoriID
                         });
                         db.SaveChanges();
                         return true;
@@ -81,11 +78,10 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    double id = Double.Parse(Al.IndirimliFiyati);
-                    if (id == 0)
+                    if (Al.IndirimliFiyati == 0)
                     {
                         Al.IndirimVarmi = false;
-                        Al.IndirimliFiyati = "0";
+                        Al.IndirimliFiyati = 0;
                     }
                     else
                     {
@@ -105,18 +101,16 @@ namespace ProjectMercury.DAL.Repository
 
                     var Bul = db.Urun.FirstOrDefault(p => p.UrunID == Al.UrunID);
                     Bul.AltKategoriID = altkategori.AltKategoriID;
-                    Bul.Gramaj = Al.Gramaj;
                     Bul.Image = Al.Image;
                     Bul.IndirimliFiyati = Al.IndirimliFiyati;
                     Bul.IndirimVarmi = Al.IndirimVarmi;
                     Bul.KategoriID = kategori.KategoriID;
                     Bul.MarkaID = marka.MarkaID;
-                    Bul.UrunAciklama = Al.UrunAciklama;
+                    Bul.UrunAciklama = Al.UrunAciklama.Trim();
                     Bul.UrunAdedi = Al.UrunAdedi;
-                    Bul.UrunAdi = Al.UrunAdi;
+                    Bul.UrunAdi = Al.UrunAdi.Trim();
                     Bul.UrunFiyati = Al.UrunFiyati;
                     Bul.UrunKategoriID = Al.UrunKategoriID;
-                    Bul.Yorum = Al.Yorum;
                     db.SaveChanges();
                     return true;
                 }
@@ -143,6 +137,23 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool UrunStokEkle(VMUrun Data) //Ürün Stok Ekle
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Urun.FirstOrDefault(p => p.UrunID == Data.UrunID);
+                    Bul.UrunAdedi += Data.UrunAdedi;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static VMUrun UrunBul(int ID) //Ürün Bul
         {
             using (DBCON db = new DBCON())
@@ -151,7 +162,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -165,8 +175,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).FirstOrDefault();
             }
         }
@@ -178,7 +187,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -192,8 +200,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
             }
         }
@@ -206,7 +213,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -220,8 +226,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
             }
         }
@@ -234,7 +239,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -248,8 +252,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
             }
         }
@@ -262,7 +265,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -276,8 +278,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
             }
         }
@@ -290,7 +291,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     Image = p.Image,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
@@ -304,42 +304,33 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
             }
         }
         public static bool IndirimDegistir(VMUrun Al) //Ürünleri Markaya Göre Bul
         {
-            double id;
-            if (!Double.TryParse(Al.IndirimliFiyati, out id))
+            using (DBCON db = new DBCON())
             {
-                return false;
-            }
-            else
-            {
-                using (DBCON db = new DBCON())
+                try
                 {
-                    try
+                    var Degistir = db.Urun.FirstOrDefault(p => p.UrunID == Al.UrunID);
+                    if (Al.IndirimliFiyati == 0)
                     {
-                        var Degistir = db.Urun.FirstOrDefault(p => p.UrunID == Al.UrunID);
-                        if (id == 0)
-                        {
-                            Degistir.IndirimVarmi = false;
-                            Degistir.IndirimliFiyati = "0";
-                        }
-                        else
-                        {
-                            Degistir.IndirimVarmi = true;
-                            Degistir.IndirimliFiyati = id.ToString();
-                        }
-                        db.SaveChanges();
-                        return true;
+                        Degistir.IndirimVarmi = false;
+                        Degistir.IndirimliFiyati = 0;
                     }
-                    catch
+                    else
                     {
-                        return false;
+                        Degistir.IndirimVarmi = true;
+                        Degistir.IndirimliFiyati = Al.IndirimliFiyati;
                     }
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
                 }
             }
         }

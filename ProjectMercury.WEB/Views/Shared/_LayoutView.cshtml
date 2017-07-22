@@ -24,6 +24,7 @@
     <link href="~/Content/css/roboto.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/roboto2.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/css/roboto3.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-select.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -96,7 +97,7 @@
                                 else
                                 {
                                     <li><a href="home-v1.html">@ViewBag.User <i class="fa fa-user mr-5"></i></a></li>
-                                    <li><a href="home-v2.html">Siparişlerim <i class="glyphicon glyphicon-shopping-cart mr-5"></i></a></li>
+                                    <li><a href="~/View/Odeme">Siparişlerim <i class="glyphicon glyphicon-shopping-cart mr-5"></i></a></li>
                                     <li><a href="home-v3.html">Çıkış Yap <i class="glyphicon glyphicon-log-out mr-5"></i></a></li>
                                 }
                             }
@@ -107,7 +108,7 @@
                     <li class="dropdown active">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sepet <i class="glyphicon glyphicon-shopping-cart ml-5"></i></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">@ViewBag.Sepet</a></li>
+                            <li><a href="~/View/Odeme">@ViewBag.Sepet</a></li>
                         </ul>
                     </li>
 
@@ -260,5 +261,7 @@
     <script type="text/javascript" src="~/Scripts/wow.min.js"></script>
     <script type="text/javascript" src="~/Scripts/swiper.min.js"></script>
     <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-notify.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js" type="text/javascript"></script>
 </body>
 </html>

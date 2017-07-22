@@ -194,6 +194,7 @@
     <Content Include="images\projectmercury.png" />
     <Content Include="images\Slider1.jpg" />
     <Content Include="Scripts\bootstrap-hover-dropdown.min.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap-slider.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -318,6 +319,8 @@
     <Content Include="Views\View\UrunKategori.cshtml" />
     <Content Include="Views\View\Marka.cshtml" />
     <Content Include="Views\Admin\Register.cshtml" />
+    <Content Include="Views\Analiz\Ciro.cshtml" />
+    <Content Include="Views\Analiz\UrunEndeks.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

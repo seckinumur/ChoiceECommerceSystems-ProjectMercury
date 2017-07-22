@@ -23,10 +23,12 @@ namespace ProjectMercury.Entity.DBContext
         public virtual DbSet<Urun> Urun { get; set; }
         public virtual DbSet<UrunKategori> UrunKategori { get; set; }
         public virtual DbSet<Uyeler> Uyeler { get; set; }
-        public virtual DbSet<Satis> Satis { get; set; }
         public virtual DbSet<UrunSepet> UrunSepet { get; set; }
         public virtual DbSet<SanalSepet> SanalSepet { get; set; }
         public virtual DbSet<SanalSepetUye> SanalSepetUye { get; set; }
+        public virtual DbSet<AylikCiro> AylikCiro { get; set; }
+        public virtual DbSet<GunlukCiro> GunlukCiro { get; set; }
+        public virtual DbSet<EnCokSatan> EnCokSatan { get; set; }
     }
     public class DBCONInitializer : CreateDatabaseIfNotExists<DBCON> //Otomatik database Oluþturma
     {
@@ -61,15 +63,14 @@ namespace ProjectMercury.Entity.DBContext
             db.Urun.Add(new Urun
             {
                 AltKategoriID = 1,
-                IndirimliFiyati = "35,70",
+                IndirimliFiyati = 35.70,
                 IndirimVarmi = true,
                 KategoriID = 1,
                 MarkaID=1,
-                UrunAciklama="Program Geliþtirme, Öðrenme Psikolojisi, Geliþim psikiolojisi, Rehberlik Ve Özel Eðitim, Öðretim Yöntem Ve Teknikleri, Ölçme Ve Deðerlendirme.",
+                UrunAciklama= "1456 Sayfa 19.50 x 27.50 cm 1.Hamur Kaðýt Poþet Ambalaj Program Geliþtirme, Öðrenme Psikolojisi, Geliþim psikiolojisi, Rehberlik Ve Özel Eðitim, Öðretim Yöntem Ve Teknikleri, Ölçme Ve Deðerlendirme.",
                 UrunAdedi=1,
                 UrunAdi="Murat Yayýnlarý KPSS Eðitim Bilimleri Konu Anlatýmlý Modüler Set(2017)",
-                UrunFiyati="59,50",
-                Yorum="1456 Sayfa 19.50 x 27.50 cm 1.Hamur Kaðýt Poþet Ambalaj",
+                UrunFiyati=59.50,
                 UrunKategoriID=1,
                 Image= "/images/ImageStore/Demo.JPG"
             });

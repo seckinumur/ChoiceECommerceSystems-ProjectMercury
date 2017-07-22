@@ -555,7 +555,6 @@ namespace ProjectMercury.WEB.Controllers
                         TempData["HataKodu"] = "0040";
                         return RedirectToAction("Hata");
                     }
-                    
                 }
                 catch
                 {

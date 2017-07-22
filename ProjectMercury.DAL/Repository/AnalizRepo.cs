@@ -9,22 +9,30 @@ using System.Threading.Tasks;
 
 namespace ProjectMercury.DAL.Repository
 {
-   public class AnalizRepo
+    public class AnalizRepo
     {
         public static VMAnaliz Analiz() //Toplam
         {
             using (DBCON db = new DBCON())
             {
+                string gun = DateTime.Now.Day.ToString(), ay = DateTime.Now.Month.ToString(), yil = DateTime.Now.Year.ToString();
+
                 int ToplamUrun = db.Urun.Count();
                 int Indirim = db.Urun.Where(p => p.IndirimVarmi == true).Count();
                 int Indirimsiz = db.Urun.Where(p => p.IndirimVarmi == false).Count();
                 int Musteriler = db.Uyeler.Count();
-                int Kullanicilar = db.Kullanicilar.Where(p=> p.System==false).ToList().Count();
-                int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true && p.İptal==false).Count();
-                int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false  && p.İptal == false && p.Onaylandimi==true).Count();
+                int Kullanicilar = db.Kullanicilar.Where(p => p.System == false).ToList().Count();
+                int Gonderilenurunler = db.Siparis.Where(p => p.Gonderildimi == true && p.İptal == false).Count();
+                int Gonderilmeyenurunler = db.Siparis.Where(p => p.Gonderildimi == false && p.İptal == false && p.Onaylandimi == true).Count();
                 int IptalEdilen = db.Siparis.Where(p => p.İptal == true && p.Gonderildimi == false).Count();
                 int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false && p.Gonderildimi == false && p.İptal == false).Count();
-
+                double ciroay = 0;
+                int urunindex = 0;
+                if (Gonderilenurunler != 0)
+                {
+                    ciroay = db.AylikCiro.Where(P => P.Yil == yil && P.Ay == ay).Sum(P => P.ToplamSatis);
+                    urunindex = db.AylikCiro.Where(p => p.Yil == yil && p.Ay == ay).Sum(p => p.ToplamAdet);
+                }
                 VMAnaliz Analiz = new VMAnaliz
                 {
                     Gönderilen = Gonderilenurunler,
@@ -35,7 +43,9 @@ namespace ProjectMercury.DAL.Repository
                     OnayBekleyen = OnayBekleyenler,
                     ToplamUrun = ToplamUrun,
                     Gonderilmeyen = Gonderilmeyenurunler,
-                    Iptal = IptalEdilen
+                    Iptal = IptalEdilen,
+                    Ciro = ciroay,
+                    UrunEndeks = urunindex
                 };
                 return Analiz;
             }
@@ -51,10 +61,10 @@ namespace ProjectMercury.DAL.Repository
 
                 VMUrunModel Model = new VMUrunModel
                 {
-                    altkategoriadi=AltKategori,
-                    kategori=Kategori,
-                    marka=Marka,
-                    urunkategoriadi=UrunKategori
+                    altkategoriadi = AltKategori,
+                    kategori = Kategori,
+                    marka = Marka,
+                    urunkategoriadi = UrunKategori
                 };
                 return Model;
             }
@@ -67,7 +77,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
                     UrunAdi = p.UrunAdi,
@@ -81,8 +90,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
                 return Bul;
             }
@@ -91,11 +99,10 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                var Bul = db.Urun.Where(n=> n.IndirimVarmi==true).Select(p => new VMUrun
+                var Bul = db.Urun.Where(n => n.IndirimVarmi == true).Select(p => new VMUrun
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
                     UrunAdi = p.UrunAdi,
@@ -109,8 +116,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
                 return Bul;
             }
@@ -123,7 +129,6 @@ namespace ProjectMercury.DAL.Repository
                 {
                     AltKategori = p.AltKategori.AltKategoriAdi,
                     AltKategoriID = p.AltKategoriID,
-                    Gramaj = p.Gramaj,
                     UrunAciklama = p.UrunAciklama,
                     UrunAdedi = p.UrunAdedi,
                     UrunAdi = p.UrunAdi,
@@ -137,8 +142,7 @@ namespace ProjectMercury.DAL.Repository
                     UrunFiyati = p.UrunFiyati,
                     UrunID = p.UrunID,
                     UrunKategori = p.UrunKategori.UrunKategoriAdi,
-                    UrunKategoriID = p.UrunKategoriID,
-                    Yorum = p.Yorum
+                    UrunKategoriID = p.UrunKategoriID
                 }).ToList();
                 return Bul;
             }
@@ -166,6 +170,41 @@ namespace ProjectMercury.DAL.Repository
             {
                 var Bul = db.Kullanicilar.Where(p => p.System != true).ToList();
                 return Bul;
+            }
+        }
+        public static List<VMGunlukToplam> CiroAylik() //Ciro/Toplam Ürün Aylık Listele
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.AylikCiro.OrderByDescending(p=> p.Yil).Select(p=> new VMGunlukToplam {
+                Ay=p.Ay,
+                Yil=p.Yil,
+                ToplamAdet=p.ToplamAdet,
+                ToplamSatis=p.ToplamSatis
+                }).ToList();
+            }
+        }
+        public static List<VMGunlukToplam> CiroGunluk(string yil, string ay) //Ciro gunuk Listele
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.GunlukCiro.Where(p => p.Yil== yil && p.Ay== ay).OrderBy(p=> p.Gun).Select(p=> new VMGunlukToplam {
+                Ay=p.Ay,
+                Gun=p.Gun,
+                ToplamSatis=p.ToplamSatis
+                }).ToList();
+            }
+        }
+        public static List<VMGunlukToplam> ToplamGunluk(string yil, string ay) //Toplam Ürün gunluk Listele
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.GunlukCiro.Where(p => p.Yil == yil && p.Ay == ay).OrderBy(p => p.Gun).Select(p => new VMGunlukToplam
+                {
+                    Ay = p.Ay,
+                    Gun = p.Gun,
+                    ToplamAdet = p.ToplamAdet
+                }).ToList();
             }
         }
     }

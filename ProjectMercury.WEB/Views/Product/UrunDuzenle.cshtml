@@ -77,17 +77,17 @@
 
                         <div class="form-group">
                             <label>Ürün Fiyatı</label>
-                            <input class="form-control" name="UrunFiyati" required value="@Model.UrunFiyati" placeholder="Ürün Fiyatını Girin">
+                            <input class="form-control" type="number" min="1" name="UrunFiyati" required value="@Model.UrunFiyati">
                         </div>
 
                         <div class="form-group">
                             <label>İndirimli Fiyatı</label>
-                            <input class="form-control" name="IndirimliFiyati" required value="@Model.IndirimliFiyati" placeholder="Ürün İndirimli Fiyatını Girin">
+                            <input class="form-control" name="IndirimliFiyati" type="number" min="0" required value="@Model.IndirimliFiyati">
                         </div>
 
                         <div class="form-group">
                             <label>Ürün Adedi</label>
-                            <input class="form-control" name="UrunAdedi" required value="@Model.UrunAdedi" placeholder="Ürün Adedi">
+                            <input class="form-control" name="UrunAdedi" type="number" min="1" required value="@Model.UrunAdedi">
                         </div>
 
                         <div class="form-group">

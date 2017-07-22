@@ -20,12 +20,12 @@ namespace ProjectMercury.DAL.Repository
                 {
                     db.Uyeler.Add(new Uyeler()
                     {
-                        Adres = Al.Adres,
-                        MailAdresi = Al.MailAdresi,
-                        UyeAdiSoyadi = Al.UyeAdiSoyadi,
-                        Sifre = Al.Sifre,
+                        Adres = Al.Adres.Trim(),
+                        MailAdresi = Al.MailAdresi.Trim(),
+                        UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim(),
+                        Sifre = Al.Sifre.Trim(),
                         Tarih = DateTime.Now.ToShortDateString(),
-                        Telefon = Al.Telefon
+                        Telefon = Al.Telefon.Trim()
                     });
                     db.SaveChanges();
                     return true;
@@ -47,9 +47,9 @@ namespace ProjectMercury.DAL.Repository
                     {
                         db.Uyeler.Add(new Uyeler()
                         {
-                            MailAdresi = Al.EMail,
-                            Sifre = Al.KullaniciSifre,
-                            UyeAdiSoyadi= Al.UyeAdiSoyadi,
+                            MailAdresi = Al.EMail.Trim(),
+                            Sifre = Al.KullaniciSifre.Trim(),
+                            UyeAdiSoyadi= Al.UyeAdiSoyadi.Trim(),
                             Tarih = DateTime.Now.ToShortDateString()
                         });
                         db.SaveChanges();
@@ -74,12 +74,12 @@ namespace ProjectMercury.DAL.Repository
                 {
                     var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
 
-                    Bul.Adres = Al.Adres;
+                    Bul.Adres = Al.Adres.Trim();
                     Bul.Banlimi = Al.Banlimi;
-                    Bul.MailAdresi = Al.MailAdresi;
-                    Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi;
-                    Bul.Sifre = Al.Sifre;
-                    Bul.Telefon = Al.Telefon;
+                    Bul.MailAdresi = Al.MailAdresi.Trim();
+                    Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
+                    Bul.Sifre = Al.Sifre.Trim();
+                    Bul.Telefon = Al.Telefon.Trim();
                     db.SaveChanges();
                     return true;
                 }

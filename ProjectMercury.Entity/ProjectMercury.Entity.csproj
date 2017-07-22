@@ -52,12 +52,14 @@
   <ItemGroup>
     <Compile Include="DBContext\DBCON.cs" />
     <Compile Include="Models\AltKategori.cs" />
+    <Compile Include="Models\AylikCiro.cs" />
+    <Compile Include="Models\EnCokSatan.cs" />
+    <Compile Include="Models\GunlukCiro.cs" />
     <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Kullanicilar.cs" />
     <Compile Include="Models\Marka.cs" />
     <Compile Include="Models\SanalSepet.cs" />
     <Compile Include="Models\SanalSepetUye.cs" />
-    <Compile Include="Models\Satis.cs" />
     <Compile Include="Models\Sepet.cs" />
     <Compile Include="Models\Siparis.cs" />
     <Compile Include="Models\SiteBilgileri.cs" />

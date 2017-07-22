@@ -27,7 +27,7 @@ namespace ProjectMercury.DAL.Repository
                     {
                         UrunKategori Ekle = new UrunKategori
                         {
-                            UrunKategoriAdi = Al.UrunKategoriAdi,
+                            UrunKategoriAdi = Al.UrunKategoriAdi.Trim(),
                             AltKategoriID= bul.AltKategoriID
                         };
                         db.UrunKategori.Add(Ekle);
@@ -49,7 +49,7 @@ namespace ProjectMercury.DAL.Repository
                 {
                     var bul1 = db.AltKategori.FirstOrDefault(p => p.AltKategoriAdi == Al.AltKategoriAdi);
                     var Bul = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == Al.UrunKategoriID);
-                    Bul.UrunKategoriAdi = Al.UrunKategoriAdi;
+                    Bul.UrunKategoriAdi = Al.UrunKategoriAdi.Trim();
                     Bul.AltKategoriID = bul1.AltKategoriID;
                     db.SaveChanges();
                     return true;

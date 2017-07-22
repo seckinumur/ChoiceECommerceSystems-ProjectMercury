@@ -17,17 +17,17 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.SiteBilgileri.FirstOrDefault(p => p.SiteBilgileriID == 1);
-                    Bul.Adres = Al.Adres;
-                    Bul.Facebook = Al.Facebook;
-                    Bul.Instagram = Al.Instagram;
+                    Bul.Adres = Al.Adres.Trim();
+                    Bul.Facebook = Al.Facebook.Trim();
+                    Bul.Instagram = Al.Instagram.Trim();
                     Bul.Logo = Al.Logo;
-                    Bul.MailAdresi = Al.MailAdresi;
-                    Bul.MobilTelefon = Al.MobilTelefon;
-                    Bul.SiteAdi = Al.SiteAdi;
-                    Bul.Telefon = Al.Telefon;
-                    Bul.Twitter = Al.Twitter;
-                    Bul.Whatsapp = Al.Whatsapp;
-                    Bul.Hakkinda = Al.Hakkinda;
+                    Bul.MailAdresi = Al.MailAdresi.Trim();
+                    Bul.MobilTelefon = Al.MobilTelefon.Trim();
+                    Bul.SiteAdi = Al.SiteAdi.Trim();
+                    Bul.Telefon = Al.Telefon.Trim();
+                    Bul.Twitter = Al.Twitter.Trim();
+                    Bul.Whatsapp = Al.Whatsapp.Trim();
+                    Bul.Hakkinda = Al.Hakkinda.Trim();
                     db.SaveChanges();
                     return true;
                 }

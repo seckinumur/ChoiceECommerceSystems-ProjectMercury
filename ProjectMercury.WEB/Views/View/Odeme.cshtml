@@ -9,11 +9,11 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-12 text-left">
-                        <h2 class="title">Sipariş Ver</h2>
+                        <h2 class="title">Siparişi Tamamla</h2>
                     </div>
                 </div>
 
-                <hr class="spacer-5"><hr class="spacer-20 no-border">
+                <hr class="spacer-1"><hr class="spacer-10 no-border">
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -51,9 +51,9 @@
                                         <thead>
                                             <tr>
                                                 <th colspan="2">Ürünler</th>
-                                                <th>Fiyat</th>
+                                                <th>Ürün Fiyatı</th>
                                                 <th>Adet</th>
-                                                <th colspan="2">Toplam</th>
+                                                <th colspan="2">Toplam Fiyat</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,13 +72,7 @@
                                                     <span>$59.99</span>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
+                                                    <input type="number" min="1" value="1" name="UrunAdedi" style="width: 4em; color:blue;" />
                                                 </td>
                                                 <td>
                                                     <span class="text-primary">$59.99</span>
@@ -92,127 +86,135 @@
                                     </table>
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="billing-info">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5 class="thin subtitle">Adres</h5>
-                                        <div class="form-group input-group-lg">
-                                            <select class="form-control">
+                                <form method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="thin subtitle">Bilgileriniz</h5>
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                    <select class="selectpicker form-control" data-live-search="true">
+                                                        <option data-tokens="Adana">Adana</option>
+                                                        <option data-tokens="Adıyaman">Adıyaman</option>
+                                                        <option data-tokens="Afyonkarahisar">Afyonkarahisar</option>
+                                                        <option data-tokens="Ağrı">Ağrı</option>
+                                                        <option data-tokens="Amasya">Amasya</option>
+                                                        <option data-tokens="Ankara">Ankara</option>
+                                                        <option data-tokens="Antalya">Antalya</option>
+                                                        <option data-tokens="Artvin">Artvin</option>
+                                                        <option data-tokens="Aydın">Aydın</option>
+                                                        <option data-tokens="Balıkesir">Balıkesir</option>
+                                                        <option data-tokens="Bilecik">Bilecik</option>
+                                                        <option data-tokens="Bingöl">Bingöl</option>
+                                                        <option data-tokens="Bitlis">Bitlis</option>
+                                                        <option data-tokens="Bolu">Bolu</option>
+                                                        <option data-tokens="Burdur">Burdur</option>
+                                                        <option data-tokens="Bursa">Bursa</option>
+                                                        <option data-tokens="Çanakkale">Çanakkale</option>
+                                                        <option data-tokens="Çankırı">Çankırı</option>
+                                                        <option data-tokens="Çorum">Çorum</option>
+                                                        <option data-tokens="Denizli">Denizli</option>
+                                                        <option data-tokens="Diyarbakır">Diyarbakır</option>
+                                                        <option data-tokens="Edirne">Edirne</option>
+                                                        <option data-tokens="Elazığ">Elazığ</option>
+                                                        <option data-tokens="Erzincan">Erzincan</option>
+                                                        <option data-tokens="Erzurum">Erzurum</option>
+                                                        <option data-tokens="Eskişehir">Eskişehir</option>
+                                                        <option data-tokens="Gaziantep">Gaziantep</option>
+                                                        <option data-tokens="Giresun">Giresun</option>
+                                                        <option data-tokens="Gümüşhane">Gümüşhane</option>
+                                                        <option data-tokens="Hakkari">Hakkâri</option>
+                                                        <option data-tokens="Hatay">Hatay</option>
+                                                        <option data-tokens="Isparta">Isparta</option>
+                                                        <option data-tokens="Mersin">Mersin</option>
+                                                        <option data-tokens="İstanbul">İstanbul</option>
+                                                        <option data-tokens="İzmir">İzmir</option>
+                                                        <option data-tokens="Kars">Kars</option>
+                                                        <option data-tokens="Kastamonu">Kastamonu</option>
+                                                        <option data-tokens="Kayseri">Kayseri</option>
+                                                        <option data-tokens="Kırklareli">Kırklareli</option>
+                                                        <option data-tokens="Kırşehir">Kırşehir</option>
+                                                        <option data-tokens="Kocaeli">Kocaeli</option>
+                                                        <option data-tokens="Konya">Konya</option>
+                                                        <option data-tokens="Kütahya">Kütahya</option>
+                                                        <option data-tokens="Malatya">Malatya</option>
+                                                        <option data-tokens="Manisa">Manisa</option>
+                                                        <option data-tokens="Kahramanmaraş">Kahramanmaraş</option>
+                                                        <option data-tokens="Mardin">Mardin</option>
+                                                        <option data-tokens="Muğla">Muğla</option>
+                                                        <option data-tokens="Muş">Muş</option>
+                                                        <option data-tokens="Nevşehir">Nevşehir</option>
+                                                        <option data-tokens="Niğde">Niğde</option>
+                                                        <option data-tokens="Ordu">Ordu</option>
+                                                        <option data-tokens="Rize">Rize</option>
+                                                        <option data-tokens="Sakarya">Sakarya</option>
+                                                        <option data-tokens="Samsun">Samsun</option>
+                                                        <option data-tokens="Siirt">Siirt</option>
+                                                        <option data-tokens="Sinop">Sinop</option>
+                                                        <option data-tokens="Sivas">Sivas</option>
+                                                        <option data-tokens="Tekirdağ">Tekirdağ</option>
+                                                        <option data-tokens="Tokat">Tokat</option>
+                                                        <option data-tokens="Trabzon">Trabzon</option>
+                                                        <option data-tokens="Tunceli">Tunceli</option>
+                                                        <option data-tokens="Şanlıurfa">Şanlıurfa</option>
+                                                        <option data-tokens="Uşak">Uşak</option>
+                                                        <option data-tokens="Van">Van</option>
+                                                        <option data-tokens="Yozgat">Yozgat</option>
+                                                        <option data-tokens="Zonguldak">Zonguldak</option>
+                                                        <option data-tokens="Aksaray">Aksaray</option>
+                                                        <option data-tokens="Bayburt">Bayburt</option>
+                                                        <option data-tokens="Karaman">Karaman</option>
+                                                        <option data-tokens="Kırıkkale">Kırıkkale</option>
+                                                        <option data-tokens="Batman">Batman</option>
+                                                        <option data-tokens="Şırnak">Şırnak</option>
+                                                        <option data-tokens="Bartın">Bartın</option>
+                                                        <option data-tokens="Ardahan">Ardahan</option>
+                                                        <option data-tokens="Iğdır">Iğdır</option>
+                                                        <option data-tokens="Yalova">Yalova</option>
+                                                        <option data-tokens="Karabük">Karabük</option>
+                                                        <option data-tokens="Kilis">Kilis</option>
+                                                        <option data-tokens="Osmaniye">Osmaniye</option>
+                                                        <option data-tokens="Düzce">Düzce</option>
+                                                    </select>
+                                                </div>
 
-                                                <option value="Adana">Adana</option>
-                                                <option value="Adıyaman">Adıyaman</option>
-                                                <option value="Afyonkarahisar">Afyonkarahisar</option>
-                                                <option value="Ağrı">Ağrı</option>
-                                                <option value="Amasya">Amasya</option>
-                                                <option value="Ankara">Ankara</option>
-                                                <option value="Antalya">Antalya</option>
-                                                <option value="Artvin">Artvin</option>
-                                                <option value="Aydın">Aydın</option>
-                                                <option value="Balıkesir">Balıkesir</option>
-                                                <option value="Bilecik">Bilecik</option>
-                                                <option value="Bingöl">Bingöl</option>
-                                                <option value="Bitlis">Bitlis</option>
-                                                <option value="Bolu">Bolu</option>
-                                                <option value="Burdur">Burdur</option>
-                                                <option value="Bursa">Bursa</option>
-                                                <option value="Çanakkale">Çanakkale</option>
-                                                <option value="Çankırı">Çankırı</option>
-                                                <option value="Çorum">Çorum</option>
-                                                <option value="Denizli">Denizli</option>
-                                                <option value="Diyarbakır">Diyarbakır</option>
-                                                <option value="Edirne">Edirne</option>
-                                                <option value="Elazığ">Elazığ</option>
-                                                <option value="Erzincan">Erzincan</option>
-                                                <option value="Erzurum">Erzurum</option>
-                                                <option value="Eskişehir">Eskişehir</option>
-                                                <option value="Gaziantep">Gaziantep</option>
-                                                <option value="Giresun">Giresun</option>
-                                                <option value="Gümüşhane">Gümüşhane</option>
-                                                <option value="Hakkari">Hakkâri</option>
-                                                <option value="Hatay">Hatay</option>
-                                                <option value="Isparta">Isparta</option>
-                                                <option value="Mersin">Mersin</option>
-                                                <option value="İstanbul">İstanbul</option>
-                                                <option value="İzmir">İzmir</option>
-                                                <option value="Kars">Kars</option>
-                                                <option value="Kastamonu">Kastamonu</option>
-                                                <option value="Kayseri">Kayseri</option>
-                                                <option value="Kırklareli">Kırklareli</option>
-                                                <option value="Kırşehir">Kırşehir</option>
-                                                <option value="Kocaeli">Kocaeli</option>
-                                                <option value="Konya">Konya</option>
-                                                <option value="Kütahya">Kütahya</option>
-                                                <option value="Malatya">Malatya</option>
-                                                <option value="Manisa">Manisa</option>
-                                                <option value="Kahramanmaraş">Kahramanmaraş</option>
-                                                <option value="Mardin">Mardin</option>
-                                                <option value="Muğla">Muğla</option>
-                                                <option value="Muş">Muş</option>
-                                                <option value="Nevşehir">Nevşehir</option>
-                                                <option value="Niğde">Niğde</option>
-                                                <option value="Ordu">Ordu</option>
-                                                <option value="Rize">Rize</option>
-                                                <option value="Sakarya">Sakarya</option>
-                                                <option value="Samsun">Samsun</option>
-                                                <option value="Siirt">Siirt</option>
-                                                <option value="Sinop">Sinop</option>
-                                                <option value="Sivas">Sivas</option>
-                                                <option value="Tekirdağ">Tekirdağ</option>
-                                                <option value="Tokat">Tokat</option>
-                                                <option value="Trabzon">Trabzon</option>
-                                                <option value="Tunceli">Tunceli</option>
-                                                <option value="Şanlıurfa">Şanlıurfa</option>
-                                                <option value="Uşak">Uşak</option>
-                                                <option value="Van">Van</option>
-                                                <option value="Yozgat">Yozgat</option>
-                                                <option value="Zonguldak">Zonguldak</option>
-                                                <option value="Aksaray">Aksaray</option>
-                                                <option value="Bayburt">Bayburt</option>
-                                                <option value="Karaman">Karaman</option>
-                                                <option value="Kırıkkale">Kırıkkale</option>
-                                                <option value="Batman">Batman</option>
-                                                <option value="Şırnak">Şırnak</option>
-                                                <option value="Bartın">Bartın</option>
-                                                <option value="Ardahan">Ardahan</option>
-                                                <option value="Iğdır">Iğdır</option>
-                                                <option value="Yalova">Yalova</option>
-                                                <option value="Karabük">Karabük</option>
-                                                <option value="Kilis">Kilis</option>
-                                                <option value="Osmaniye">Osmaniye</option>
-                                                <option value="Düzce">Düzce</option>
-                                            </select>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <input id="name" type="text" placeholder="Adı Soyadı" name="firstname" class="form-control input-md required">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input id="name" type="text" placeholder="Adı Soyadı" name="firstname" class="form-control input-md required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input id="email" type="text" placeholder="Email" name="email" class="form-control input-md required email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input id="phone" type="tel" placeholder="Telefon" name="phone" class="form-control input-md required">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-12">
+                                                    <input id="billingAddress" type="text" placeholder="Adres" name="address1" class="form-control input-md required">
+                                                </div>
+                                                <div class="form-group col-sm-12">
+                                                    <button class="btn btn-success form-control">Bilgileri Güncelle</button>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input id="email" type="text" placeholder="Email" name="email" class="form-control input-md required email">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input id="phone" type="tel" placeholder="Telefon" name="phone" class="form-control input-md required">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input id="billingAddress" type="text" placeholder="Adres" name="address1" class="form-control input-md required">
+
                                         </div>
 
+                                        <div class="col-md-6">
+                                            <h5 class="thin subtitle">Bize Notunuz Mu Var?</h5>
+                                            <div class="form-group">
+                                                <textarea rows="6" class="form-control" placeholder="Ayrıca Bize Söylemek İstediğiniz Şey?"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <h5 class="thin subtitle">Bize Notunuz Mu Var?</h5>
-                                        <div class="form-group">
-                                            <textarea rows="6" class="form-control" placeholder="Ayrıca Bize Söylemek İstediğiniz Şey?"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
+
                             <div class="tab-pane" id="payment">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -222,129 +224,16 @@
                                                 <div class="panel-heading" role="tab" id="headingPayment1">
                                                     <h4 class="panel-title">
                                                         <a class="" data-toggle="collapse" data-parent="#accordionPayment" href="#collapsePayment1" aria-expanded="true" aria-controls="collapsePayment1">
-                                                            <i class="fa fa-user"></i> Müşteri Bilgileri
+                                                            <i class="fa fa-file-text-o"></i> Firma Sözleşmesi
                                                         </a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapsePayment1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingPayment1">
                                                     <div class="panel-body">
                                                         <div class="col-md-12">
-                                                            <h5 class="thin subtitle">Müşteri Bilgileri</h5>
-                                                            <div class="form-group input-group-lg">
-                                                                <select class="form-control">
-
-                                                                    <option value="Adana">Adana</option>
-                                                                    <option value="Adıyaman">Adıyaman</option>
-                                                                    <option value="Afyonkarahisar">Afyonkarahisar</option>
-                                                                    <option value="Ağrı">Ağrı</option>
-                                                                    <option value="Amasya">Amasya</option>
-                                                                    <option value="Ankara">Ankara</option>
-                                                                    <option value="Antalya">Antalya</option>
-                                                                    <option value="Artvin">Artvin</option>
-                                                                    <option value="Aydın">Aydın</option>
-                                                                    <option value="Balıkesir">Balıkesir</option>
-                                                                    <option value="Bilecik">Bilecik</option>
-                                                                    <option value="Bingöl">Bingöl</option>
-                                                                    <option value="Bitlis">Bitlis</option>
-                                                                    <option value="Bolu">Bolu</option>
-                                                                    <option value="Burdur">Burdur</option>
-                                                                    <option value="Bursa">Bursa</option>
-                                                                    <option value="Çanakkale">Çanakkale</option>
-                                                                    <option value="Çankırı">Çankırı</option>
-                                                                    <option value="Çorum">Çorum</option>
-                                                                    <option value="Denizli">Denizli</option>
-                                                                    <option value="Diyarbakır">Diyarbakır</option>
-                                                                    <option value="Edirne">Edirne</option>
-                                                                    <option value="Elazığ">Elazığ</option>
-                                                                    <option value="Erzincan">Erzincan</option>
-                                                                    <option value="Erzurum">Erzurum</option>
-                                                                    <option value="Eskişehir">Eskişehir</option>
-                                                                    <option value="Gaziantep">Gaziantep</option>
-                                                                    <option value="Giresun">Giresun</option>
-                                                                    <option value="Gümüşhane">Gümüşhane</option>
-                                                                    <option value="Hakkari">Hakkâri</option>
-                                                                    <option value="Hatay">Hatay</option>
-                                                                    <option value="Isparta">Isparta</option>
-                                                                    <option value="Mersin">Mersin</option>
-                                                                    <option value="İstanbul">İstanbul</option>
-                                                                    <option value="İzmir">İzmir</option>
-                                                                    <option value="Kars">Kars</option>
-                                                                    <option value="Kastamonu">Kastamonu</option>
-                                                                    <option value="Kayseri">Kayseri</option>
-                                                                    <option value="Kırklareli">Kırklareli</option>
-                                                                    <option value="Kırşehir">Kırşehir</option>
-                                                                    <option value="Kocaeli">Kocaeli</option>
-                                                                    <option value="Konya">Konya</option>
-                                                                    <option value="Kütahya">Kütahya</option>
-                                                                    <option value="Malatya">Malatya</option>
-                                                                    <option value="Manisa">Manisa</option>
-                                                                    <option value="Kahramanmaraş">Kahramanmaraş</option>
-                                                                    <option value="Mardin">Mardin</option>
-                                                                    <option value="Muğla">Muğla</option>
-                                                                    <option value="Muş">Muş</option>
-                                                                    <option value="Nevşehir">Nevşehir</option>
-                                                                    <option value="Niğde">Niğde</option>
-                                                                    <option value="Ordu">Ordu</option>
-                                                                    <option value="Rize">Rize</option>
-                                                                    <option value="Sakarya">Sakarya</option>
-                                                                    <option value="Samsun">Samsun</option>
-                                                                    <option value="Siirt">Siirt</option>
-                                                                    <option value="Sinop">Sinop</option>
-                                                                    <option value="Sivas">Sivas</option>
-                                                                    <option value="Tekirdağ">Tekirdağ</option>
-                                                                    <option value="Tokat">Tokat</option>
-                                                                    <option value="Trabzon">Trabzon</option>
-                                                                    <option value="Tunceli">Tunceli</option>
-                                                                    <option value="Şanlıurfa">Şanlıurfa</option>
-                                                                    <option value="Uşak">Uşak</option>
-                                                                    <option value="Van">Van</option>
-                                                                    <option value="Yozgat">Yozgat</option>
-                                                                    <option value="Zonguldak">Zonguldak</option>
-                                                                    <option value="Aksaray">Aksaray</option>
-                                                                    <option value="Bayburt">Bayburt</option>
-                                                                    <option value="Karaman">Karaman</option>
-                                                                    <option value="Kırıkkale">Kırıkkale</option>
-                                                                    <option value="Batman">Batman</option>
-                                                                    <option value="Şırnak">Şırnak</option>
-                                                                    <option value="Bartın">Bartın</option>
-                                                                    <option value="Ardahan">Ardahan</option>
-                                                                    <option value="Iğdır">Iğdır</option>
-                                                                    <option value="Yalova">Yalova</option>
-                                                                    <option value="Karabük">Karabük</option>
-                                                                    <option value="Kilis">Kilis</option>
-                                                                    <option value="Osmaniye">Osmaniye</option>
-                                                                    <option value="Düzce">Düzce</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <input id="name" type="text" placeholder="Adı Soyadı" name="firstname" class="form-control input-md required">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <input id="email" type="text" placeholder="Email" name="email" class="form-control input-md required email">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <input id="phone" type="tel" placeholder="Telefon" name="phone" class="form-control input-md required">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input id="billingAddress" type="text" placeholder="Adres" name="address1" class="form-control input-md required">
-                                                            </div>
-
+                                                            <h5 class="thin subtitle">@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().SiteAdi</h5>
+                                                            <p>@ProjectMercury.DAL.Repository.SiteBilgileriRepo.Goster().Hakkinda</p>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <div class="col-sm-offset-4 col-sm-8">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,18 +247,19 @@
                                                     </h4>
                                                 </div>
                                                 <div id="collapsePayment2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPayment2">
-                                                    <div class="panel-body">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="table-responsive">
-                                                                    <table class="table no-border">
-                                                                        <tr>
-                                                                            <th>Ürün Fiyatı</th>
-                                                                            <td>$ 98,00</td>
+                                                    <form method="post">
+                                                        <div class="panel-body">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table no-border">
+                                                                            <tr>
+                                                                                <th>Sipariş Tarihi</th>
+                                                                                <td>@DateTime.Now.ToShortDateString()</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Kargo Ücreti</th>
-                                                                            <td>Free Shipping</td>
+                                                                            <th>Toplam Ürün</th>
+                                                                            <td>@ViewBag.Sepet</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>Toplam Fiyat</th>
@@ -384,7 +274,6 @@
                                                                     </label>
                                                                 </div>
                                                             </div>
-
                                                         </div>
 
                                                         <div class="form-group">
@@ -393,6 +282,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -455,8 +345,6 @@
                         </div>
 
                         <hr class="spacer-30">
-
-
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ namespace ProjectMercury.DAL.Repository
                     {
                         Marka Ekle = new Marka
                         {
-                            MarkaAdi = Al.MarkaAdi
+                            MarkaAdi = Al.MarkaAdi.Trim()
                         };
                         db.Marka.Add(Ekle);
                         db.SaveChanges();
@@ -46,7 +46,7 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.Marka.FirstOrDefault(p => p.MarkaID == Al.MarkaID);
-                    Bul.MarkaAdi = Al.MarkaAdi;
+                    Bul.MarkaAdi = Al.MarkaAdi.Trim();
                     db.SaveChanges();
                     return true;
                 }

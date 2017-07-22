@@ -28,7 +28,7 @@ namespace ProjectMercury.DAL.Repository
                         var bulKat = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.KategoriIsmi);
                         AltKategori Ekle = new AltKategori
                         {
-                            AltKategoriAdi = Al.AltKategoriAdi,
+                            AltKategoriAdi = Al.AltKategoriAdi.Trim(),
                             KategoriID=bulKat.KategoriID
                         };
                         db.AltKategori.Add(Ekle);
@@ -50,7 +50,7 @@ namespace ProjectMercury.DAL.Repository
                 {
                     var bulKat = db.Kategori.FirstOrDefault(p => p.KategoriAdi == Al.KategoriIsmi);
                     var Bul = db.AltKategori.FirstOrDefault(p => p.AltKategoriID == Al.AltKategoriID);
-                    Bul.AltKategoriAdi = Al.AltKategoriAdi;
+                    Bul.AltKategoriAdi = Al.AltKategoriAdi.Trim();
                     Bul.KategoriID = bulKat.KategoriID;
                     db.SaveChanges();
                     return true;

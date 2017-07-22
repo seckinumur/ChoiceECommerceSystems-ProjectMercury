@@ -115,6 +115,7 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Siparis = db.Siparis.FirstOrDefault(p => p.SiparisID == ID && p.İptal != true && p.Onaylandimi == true);
+                    string gun = DateTime.Now.Day.ToString(), ay = DateTime.Now.Month.ToString(), yil = DateTime.Now.Year.ToString();
                     Siparis.Onaylandimi = true;
                     Siparis.İptal = false;
                     Siparis.Gonderildimi = true;
@@ -126,18 +127,67 @@ namespace ProjectMercury.DAL.Repository
                     }
                     foreach (var item in Siparis.Sepet.UrunSepet)
                     {
-                        var bul = db.Satis.FirstOrDefault(p => p.UrunID == item.UrunID);
-                        if (bul != null)
+                        double fiyat = item.Urun.IndirimliFiyati, toplam = fiyat * item.Adedi;
+
+                        try
                         {
-                            bul.SatisAdedi = bul.SatisAdedi++;
+                            var Bul = db.AylikCiro.FirstOrDefault(p => p.Yil == yil && p.Ay == ay);
+                            Bul.ToplamAdet += item.Adedi;
+                            Bul.ToplamSatis = fiyat;
+                            db.SaveChanges();
+                            try
+                            {
+                                var kontrol = db.GunlukCiro.FirstOrDefault(p => p.Yil == yil && p.Ay == ay && p.Gun == gun);
+                                kontrol.ToplamAdet += item.Adedi;
+                                kontrol.ToplamSatis += fiyat;
+                                db.SaveChanges();
+                            }
+                            catch
+                            {
+                                db.GunlukCiro.Add(new GunlukCiro
+                                {
+                                    Ay = ay,
+                                    Gun = gun,
+                                    Yil = yil,
+                                    ToplamAdet = item.Adedi,
+                                    ToplamSatis = fiyat
+                                });
+                                db.SaveChanges();
+                            }
+                        }
+                        catch
+                        {
+                            db.AylikCiro.Add(new AylikCiro
+                            {
+                                Ay = ay,
+                                Yil = yil,
+                                ToplamAdet = item.Adedi,
+                                ToplamSatis = fiyat
+                            });
+                            db.SaveChanges();
+
+                            db.GunlukCiro.Add(new GunlukCiro
+                            {
+                                Ay = ay,
+                                Gun = gun,
+                                Yil = yil,
+                                ToplamAdet = item.Adedi,
+                                ToplamSatis = fiyat
+                            });
                             db.SaveChanges();
                         }
-                        else
+                        try
                         {
-                            db.Satis.Add(new Satis()
+                            var al = db.EnCokSatan.FirstOrDefault(p => p.UrunID == item.UrunID);
+                            al.Adet += item.Adedi;
+                            db.SaveChanges();
+                        }
+                        catch
+                        {
+                            db.EnCokSatan.Add(new EnCokSatan
                             {
-                                SatisAdedi = 1,
-                                UrunID = item.UrunID
+                                UrunID = item.UrunID,
+                                Adet = item.Adedi
                             });
                             db.SaveChanges();
                         }
@@ -155,7 +205,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Onaylandimi == false && p.İptal != true && p.Gonderildimi !=true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Onaylandimi == false && p.İptal != true && p.Gonderildimi != true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,
@@ -194,7 +244,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Gonderildimi == true  && p.İptal != true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Gonderildimi == true && p.İptal != true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     GonderimTarihi = p.GonderimTarihi,
@@ -208,7 +258,7 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.Siparis.Where(p => p.Gonderildimi == false  && p.İptal != true && p.Onaylandimi==true).Select(p => new VMSiparis
+                return db.Siparis.Where(p => p.Gonderildimi == false && p.İptal != true && p.Onaylandimi == true).Select(p => new VMSiparis
                 {
                     SepetID = p.SepetID,
                     SiparisID = p.SiparisID,

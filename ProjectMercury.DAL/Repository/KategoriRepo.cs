@@ -26,7 +26,7 @@ namespace ProjectMercury.DAL.Repository
                     {
                         Kategori Ekle = new Kategori
                         {
-                            KategoriAdi = Al.KategoriAdi
+                            KategoriAdi = Al.KategoriAdi.Trim()
                         };
                         db.Kategori.Add(Ekle);
                         db.SaveChanges();
@@ -46,7 +46,7 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.Kategori.FirstOrDefault(p => p.KategoriID == Al.KategoriID);
-                    Bul.KategoriAdi = Al.KategoriAdi;
+                    Bul.KategoriAdi = Al.KategoriAdi.Trim();
                     db.SaveChanges();
                     return true;
                 }

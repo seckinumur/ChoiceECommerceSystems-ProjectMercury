@@ -10,12 +10,10 @@ namespace ProjectMercury.Entity.Models
     {
         public int UrunID { get; set; }
         public string UrunAdi { get; set; }
-        public string UrunFiyati { get; set; }
-        public string IndirimliFiyati { get; set; }
+        public double UrunFiyati { get; set; }
+        public double IndirimliFiyati { get; set; }
         public bool IndirimVarmi { get; set; }
-        public string Gramaj { get; set; }
         public string UrunAciklama { get; set; }
-        public string Yorum { get; set; }
         public string Image { get; set; }
         public int UrunAdedi { get; set; }
         public int KategoriID { get; set; }
