@@ -25,7 +25,8 @@ namespace ProjectMercury.DAL.Repository
                         UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim(),
                         Sifre = Al.Sifre.Trim(),
                         Tarih = DateTime.Now.ToShortDateString(),
-                        Telefon = Al.Telefon.Trim()
+                        Telefon = Al.Telefon.Trim(),
+                        Il=Al.Il
                     });
                     db.SaveChanges();
                     return true;
@@ -80,6 +81,7 @@ namespace ProjectMercury.DAL.Repository
                     Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
                     Bul.Sifre = Al.Sifre.Trim();
                     Bul.Telefon = Al.Telefon.Trim();
+                    Bul.Il = Al.Il;
                     db.SaveChanges();
                     return true;
                 }
@@ -121,7 +123,8 @@ namespace ProjectMercury.DAL.Repository
                     Sifre = p.Sifre,
                     Tarih = p.Tarih,
                     Telefon = p.Telefon,
-                    UyelerID = p.UyelerID
+                    UyelerID = p.UyelerID,
+                    Il= p.Il
                 }).FirstOrDefault();
             }
         }
@@ -146,7 +149,8 @@ namespace ProjectMercury.DAL.Repository
                     Sifre = p.Sifre,
                     Tarih = p.Tarih,
                     Telefon = p.Telefon,
-                    UyelerID = p.UyelerID
+                    UyelerID = p.UyelerID,
+                    Il=p.Il
                 }).ToList();
             }
         }

@@ -100,7 +100,8 @@ namespace ProjectMercury.Entity.DBContext
                 MailAdresi="seckinumur@gmail.com",
                 Tarih=DateTime.Now.ToShortDateString(),
                 Telefon="05423428009",
-                UyeAdiSoyadi="demo demo"
+                UyeAdiSoyadi="demo demo",
+                Il= "Ýzmir"
             });
             db.SaveChanges();
 

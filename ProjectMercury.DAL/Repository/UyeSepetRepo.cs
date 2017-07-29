@@ -55,22 +55,37 @@ namespace ProjectMercury.DAL.Repository
             using (DBCON db = new DBCON())
             {
                 int kullanici = int.Parse(id);
-                var urunler =  db.SanalSepetUye.Where(p => p.SanalSepetUyeID == kullanici).Select(p => new VMUrun
-                {
-                    Image = p.Urun.Image,
-                    UrunAdi = p.Urun.UrunAdi,
-                    UrunFiyati = p.Urun.IndirimliFiyati,
-                    UrunAdedi = db.SanalSepetUye.Where(s => s.UyelerID == kullanici).Sum(m => m.Adet),
-                    ToplamFiyat = db.SanalSepetUye.Where(s => s.UyelerID == kullanici).Sum(m => m.Urun.IndirimliFiyati)
-                }).ToList();
+                var Al = Urunler(kullanici);
                 var uye = db.Uyeler.FirstOrDefault(p => p.UyelerID == kullanici);
                 return new VMSiparisSepeti()
                 {
-                    Urunler = urunler,
-                    Uye = uye
+                    Urun = Al,
+                    Uye = uye,
+                    ToplamFiyat = Al.Sum(p => p.ToplamFiyat)
                 };
             }
         }
+        private static List<VMUrun> Urunler(int kullanici)
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.SanalSepetUye.Where(p => p.UyelerID == kullanici).Select(p => new VMUrun
+                {
+                    Image = p.Urun.Image,
+                    UrunAdi = p.Urun.UrunAdi,
+                    UrunFiyati = (p.Urun.IndirimliFiyati == 0) ? p.Urun.UrunFiyati : p.Urun.IndirimliFiyati,
+                    UrunAdedi = p.Adet,
+                    ToplamFiyat = (p.Urun.IndirimliFiyati == 0) ? p.Urun.UrunFiyati : p.Urun.IndirimliFiyati * p.Adet,
+                    UrunID = p.UrunID
+                }).ToList();
+            }
+        }
+
+        public static List<VMUrun> Listele(int id) //Ajax Listele
+        {
+            return Urunler(id);
+        }
+
         public static List<VMUrun> SanalSepeteCikar(int kullanici, int urun, int adet) //Sanal sepet
         {
             using (DBCON db = new DBCON())

@@ -27,6 +27,7 @@
                                     <th>Mail Adresi</th>
                                     <th>Şifre</th>
                                     <th>Telefon</th>
+                                    <th>İl</th>
                                     <th>Adres</th>
                                     <th>Üye Tarihi</th>
                                     <th>İşlemler</th>
@@ -41,11 +42,12 @@
                                             <td>@item.MailAdresi</td>
                                             <td>@item.Sifre</td>
                                             <td>@item.Telefon</td>
+                                            <td>@item.Il</td>
                                             <td>@item.Adres</td>
                                             <td>@item.Tarih</td>
                                             <td>
                                                 <button data-toggle="modal" data-target="#myModal" class="btn btn-warning" onclick="Islem('@item.UyelerID','@item.UyeAdiSoyadi')">Sil</button>
-                                                <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.UyelerID','@item.UyeAdiSoyadi','@item.MailAdresi','@item.Sifre','@item.Telefon','@item.Adres')">Düzenle</button>
+                                                <button data-toggle="modal" data-target="#UyeDuzenle" class="btn btn-info" onclick="Duzenle('@item.UyelerID','@item.UyeAdiSoyadi','@item.MailAdresi','@item.Sifre','@item.Telefon','@item.Il','@item.Adres')">Düzenle</button>
                                                 <button class="btn btn-warning" data-toggle="modal" data-target="#Banla" disabled="@(item.Banlimi == true ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Banla</button>
                                                 <button class="btn btn-success" data-toggle="modal" data-target="#BANKaldir" disabled="@(item.Banlimi == false ? true : false)" onclick="BanIslemi('@item.UyelerID','@item.UyeAdiSoyadi')">Ban Kaldır</button>
                                             </td>
@@ -193,6 +195,92 @@
                                         <input class="form-control" name="Telefon" id="Tel" placeholder="Telefon" required>
                                     </div>
                                     
+                                <div class="form-group">
+                                    <select class="selectpicker form-control" name="Il" data-live-search="true" id="Il">
+                                        <option data-tokens="Adana">Adana</option>
+                                        <option data-tokens="Adıyaman">Adıyaman</option>
+                                        <option data-tokens="Afyonkarahisar">Afyonkarahisar</option>
+                                        <option data-tokens="Ağrı">Ağrı</option>
+                                        <option data-tokens="Amasya">Amasya</option>
+                                        <option data-tokens="Ankara">Ankara</option>
+                                        <option data-tokens="Antalya">Antalya</option>
+                                        <option data-tokens="Artvin">Artvin</option>
+                                        <option data-tokens="Aydın">Aydın</option>
+                                        <option data-tokens="Balıkesir">Balıkesir</option>
+                                        <option data-tokens="Bilecik">Bilecik</option>
+                                        <option data-tokens="Bingöl">Bingöl</option>
+                                        <option data-tokens="Bitlis">Bitlis</option>
+                                        <option data-tokens="Bolu">Bolu</option>
+                                        <option data-tokens="Burdur">Burdur</option>
+                                        <option data-tokens="Bursa">Bursa</option>
+                                        <option data-tokens="Çanakkale">Çanakkale</option>
+                                        <option data-tokens="Çankırı">Çankırı</option>
+                                        <option data-tokens="Çorum">Çorum</option>
+                                        <option data-tokens="Denizli">Denizli</option>
+                                        <option data-tokens="Diyarbakır">Diyarbakır</option>
+                                        <option data-tokens="Edirne">Edirne</option>
+                                        <option data-tokens="Elazığ">Elazığ</option>
+                                        <option data-tokens="Erzincan">Erzincan</option>
+                                        <option data-tokens="Erzurum">Erzurum</option>
+                                        <option data-tokens="Eskişehir">Eskişehir</option>
+                                        <option data-tokens="Gaziantep">Gaziantep</option>
+                                        <option data-tokens="Giresun">Giresun</option>
+                                        <option data-tokens="Gümüşhane">Gümüşhane</option>
+                                        <option data-tokens="Hakkari">Hakkâri</option>
+                                        <option data-tokens="Hatay">Hatay</option>
+                                        <option data-tokens="Isparta">Isparta</option>
+                                        <option data-tokens="Mersin">Mersin</option>
+                                        <option data-tokens="İstanbul">İstanbul</option>
+                                        <option data-tokens="İzmir">İzmir</option>
+                                        <option data-tokens="Kars">Kars</option>
+                                        <option data-tokens="Kastamonu">Kastamonu</option>
+                                        <option data-tokens="Kayseri">Kayseri</option>
+                                        <option data-tokens="Kırklareli">Kırklareli</option>
+                                        <option data-tokens="Kırşehir">Kırşehir</option>
+                                        <option data-tokens="Kocaeli">Kocaeli</option>
+                                        <option data-tokens="Konya">Konya</option>
+                                        <option data-tokens="Kütahya">Kütahya</option>
+                                        <option data-tokens="Malatya">Malatya</option>
+                                        <option data-tokens="Manisa">Manisa</option>
+                                        <option data-tokens="Kahramanmaraş">Kahramanmaraş</option>
+                                        <option data-tokens="Mardin">Mardin</option>
+                                        <option data-tokens="Muğla">Muğla</option>
+                                        <option data-tokens="Muş">Muş</option>
+                                        <option data-tokens="Nevşehir">Nevşehir</option>
+                                        <option data-tokens="Niğde">Niğde</option>
+                                        <option data-tokens="Ordu">Ordu</option>
+                                        <option data-tokens="Rize">Rize</option>
+                                        <option data-tokens="Sakarya">Sakarya</option>
+                                        <option data-tokens="Samsun">Samsun</option>
+                                        <option data-tokens="Siirt">Siirt</option>
+                                        <option data-tokens="Sinop">Sinop</option>
+                                        <option data-tokens="Sivas">Sivas</option>
+                                        <option data-tokens="Tekirdağ">Tekirdağ</option>
+                                        <option data-tokens="Tokat">Tokat</option>
+                                        <option data-tokens="Trabzon">Trabzon</option>
+                                        <option data-tokens="Tunceli">Tunceli</option>
+                                        <option data-tokens="Şanlıurfa">Şanlıurfa</option>
+                                        <option data-tokens="Uşak">Uşak</option>
+                                        <option data-tokens="Van">Van</option>
+                                        <option data-tokens="Yozgat">Yozgat</option>
+                                        <option data-tokens="Zonguldak">Zonguldak</option>
+                                        <option data-tokens="Aksaray">Aksaray</option>
+                                        <option data-tokens="Bayburt">Bayburt</option>
+                                        <option data-tokens="Karaman">Karaman</option>
+                                        <option data-tokens="Kırıkkale">Kırıkkale</option>
+                                        <option data-tokens="Batman">Batman</option>
+                                        <option data-tokens="Şırnak">Şırnak</option>
+                                        <option data-tokens="Bartın">Bartın</option>
+                                        <option data-tokens="Ardahan">Ardahan</option>
+                                        <option data-tokens="Iğdır">Iğdır</option>
+                                        <option data-tokens="Yalova">Yalova</option>
+                                        <option data-tokens="Karabük">Karabük</option>
+                                        <option data-tokens="Kilis">Kilis</option>
+                                        <option data-tokens="Osmaniye">Osmaniye</option>
+                                        <option data-tokens="Düzce">Düzce</option>
+                                    </select>
+                                </div>
+
                                     <div class="form-group">
                                         <label class="text-primary">Adres</label>
                                         <input class="form-control" name="Adres" id="Adres" placeholder="Adres" required>
@@ -232,6 +320,92 @@
                                 </div>
                                 
                                 <div class="form-group">
+                                    <select class="selectpicker form-control" data-live-search="true" name="Il">
+                                        <option data-tokens="Adana">Adana</option>
+                                        <option data-tokens="Adıyaman">Adıyaman</option>
+                                        <option data-tokens="Afyonkarahisar">Afyonkarahisar</option>
+                                        <option data-tokens="Ağrı">Ağrı</option>
+                                        <option data-tokens="Amasya">Amasya</option>
+                                        <option data-tokens="Ankara">Ankara</option>
+                                        <option data-tokens="Antalya">Antalya</option>
+                                        <option data-tokens="Artvin">Artvin</option>
+                                        <option data-tokens="Aydın">Aydın</option>
+                                        <option data-tokens="Balıkesir">Balıkesir</option>
+                                        <option data-tokens="Bilecik">Bilecik</option>
+                                        <option data-tokens="Bingöl">Bingöl</option>
+                                        <option data-tokens="Bitlis">Bitlis</option>
+                                        <option data-tokens="Bolu">Bolu</option>
+                                        <option data-tokens="Burdur">Burdur</option>
+                                        <option data-tokens="Bursa">Bursa</option>
+                                        <option data-tokens="Çanakkale">Çanakkale</option>
+                                        <option data-tokens="Çankırı">Çankırı</option>
+                                        <option data-tokens="Çorum">Çorum</option>
+                                        <option data-tokens="Denizli">Denizli</option>
+                                        <option data-tokens="Diyarbakır">Diyarbakır</option>
+                                        <option data-tokens="Edirne">Edirne</option>
+                                        <option data-tokens="Elazığ">Elazığ</option>
+                                        <option data-tokens="Erzincan">Erzincan</option>
+                                        <option data-tokens="Erzurum">Erzurum</option>
+                                        <option data-tokens="Eskişehir">Eskişehir</option>
+                                        <option data-tokens="Gaziantep">Gaziantep</option>
+                                        <option data-tokens="Giresun">Giresun</option>
+                                        <option data-tokens="Gümüşhane">Gümüşhane</option>
+                                        <option data-tokens="Hakkari">Hakkâri</option>
+                                        <option data-tokens="Hatay">Hatay</option>
+                                        <option data-tokens="Isparta">Isparta</option>
+                                        <option data-tokens="Mersin">Mersin</option>
+                                        <option data-tokens="İstanbul">İstanbul</option>
+                                        <option data-tokens="İzmir">İzmir</option>
+                                        <option data-tokens="Kars">Kars</option>
+                                        <option data-tokens="Kastamonu">Kastamonu</option>
+                                        <option data-tokens="Kayseri">Kayseri</option>
+                                        <option data-tokens="Kırklareli">Kırklareli</option>
+                                        <option data-tokens="Kırşehir">Kırşehir</option>
+                                        <option data-tokens="Kocaeli">Kocaeli</option>
+                                        <option data-tokens="Konya">Konya</option>
+                                        <option data-tokens="Kütahya">Kütahya</option>
+                                        <option data-tokens="Malatya">Malatya</option>
+                                        <option data-tokens="Manisa">Manisa</option>
+                                        <option data-tokens="Kahramanmaraş">Kahramanmaraş</option>
+                                        <option data-tokens="Mardin">Mardin</option>
+                                        <option data-tokens="Muğla">Muğla</option>
+                                        <option data-tokens="Muş">Muş</option>
+                                        <option data-tokens="Nevşehir">Nevşehir</option>
+                                        <option data-tokens="Niğde">Niğde</option>
+                                        <option data-tokens="Ordu">Ordu</option>
+                                        <option data-tokens="Rize">Rize</option>
+                                        <option data-tokens="Sakarya">Sakarya</option>
+                                        <option data-tokens="Samsun">Samsun</option>
+                                        <option data-tokens="Siirt">Siirt</option>
+                                        <option data-tokens="Sinop">Sinop</option>
+                                        <option data-tokens="Sivas">Sivas</option>
+                                        <option data-tokens="Tekirdağ">Tekirdağ</option>
+                                        <option data-tokens="Tokat">Tokat</option>
+                                        <option data-tokens="Trabzon">Trabzon</option>
+                                        <option data-tokens="Tunceli">Tunceli</option>
+                                        <option data-tokens="Şanlıurfa">Şanlıurfa</option>
+                                        <option data-tokens="Uşak">Uşak</option>
+                                        <option data-tokens="Van">Van</option>
+                                        <option data-tokens="Yozgat">Yozgat</option>
+                                        <option data-tokens="Zonguldak">Zonguldak</option>
+                                        <option data-tokens="Aksaray">Aksaray</option>
+                                        <option data-tokens="Bayburt">Bayburt</option>
+                                        <option data-tokens="Karaman">Karaman</option>
+                                        <option data-tokens="Kırıkkale">Kırıkkale</option>
+                                        <option data-tokens="Batman">Batman</option>
+                                        <option data-tokens="Şırnak">Şırnak</option>
+                                        <option data-tokens="Bartın">Bartın</option>
+                                        <option data-tokens="Ardahan">Ardahan</option>
+                                        <option data-tokens="Iğdır">Iğdır</option>
+                                        <option data-tokens="Yalova">Yalova</option>
+                                        <option data-tokens="Karabük">Karabük</option>
+                                        <option data-tokens="Kilis">Kilis</option>
+                                        <option data-tokens="Osmaniye">Osmaniye</option>
+                                        <option data-tokens="Düzce">Düzce</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <input class="form-control" name="Adres" placeholder="Adres" required>
                                 </div>
                             </div>
@@ -253,13 +427,14 @@
         </div>
     </div>
     <script type="text/javascript">
-        function Duzenle(obj, obj1,obj3,obj4,obj5,obj6) {
+        function Duzenle(obj, obj1,obj3,obj4,obj5,obj6,obj7) {
             document.getElementById("DuzenleID").value = obj;
             document.getElementById("UyeAdi").value = obj1;
             document.getElementById("Sifresi").value = obj4;
             document.getElementById("Tel").value = obj5;
             document.getElementById("Email").value = obj3;
-            document.getElementById("Adres").value = obj6;
+            $('#Il').selectpicker('val', obj6);
+            document.getElementById("Adres").value = obj7;
         }
         function BanIslemi(obj, ob2) {
             document.getElementById("BanUyeID").value = obj;

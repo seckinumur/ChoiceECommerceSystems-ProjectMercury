@@ -9,7 +9,8 @@ namespace ProjectMercury.DAL.VMModels
 {
    public class VMSiparisSepeti
     {
-        public List<VMUrun> Urunler { get; set; }
+        public List<VMUrun> Urun { get; set; }
         public Uyeler Uye { get; set; }
+        public double ToplamFiyat { get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace ProjectMercury.DAL.VMModels
         public string Gorev { get; set; }
         public bool Banlimi { get; set; }
         public string Tarih { get; set; }
+        public string Il { get; set; }
     }
 }

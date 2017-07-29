@@ -221,7 +221,41 @@ namespace ProjectMercury.WEB.Controllers
                 }
             }
         }
-
+        [HttpPost]
+        public ActionResult Odeme(int UrunID)
+        {
+            if (Session["User"] != null)
+            {
+                try
+                {
+                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                    ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                    var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
+                    return View(gonder);
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "983366";
+                    return RedirectToAction("Hata");
+                }
+            }
+            else
+            {
+                try
+                {
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    return RedirectToAction("Anasayfa");
+                }
+                catch
+                {
+                    TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "983366";
+                    return RedirectToAction("Hata");
+                }
+            }
+        }
         public ActionResult Uye()
         {
             if (Session["User"] != null)
@@ -275,6 +309,12 @@ namespace ProjectMercury.WEB.Controllers
             {
                 return Json(new { success = false, responseText = "Önce Sisteme Giriş Yapmalısınız!" }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult sepetlistelekullanicilar(int id) //Ajax
+        {
+            var gonder = UyeSepetRepo.Listele(id);
+            return Json(gonder, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Hata()
         {

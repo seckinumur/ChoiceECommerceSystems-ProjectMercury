@@ -11,6 +11,7 @@ namespace ProjectMercury.Entity.Models
         public int UyelerID { get; set; }
         public string UyeAdiSoyadi { get; set; }
         public string Adres { get; set; }
+        public string Il { get; set; }
         public string Telefon { get; set; }
         public string MailAdresi { get; set; }
         public string Sifre { get; set; }
