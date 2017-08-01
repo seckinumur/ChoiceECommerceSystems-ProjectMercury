@@ -23,8 +23,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Anasayfa Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2001";
                     return RedirectToAction("Hata");
                 }
             }
@@ -39,8 +39,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Anasayfa Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2001";
                     return RedirectToAction("Hata");
                 }
             }
@@ -59,8 +59,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Kategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2002";
                     return RedirectToAction("Hata");
                 }
             }
@@ -75,8 +75,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Kategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2002";
                     return RedirectToAction("Hata");
                 }
             }
@@ -95,8 +95,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem AltKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2003";
                     return RedirectToAction("Hata");
                 }
             }
@@ -111,8 +111,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem AltKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2003";
                     return RedirectToAction("Hata");
                 }
             }
@@ -130,8 +130,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem UrunKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2004";
                     return RedirectToAction("Hata");
                 }
             }
@@ -146,8 +146,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem UrunKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2004";
                     return RedirectToAction("Hata");
                 }
             }
@@ -165,8 +165,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Marka Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2005";
                     return RedirectToAction("Hata");
                 }
             }
@@ -181,8 +181,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Marka Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2005";
                     return RedirectToAction("Hata");
                 }
             }
@@ -201,7 +201,7 @@ namespace ProjectMercury.WEB.Controllers
                 catch
                 {
                     TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "983366";
+                    TempData["HataKodu"] = "2011";
                     return RedirectToAction("Hata");
                 }
             }
@@ -216,7 +216,7 @@ namespace ProjectMercury.WEB.Controllers
                 catch
                 {
                     TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "983366";
+                    TempData["HataKodu"] = "2011";
                     return RedirectToAction("Hata");
                 }
             }
@@ -233,9 +233,16 @@ namespace ProjectMercury.WEB.Controllers
                         bool sonuc = UyeSepetRepo.Adet(Data.UyelerID, Data.UrunID, Data.UrunAdet);
                         if (sonuc != true)
                         {
-                            TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                            TempData["HataKodu"] = "9833366";
+                            TempData["Hata"] = "Sistem Ödeme Sayfasında Ürün Adedi Değiştirme Başarılı Olamadı. Bu Bir Database Hatasıdır.";
+                            TempData["HataKodu"] = "2012";
                             return RedirectToAction("Hata");
+                        }
+                        else
+                        {
+                            ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                            ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                            var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
+                            return View(gonder);
                         }
                     }
 
@@ -244,9 +251,16 @@ namespace ProjectMercury.WEB.Controllers
                         bool sonuc1 = UyeSepetRepo.SepettenCikarma(Data.UyelerID, Data.UrunID);
                         if (sonuc1 != true)
                         {
-                            TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                            TempData["HataKodu"] = "9833966";
+                            TempData["Hata"] = "Sistem Ödeme Sayfasında Sepetten Ürün Çıkarma İşleminde Başarılı Olamadı. Bu Bir Database Hatasıdır.";
+                            TempData["HataKodu"] = "2013";
                             return RedirectToAction("Hata");
+                        }
+                        else
+                        {
+                            ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                            ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                            var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
+                            return View(gonder);
                         }
                     }
 
@@ -255,9 +269,16 @@ namespace ProjectMercury.WEB.Controllers
                         bool sonuc2 = UyelerRepo.UyeGuncelleHizli(Data);
                         if (sonuc2 != true)
                         {
-                            TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                            TempData["HataKodu"] = "9837966";
+                            TempData["Hata"] = "Sistem Ödeme Sayfasında Üye Bilgileri Güncelleme İşleminde Başarılı Olamadı. Bu Bir Database Hatasıdır.";
+                            TempData["HataKodu"] = "2014";
                             return RedirectToAction("Hata");
+                        }
+                        else
+                        {
+                            ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                            ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                            var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
+                            return View(gonder);
                         }
                     }
 
@@ -266,28 +287,27 @@ namespace ProjectMercury.WEB.Controllers
                         bool sonuc3 = UyeSepetRepo.Gonder(Data.UyelerID);
                         if (sonuc3 != true)
                         {
-                            TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                            TempData["HataKodu"] = "9827966";
+                            TempData["Hata"] = "Sistem Ödeme Sayfasında Siparişi Tamalama İşleminde Başarılı Olamadı. Bu Kritik Bir Sistem Hatasıdır.";
+                            TempData["HataKodu"] = "2015";
                             return RedirectToAction("Hata");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Siparisler");
                         }
                     }
 
                     else
                     {
-                        TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                        TempData["HataKodu"] = "9847966";
+                        TempData["Hata"] = "Sistem Ödeme Sayfasından POST İşlemi Gerçekleştirdi Ancak Sunucu Bu İşleme Yanıt Vermedi. Bu Bağlantı Hatasıdır.";
+                        TempData["HataKodu"] = "2016";
                         return RedirectToAction("Hata");
                     }
-
-                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
-                    ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
-                    var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
-                    return View(gonder);
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "983366";
+                    TempData["Hata"] = "Sistem Ödeme Sayfasından POST İşlemi Gerçekleştirdi Ancak İşlem Başarılı Olamadı. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2017";
                     return RedirectToAction("Hata");
                 }
             }
@@ -301,8 +321,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "983366";
+                    TempData["Hata"] = "Sistem Ödeme Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Trafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2018";
                     return RedirectToAction("Hata");
                 }
             }
@@ -321,7 +341,7 @@ namespace ProjectMercury.WEB.Controllers
                 catch
                 {
                     TempData["Hata"] = "Sistem Üye Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "982266";
+                    TempData["HataKodu"] = "2021";
                     return RedirectToAction("Hata");
                 }
             }
@@ -336,7 +356,7 @@ namespace ProjectMercury.WEB.Controllers
                 catch
                 {
                     TempData["Hata"] = "Sistem Üye Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "922866";
+                    TempData["HataKodu"] = "2021";
                     return RedirectToAction("Hata");
                 }
             }
@@ -351,8 +371,8 @@ namespace ProjectMercury.WEB.Controllers
                     bool sonuc = UyelerRepo.UyeGuncelle(Data);
                     if(sonuc != true)
                     {
-                        TempData["Hata"] = "Sistem Üye Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                        TempData["HataKodu"] = "926866";
+                        TempData["Hata"] = "Sistem Üye Sayfasından Üye Güncelleme İşlemini Gereçkleştiremedi. Bu Bir Database Hatasıdır.";
+                        TempData["HataKodu"] = "2022";
                         return RedirectToAction("Hata");
                     }
                     ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
@@ -362,8 +382,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Üye Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "986996";
+                    TempData["Hata"] = "Sistem Üye Sayfasından Üye Güncelleme İşlemini Gereçkleştiremedi. Bu Bir Database Hatasıdır.";
+                    TempData["HataKodu"] = "2022";
                     return RedirectToAction("Hata");
                 }
             }
@@ -373,12 +393,12 @@ namespace ProjectMercury.WEB.Controllers
                 {
                     ViewBag.User = "Misafir Kullanıcı";
                     ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
-                    return View();
+                    return RedirectToAction("Anasayfa");
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Üye Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Trafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2023";
                     return RedirectToAction("Hata");
                 }
             }
@@ -396,8 +416,8 @@ namespace ProjectMercury.WEB.Controllers
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Siparişler Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "95996";
+                    TempData["Hata"] = "Sistem Siparişler Sayfasında Siparişlerin Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2031";
                     return RedirectToAction("Hata");
                 }
             }
@@ -407,12 +427,12 @@ namespace ProjectMercury.WEB.Controllers
                 {
                     ViewBag.User = "Misafir Kullanıcı";
                     ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
-                    return View();
+                    return RedirectToAction("Anasayfa");
                 }
                 catch
                 {
-                    TempData["Hata"] = "Sistem Admin Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.";
-                    TempData["HataKodu"] = "9866";
+                    TempData["Hata"] = "Sistem Siparişler Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Trafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.";
+                    TempData["HataKodu"] = "2032";
                     return RedirectToAction("Hata");
                 }
             }
@@ -448,12 +468,16 @@ namespace ProjectMercury.WEB.Controllers
             catch
             {
                 TempData["Hata"] = "Sistem Login İşleminden Çıkmak İstedi Ancak Bu İşlem Başarız Oldu. Bu Kritik Bir Sistem Hatasıdır.";
-                TempData["HataKodu"] = "9666";
+                TempData["HataKodu"] = "2041";
                 return RedirectToAction("Hata");
             }
         }
         
         public ActionResult Hata()
+        {
+            return View();
+        }
+        public ActionResult BeyazSayfa()
         {
             return View();
         }

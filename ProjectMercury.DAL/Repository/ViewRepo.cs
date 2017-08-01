@@ -78,8 +78,25 @@ namespace ProjectMercury.DAL.Repository
                 List<UrunKategori> Urunkategorilistesi = new List<UrunKategori>();
                 List<Marka> MarkalarListesi = new List<Marka>();
                 var kategori = db.Kategori.FirstOrDefault(p => p.KategoriID == ID);
+                var Urunler = db.Urun.Where(p => p.MarkaID == ID).OrderBy(p => p.IndirimliFiyati == 0 ? p.UrunFiyati : p.IndirimliFiyati).Select(b => new VMUrun
+                {
+                    Image = b.Image,
+                    IndirimliFiyati = b.IndirimliFiyati == 0 ? b.UrunFiyati : b.IndirimliFiyati,
+                    UrunFiyati = b.UrunFiyati,
+                    UrunAciklama = b.UrunAciklama,
+                    UrunID = b.UrunID,
+                    UrunAdi = b.UrunAdi,
+                    AltKategoriID = b.AltKategoriID,
+                    AltKategori = b.AltKategori.AltKategoriAdi,
+                    UrunKategori = b.UrunKategori.UrunKategoriAdi,
+                    UrunKategoriID = b.UrunKategoriID,
+                    KategoriID = b.KategoriID,
+                    MarkaID = b.MarkaID,
+                    Kategori = b.Kategori.KategoriAdi,
+                    Marka = b.Marka.MarkaAdi
+                }).ToList();
                 liste.AltKategoriler = db.AltKategori.Where(p => p.KategoriID == ID).ToList();
-                liste.Urunler = db.Urun.Where(p => p.KategoriID == ID).OrderBy(p=> p.IndirimliFiyati).ToList();
+                liste.Urunler = Urunler;
                 var urunkategori = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.UrunKategori).OrderBy(P=> P.UrunKategoriID).ToList();
                 var marka = db.Urun.Where(p => p.KategoriID == ID).Select(p => p.Marka).OrderBy(p=> p.MarkaID).ToList();
                 
@@ -115,7 +132,23 @@ namespace ProjectMercury.DAL.Repository
                 VMViewKategori liste = new VMViewKategori();
                 List<UrunKategori> Urunkategorilistesi = new List<UrunKategori>();
                 List<Marka> MarkalarListesi = new List<Marka>();
-                var Urunler = db.Urun.Where(p => p.AltKategoriID == ID).OrderBy(p=> p.IndirimliFiyati).ToList();
+                var Urunler = db.Urun.Where(p => p.MarkaID == ID).OrderBy(p => p.IndirimliFiyati == 0 ? p.UrunFiyati : p.IndirimliFiyati).Select(b => new VMUrun
+                {
+                    Image = b.Image,
+                    IndirimliFiyati = b.IndirimliFiyati == 0 ? b.UrunFiyati : b.IndirimliFiyati,
+                    UrunFiyati = b.UrunFiyati,
+                    UrunAciklama = b.UrunAciklama,
+                    UrunID = b.UrunID,
+                    UrunAdi = b.UrunAdi,
+                    AltKategoriID = b.AltKategoriID,
+                    AltKategori = b.AltKategori.AltKategoriAdi,
+                    UrunKategori = b.UrunKategori.UrunKategoriAdi,
+                    UrunKategoriID = b.UrunKategoriID,
+                    KategoriID = b.KategoriID,
+                    MarkaID = b.MarkaID,
+                    Kategori = b.Kategori.KategoriAdi,
+                    Marka = b.Marka.MarkaAdi
+                }).ToList();
                 liste.AltKategoriler = db.AltKategori.Where(p => p.AltKategoriID == ID).ToList();
                 liste.Urunler = Urunler;
                 var urunkategori = db.UrunKategori.Where(p => p.AltKategoriID == ID).OrderBy(p=> p.AltKategoriID).ToList();
@@ -140,7 +173,7 @@ namespace ProjectMercury.DAL.Repository
                         data = ma.MarkaID;
                     }
                 }
-                liste.KategoriAdi = Urunler.FirstOrDefault(p => p.AltKategoriID == ID).Kategori.KategoriAdi;
+                liste.KategoriAdi = Urunler.FirstOrDefault(p => p.AltKategoriID == ID).Kategori;
                 liste.Markalar = MarkalarListesi;
                 liste.AltKategoriAdi = db.AltKategori.FirstOrDefault(p => p.AltKategoriID == ID).AltKategoriAdi;
                 liste.ÜrünKategorileri = Urunkategorilistesi;
@@ -156,8 +189,25 @@ namespace ProjectMercury.DAL.Repository
                 List<UrunKategori> Urunkategorilistesi = new List<UrunKategori>();
                 List<Marka> MarkalarListesi = new List<Marka>();
                 List<AltKategori> altkategorilistesi = new List<AltKategori>();
+                
                 var altkategorisi = db.UrunKategori.FirstOrDefault(p => p.UrunKategoriID == ID);
-                var Urunler = db.Urun.Where(p => p.UrunKategoriID == ID).OrderBy(p => p.IndirimliFiyati).ToList();
+                var Urunler = db.Urun.Where(p => p.MarkaID == ID).OrderBy(p => p.IndirimliFiyati == 0 ? p.UrunFiyati : p.IndirimliFiyati).Select(b => new VMUrun
+                {
+                    Image = b.Image,
+                    IndirimliFiyati = b.IndirimliFiyati == 0 ? b.UrunFiyati : b.IndirimliFiyati,
+                    UrunFiyati = b.UrunFiyati,
+                    UrunAciklama = b.UrunAciklama,
+                    UrunID = b.UrunID,
+                    UrunAdi = b.UrunAdi,
+                    AltKategoriID = b.AltKategoriID,
+                    AltKategori = b.AltKategori.AltKategoriAdi,
+                    UrunKategori = b.UrunKategori.UrunKategoriAdi,
+                    UrunKategoriID = b.UrunKategoriID,
+                    KategoriID = b.KategoriID,
+                    MarkaID = b.MarkaID,
+                    Kategori = b.Kategori.KategoriAdi,
+                    Marka = b.Marka.MarkaAdi
+                }).ToList();
                 var altKategoriler = db.AltKategori.Where(p => p.AltKategoriID == altkategorisi.AltKategoriID).OrderBy(p=> p.AltKategoriID).ToList();
                 liste.Urunler = Urunler;
                 var urunkategori = db.Urun.Where(p => p.UrunKategoriID == ID).Select(p=> p.UrunKategori).OrderBy(p=> p.UrunKategoriID).ToList();
@@ -194,7 +244,7 @@ namespace ProjectMercury.DAL.Repository
                 }
 
                 liste.AltKategoriler = altkategorilistesi;
-                liste.KategoriAdi = Urunler.FirstOrDefault(p => p.UrunKategoriID == ID).Kategori.KategoriAdi;
+                liste.KategoriAdi = Urunler.FirstOrDefault(p => p.UrunKategoriID == ID).Kategori;
                 liste.Markalar = MarkalarListesi;
                 liste.AltKategoriAdi = db.Urun.FirstOrDefault(p => p.UrunKategoriID == ID).AltKategori.AltKategoriAdi;
                 liste.ÜrünKategorileri = Urunkategorilistesi;
@@ -212,10 +262,25 @@ namespace ProjectMercury.DAL.Repository
                 List<UrunKategori> Urunkategorilistesi = new List<UrunKategori>();
                 List<AltKategori> Altkategori = new List<AltKategori>();
 
-                var Urunler = db.Urun.Where(p => p.MarkaID == ID).OrderBy(p => p.IndirimliFiyati).ToList();
-                var AltKategoriler = db.Urun.Where(p => p.MarkaID == ID).Select(p=> p.AltKategori).ToList();
+                var Urunler = db.Urun.Where(p => p.MarkaID == ID).OrderBy(p => p.IndirimliFiyati == 0 ? p.UrunFiyati : p.IndirimliFiyati).Select(b=> new VMUrun {
+                    Image= b.Image,
+                    IndirimliFiyati = b.IndirimliFiyati==0 ? b.UrunFiyati : b.IndirimliFiyati,
+                    UrunFiyati = b.UrunFiyati,
+                    UrunAciklama= b.UrunAciklama,
+                    UrunID= b.UrunID,
+                    UrunAdi= b.UrunAdi,
+                    AltKategoriID= b.AltKategoriID,
+                    AltKategori = b.AltKategori.AltKategoriAdi,
+                    UrunKategori = b.UrunKategori.UrunKategoriAdi,
+                    UrunKategoriID = b.UrunKategoriID,
+                    KategoriID= b.KategoriID,
+                    MarkaID = b.MarkaID,
+                    Kategori = b.Kategori.KategoriAdi,
+                    Marka = b.Marka.MarkaAdi
+                }).ToList();
+                var AltKategoriler = db.Urun.Where(p => p.MarkaID == ID).Select(p=> p.AltKategori).OrderBy(p => p.AltKategoriID).ToList();
                 liste.Urunler = Urunler;
-                var urunkategori = db.Urun.Where(p => p.MarkaID == ID).Select(p => p.UrunKategori).ToList();
+                var urunkategori = db.Urun.Where(p => p.MarkaID == ID).Select(p => p.UrunKategori).OrderBy(p => p.UrunKategoriID).ToList();
 
                 int data = 0;
                 foreach (var urk in urunkategori)

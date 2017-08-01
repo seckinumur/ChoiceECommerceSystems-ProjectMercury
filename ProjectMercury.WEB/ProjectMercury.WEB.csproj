@@ -107,6 +107,7 @@
     <Content Include="Content\css\default.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\form-elements.css" />
+    <Content Include="Content\css\highlight.min.css" />
     <Content Include="Content\css\jasny-bootstrap.min.css" />
     <Content Include="Content\css\metisMenu.min.css" />
     <Content Include="Content\css\owl.carousel.html" />
@@ -236,6 +237,7 @@
     <Content Include="Scripts\dataTables.buttons.min.js" />
     <Content Include="Scripts\dataTables.select.min.js" />
     <Content Include="Scripts\defaults-tr_TR.js" />
+    <Content Include="Scripts\highlight.min.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -323,6 +325,7 @@
     <Content Include="Views\Analiz\UrunEndeks.cshtml" />
     <Content Include="Views\View\Uye.cshtml" />
     <Content Include="Views\View\Siparisler.cshtml" />
+    <Content Include="Views\View\BeyazSayfa.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

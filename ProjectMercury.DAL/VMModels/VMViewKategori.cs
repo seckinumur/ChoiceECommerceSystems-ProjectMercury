@@ -12,7 +12,7 @@ namespace ProjectMercury.DAL.VMModels
         public List<AltKategori> AltKategoriler { get; set; }
         public List<UrunKategori> ÜrünKategorileri { get; set; }
         public List<Marka> Markalar { get; set; }
-        public List<Urun> Urunler { get; set; }
+        public List<VMUrun> Urunler { get; set; }
         public string KategoriAdi { get; set; }
         public int Kategoriid { get; set; }
         public string AltKategoriAdi { get; set; }

@@ -1,0 +1,631 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Choice Corporation Beyaz Sayfa">
+    <meta name="author" content="Seckin Umur">
+    <link rel="icon" href="~/images/favicon.png">
+    <title>Choice Admin Control Systems V.1.5</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/highlight.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/highlight.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>©2017 Choice Corporation Project Mercury Beyaz Sayfa</h1>
+        <hr>
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><strong class="text-danger">Hata Kodu: 2001</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Anasayfa Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var Gonder = ViewRepo.VievIndexAI();
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada top 5 için gerekli algoritmayı
+                            hesaplayan VievIndexAI adlı Repo daki bir kodda öngörülemeyen bir sorun olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><strong class="text-danger">Hata Kodu: 2002</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Kategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var Gonder = ViewRepo.KategoriyeGore(ID);
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, ViewRepo.KategoriyeGore(ID);
+                            işlemi içersinde öngörülemeyen bir hata olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><strong class="text-danger">Hata Kodu: 2003</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem AltKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var Gonder = ViewRepo.AltKategoriyeGore(ID);
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, ViewRepo.AltKategoriyeGore(ID);
+                            işlemi içersinde öngörülemeyen bir hata olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><strong class="text-danger">Hata Kodu: 2004</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem UrunKategori Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var Gonder = ViewRepo.UrunKategoriyeGore(ID);
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, ViewRepo.UrunKategoriyeGore(ID);
+                            işlemi içersinde öngörülemeyen bir hata olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><strong class="text-danger">Hata Kodu: 2005</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Marka Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var Gonder = ViewRepo.Markayagore(ID);
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, ViewRepo.Markayagore(ID);
+                            işlemi içersinde öngörülemeyen bir hata olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><strong class="text-danger">Hata Kodu: 2011</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+             ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+             ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+             var gonder = UyeSepetRepo.Liste(Session["User"].ToString());
+             return View(Gonder);
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, UyeSepetRepo.Liste(Session["User"].ToString());
+                            işlemi içersinde Session null değer almış veya  öngörülemeyen bir hata olmuş olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><strong class="text-danger">Hata Kodu: 2012</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasında Ürün Adedi Değiştirme Başarılı Olamadı. Bu Bir Database Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+public static bool Adet(int kullanici, int urun, int adet)
+{
+    using (DBCON db = new DBCON())
+    {
+        try
+        {
+            var bul = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == kullanici && p.UrunID == urun);
+            bul.Adet = adet;
+            db.SaveChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+}
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Database Bağlantı Sorunu Veya Gösterilmek İstenen Ürün Silinmiş. Bu sorunun Çözümü Database ten bu sorguyu
+                            çalıştıracak ilişkileri silmektir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse8"><strong class="text-danger">Hata Kodu: 2013</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasında Sepetten Ürün Çıkarma İşleminde Başarılı Olamadı. Bu Bir Database Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        public static bool SepettenCikarma(int KullaniciID,int urun)
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var sil = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == KullaniciID && p.UrunID==urun);
+                    db.SanalSepetUye.Remove(sil);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Database Bağlantı Sorunu Veya Gösterilmek İstenen Ürün Silinmiş. Bu sorunun Çözümü Database ten bu sorguyu
+                            çalıştıracak ilişkileri silmektir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse9"><strong class="text-danger">Hata Kodu: 2014</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasında Üye Bilgileri Güncelleme İşleminde Başarılı Olamadı. Bu Bir Database Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        public static bool UyeGuncelleHizli(VMUyeSepet Al)
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
+
+                    Bul.Adres = Al.Adres.Trim();
+                    Bul.MailAdresi = Al.MailAdresi.Trim();
+                    Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
+                    Bul.Telefon = Al.Telefon.Trim();
+                    Bul.Il = Al.Il;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Database Bağlantı Sorunu Veya Eksik Bilgiler Girilmiş Olabilir. Çözümü İse Tüm Alanları Doldurup Bir Daha Denemek
+                            Faydalı Olabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse10"><strong class="text-danger">Hata Kodu: 2015</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse10" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasında Siparişi Tamalama İşleminde Başarılı Olamadı. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        public static bool Gonder(int KullaniciID)
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var bul = db.SanalSepetUye.Where(p => p.UyelerID == KullaniciID).ToList();
+                    if (bul.Count != 0)
+                    {
+                        var liste = bul.Select(p => new UrunSepet
+                        {
+                            Adedi = p.Adet,
+                            UrunID = p.Urun.UrunID
+                        }).ToList();
+
+                        db.Sepet.Add(new Sepet()
+                        {
+                            SiparisTamamlandimi = true,
+                            UyelerID = KullaniciID,
+                            UrunSepet = liste,
+                            Manuel = false,
+                            Aktifmi = true
+                        });
+                        db.SaveChanges();
+
+                        var bulsepet = db.Sepet.FirstOrDefault(p => p.Aktifmi == true);
+                        bool sonuc = SiparisRepo.SiparisKaydetUye(bulsepet);
+                        if (sonuc == true)
+                        {
+                            bulsepet.Aktifmi = false;
+                        }
+                        db.SanalSepetUye.RemoveRange(bul);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+           </code></pre>
+                        <p>
+                            <strong class="text-danger">Olası Sorun Sebebi:</strong> Database Bağlantı Sorunu Veya Daha Önceden Sanal Sepete Kaydedilen Ürünlerin Sistemden Kaldırılmış Olması yada Sepet Null Olarak
+                            Sunucuya Dönmüş Olabilir. Bu Sorunun Çözümü İlişkilerdeki Tablolarda Artık Database te Bulunmayan Veriyi Kaldırmak Yada Sepetin Null Dönmesine İzin Vermemek.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse11"><strong class="text-danger">Hata Kodu: 2016</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse11" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasından POST İşlemi Gerçekleştirdi Ancak Sunucu Bu İşleme Yanıt Vermedi. Bu Bağlantı Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        if (Data.Gorev == "Adet")
+        {
+        //Kod
+        }
+        else 
+        {
+        //Data.Gorev Null Olarak else İçersine Düştü.
+        }
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Sayfa Post İşlemi Yaptıkdan Sonra Gorev name'minde String Bir değeri Döndürüyor. Belirlenmeyen Bir Sebepten Dolayı O değer Null Yada koşulları Gerçekleştirmezse Hata Yakalama Sstemi Etkinleştiriliyor. Bunun Sebebi Hack Girişimi Yada Bağlantı Hatası Olabilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse12"><strong class="text-danger">Hata Kodu: 2017</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse12" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasından POST İşlemi Gerçekleştirdi Ancak Sunucu Bu İşlemde Başarılı Olamadı. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        try
+        {
+         //POST
+        }
+        catch
+        {
+         //İşlem Başarısız
+        }
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Sayfa Post İşlemi Yaptıkdan Sonra try Bloğu İçersinde Bir Takım İşlemler Gerçekleştirmeliydi. Ancak Olası Bir Database  veya Bağlantı Sorunu Bu İşlemleri Gerçekleştirmeye İzin Vermedi. Bu Sorunun Çözümü Bilinmemektedir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse13"><strong class="text-danger">Hata Kodu: 2018</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse13" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Ödeme Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Trafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    return RedirectToAction("Anasayfa");
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Sayfa Bir Yönlendirme İşlemi Gerçekleştirmek İstedi Ancak Sunucu Buna Yanıt Vermedi. Eğer O sayfa Sunucuda Yoksa 404 Hata Sayfası Çıkması Gerekliydi Ancak Bu İşlemde Tamamlanmamış Olabilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse14"><strong class="text-danger">Hata Kodu: 2021</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse14" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Üye Sayfasının Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+                    ViewBag.User = UyelerRepo.UyeIsmi(Session["User"].ToString());
+                    ViewBag.Sepet = ViewRepo.UyeSepet(Session["User"].ToString());
+                    var gonder = UyelerRepo.UyeListele(Session["User"].ToString());
+                    return View(gonder);
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Session da kayıtlı userID  Session süresi bitiminde null değeri alırsa yada, UyelerRepo.UyeListele(Session["User"].ToString()); İşlemi içersinde Session null değer almış veya  öngörülemeyen bir hata olmuş olabilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse15"><strong class="text-danger">Hata Kodu: 2022</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse15" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Üye Sayfasından Üye Güncelleme İşlemini Gereçkleştiremedi. Bu Bir Database Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        public static bool UyeGuncelle(VMUyeler Al)
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
+
+                    Bul.Adres = Al.Adres.Trim();
+                    Bul.Banlimi = Al.Banlimi;
+                    Bul.MailAdresi = Al.MailAdresi.Trim();
+                    Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
+                    Bul.Sifre = Al.Sifre.Trim();
+                    Bul.Telefon = Al.Telefon.Trim();
+                    Bul.Il = Al.Il;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> POST İşlemi Sonrasında Tüm Bilgilerin Doldurulmamış Olması Yada Bilinmeyen Bir Nedenden Dolayı Olmuş Olabilir. Çözüm Bilinmemektedir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse16"><strong class="text-danger">Hata Kodu: 2023</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse16" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Üye Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Tarafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    return RedirectToAction("Anasayfa");
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Sayfa Bir Yönlendirme İşlemi Gerçekleştirmek İstedi Ancak Sunucu Buna Yanıt Vermedi. Eğer O sayfa Sunucuda Yoksa 404 Hata Sayfası Çıkması Gerekliydi Ancak Bu İşlemde Tamamlanmamış Olabilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse17"><strong class="text-danger">Hata Kodu: 2031</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse17" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Siparişler Sayfasında Siparişlerin Gösterimini İstedi Ancak Database Bu İşleme Yanıt Vermedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+        public static List&lt;VMSiparis&gt; UyeSiparisListele(string id)
+        {
+            using (DBCON db = new DBCON())
+            {
+                int ID = int.Parse(id);
+
+                return db.Siparis.Where(p => p.Sepet.UyelerID == ID).Select(p => new VMSiparis
+                {
+                    SepetID = p.SepetID,
+                    GonderimTarihi = p.GonderimTarihi,
+                    Durum = p.Gonderildimi == false  ? "label label-danger" : "label label-primary",
+                    Sonuc = p.Gonderildimi == false ? "Sipariş Hazırlanıyor" : "Sipariş Gönderildi",
+                    SiparisID = p.SiparisID,
+                    Gonderildimi=p.Gonderildimi,
+                    SiparisTarihi = p.SiparisTarihi,
+                    ToplamAdet= p.Sepet.UrunSepet.Sum(n=> n.Adedi),
+                    ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati ==0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati)*n.Adedi),
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                }).ToList();
+            }
+        }
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Genelde Database Bağlantı Hatası Zaman Aşımı Olabilir. Yalnız Mevcut Sipariş Listesindeki Ürünlerden Biri Yada Bazıları Silinmişse Bu Hataya Sebep Verebilir. Bilinen Çözümü İlişkili Tablolardan Sorunlu Veriyi Silmektir.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse18"><strong class="text-danger">Hata Kodu: 2032</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse18" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Siparişler Sayfasından Anasayfa'ya Bir Yönlendirme İşlemi İstedi Ancak İstek Sunucu Tarafından Gerçekleştirilemedi. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+                    ViewBag.User = "Misafir Kullanıcı";
+                    ViewBag.Sepet = "Sepette Bekleyen Ürün Yok";
+                    return RedirectToAction("Anasayfa");
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Sayfa Bir Yönlendirme İşlemi Gerçekleştirmek İstedi Ancak Sunucu Buna Yanıt Vermedi. Eğer O sayfa Sunucuda Yoksa 404 Hata Sayfası Çıkması Gerekliydi Ancak Bu İşlemde Tamamlanmamış Olabilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse19"><strong class="text-danger">Hata Kodu: 2041</strong></a>
+                    </h4>
+                </div>
+                <div id="collapse19" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><strong class="text-primary">Hata Metni:</strong> Sistem Login İşleminden Çıkmak İstedi Ancak Bu İşlem Başarız Oldu. Bu Kritik Bir Sistem Hatasıdır.</p>
+                        <hr>
+                        <p class="text-warning">Olası Hatayı Meydana Getirebilecek Kod Dizesi:</p>
+
+                        <pre><code class="csharp">
+                Session.Abandon();
+                return RedirectToAction("Anasayfa");
+           </code></pre>
+                        <p><strong class="text-danger">Olası Sorun Sebebi:</strong> Bu Hatanın bilinen Bir Nedeni Ve Çözümü Bulunmamaktadır.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <h4 class="text-primary">Choice Corp. Yardım Sayfası. Detaylı Bilgi İçin <a href="https://github.com/seckinumur/ChoiceECommerceSystems-ProjectMercury" target="_blank">GitHub</a> Projenin Kaynak Kodlarına Bakınız.</h4>
+        </div>
+    </div>
+
+</body>
+</html>

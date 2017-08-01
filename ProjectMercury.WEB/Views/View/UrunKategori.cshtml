@@ -112,7 +112,7 @@
                                     </figure>
                                     <div class="icons">
                                         <a class="icon semi-circle" href="javascript:void(0);" onclick="SepeteEkle('@item.UrunID');"><i class="fa fa-cart-plus"></i></a>
-                                        <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama')"><i class="fa fa-search"></i></a>
+                                        <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@item.UrunAdi','@item.Image','@item.UrunFiyati','@item.IndirimliFiyati','@item.UrunAciklama','@item.UrunID')"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="caption">
@@ -159,7 +159,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <h4 class="text-primary" id="urunIndirim">$79.00</h4>
+                                    <h4 class="text-primary" id="urunIndirim"></h4>
+                                    <input hidden="hidden" id="ManuelID" />
                                     <small id="urunFiyati" class="amount off"></small>
                                     <hr class="text-danger" />
                                     <div class="col-md-pull-12">
@@ -167,7 +168,7 @@
                                     </div>
                                     <hr class="spacer-10">
                                     <ul class="list list-inline">
-                                        <li><button type="button" class="btn btn-default btn-md round"><i class="fa fa-shopping-basket mr-5"></i>Sepete Ekle</button></li>
+                                        <li><button type="button" class="btn btn-default btn-md round" data-dismiss="modal" onclick="SepeteEkleManuel();"><i class="fa fa-shopping-basket mr-5"></i>Sepete Ekle</button></li>
                                         <li>
                                             <button type="button" class="btn btn-gray " data-dismiss="modal"><i class="fa fa-times-circle mr-5"></i>Pencereyi Kapat</button>
                                         </li>
@@ -178,19 +179,21 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
 <script type="text/javascript">
-
-    function DataGom(obj, obj2, obj3, obj4, obj5) {
+    function DataGom(obj, obj2, obj3, obj4, obj5, obj6) {
         document.getElementById("urunAdi").innerHTML = obj;
         document.getElementById("urunResmi").src = obj2;
         document.getElementById("urunFiyati").innerHTML = "Ürün Fiyatı: " + obj3 + "₺";
         document.getElementById("urunIndirim").innerHTML = "İndirimli Fiyatı: " + obj4 + "₺";
         document.getElementById("urunAciklama").innerHTML = obj5;
+        document.getElementById("ManuelID").value = obj6;
     }
+
     function SepeteEkle(obj) {
         var urunId = obj;
         var data = JSON.stringify({
@@ -243,10 +246,63 @@
             }
         })
     };
+
+    function SepeteEkleManuel() {
+        var urunId = document.getElementById("ManuelID").value;
+        var data = JSON.stringify({
+            'urunId': urunId
+        })
+        $.ajax({
+            type: 'POST',
+            url: '/View/Sepet',
+            data: data,
+            contentType: 'application/json',
+            success: function (response) {
+                if (response != null && response.success) {
+                    $.notify({
+                        icon: 'fa fa-check-circle',
+                        message: response.responseText,
+                    }, {
+                            type: 'success',
+                            placement: {
+                                from: 'top',
+                                align: 'center'
+                            },
+                            delay: 1500
+                        });
+                } else {
+                    $.notify({
+                        icon: 'fa fa-exclamation-triangle',
+                        message: response.responseText,
+                    }, {
+                            type: 'danger',
+                            placement: {
+                                from: 'top',
+                                align: 'center'
+                            },
+                            delay: 1500
+                        });
+                }
+            },
+            error: function (response) {
+                $.notify({
+                    icon: 'fa fa-exclamation-triangle',
+                    message: 'Sunucuyla İletişim Kurulamadı!',
+                }, {
+                        type: 'danger',
+                        placement: {
+                            from: 'top',
+                            align: 'center'
+                        },
+                        delay: 1500
+                    });
+            }
+        })
+    };
 </script>
 
-<script type="text/javascript">
 
+<script type="text/javascript">
     $.fn.pageMe = function (opts) {
         var $this = this,
             defaults = {
@@ -295,11 +351,9 @@
         }
 
         pager.find('.page_link:first').addClass('active');
-
         if (numPages <= 1) {
             pager.find('.next_link').hide();
         }
-
         pager.children().eq(1).addClass("active");
 
         children.hide();
@@ -310,12 +364,10 @@
             goTo(clickedPage, perPage);
             return false;
         });
-
         pager.find('li .prev_link').click(function () {
             previous();
             return false;
         });
-
         pager.find('li .next_link').click(function () {
             next();
             return false;
@@ -364,5 +416,4 @@
     };
 
     $('#pages').pageMe({ pagerSelector: '#myPager', childSelector: '.page', showPrevNext: true, hidePageNumbers: false, perPage: 12 });
-
 </script>

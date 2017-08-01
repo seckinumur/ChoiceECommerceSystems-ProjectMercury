@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProjectMercury.Entity")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Project Mercury Business Process Layer")]
+[assembly: AssemblyDescription("Project Mercury İş Modeli Katmanı")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ProjectMercury.Entity")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("https://www.seckinumur.com/")]
+[assembly: AssemblyProduct("ProjectMercury.DAL")]
+[assembly: AssemblyCopyright("©2017 Choice Corporation")]
+[assembly: AssemblyTrademark("Seçkin Umur")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

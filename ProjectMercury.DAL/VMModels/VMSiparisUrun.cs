@@ -14,6 +14,7 @@ namespace ProjectMercury.DAL.VMModels
         public string Marka { get; set; }
         public string UrunAdi { get; set; }
         public string UrunFiyati { get; set; }
+        public double Fiyat { get; set; }
         public string IndirimliFiyati { get; set; }
         public int UrunAdedi { get; set; }
     }
