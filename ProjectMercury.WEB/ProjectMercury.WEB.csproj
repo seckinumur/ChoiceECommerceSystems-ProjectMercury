@@ -321,6 +321,8 @@
     <Content Include="Views\Admin\Register.cshtml" />
     <Content Include="Views\Analiz\Ciro.cshtml" />
     <Content Include="Views\Analiz\UrunEndeks.cshtml" />
+    <Content Include="Views\View\Uye.cshtml" />
+    <Content Include="Views\View\Siparisler.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

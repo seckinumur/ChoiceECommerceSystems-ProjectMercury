@@ -1,6 +1,5 @@
 ﻿@model ProjectMercury.DAL.VMModels.VMViewKategori
 @{
-    ViewBag.Title = "AltKategori";
     Layout = "~/Views/Shared/_LayoutView.cshtml";
 }
 <div class="breadcrumbs">
@@ -245,8 +244,6 @@
     };
 </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 <script type="text/javascript">
 
     $.fn.pageMe = function (opts) {
@@ -272,7 +269,7 @@
             pager = $(settings.pagerSelector);
         }
 
-        var numItems = children.size();
+        var numItems = children.length;
         var numPages = Math.ceil(numItems / perPage);
 
         pager.data("curr", 0);

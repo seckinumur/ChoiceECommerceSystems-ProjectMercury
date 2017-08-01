@@ -37,7 +37,7 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static bool UyeKaydetHızlı(VMRegister Al) //Üye Kaydet
+        public static bool UyeKaydetHizli(VMRegister Al) //Üye Kaydet
         {
             using (DBCON db = new DBCON())
             {
@@ -80,6 +80,28 @@ namespace ProjectMercury.DAL.Repository
                     Bul.MailAdresi = Al.MailAdresi.Trim();
                     Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
                     Bul.Sifre = Al.Sifre.Trim();
+                    Bul.Telefon = Al.Telefon.Trim();
+                    Bul.Il = Al.Il;
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool UyeGuncelleHizli(VMUyeSepet Al) //Üye Guncelle hızlı
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
+
+                    Bul.Adres = Al.Adres.Trim();
+                    Bul.MailAdresi = Al.MailAdresi.Trim();
+                    Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
                     Bul.Telefon = Al.Telefon.Trim();
                     Bul.Il = Al.Il;
                     db.SaveChanges();

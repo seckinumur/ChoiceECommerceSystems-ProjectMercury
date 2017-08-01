@@ -77,14 +77,14 @@
                                 {
                                     <ul class="items">
                                         <li>
-                                            <a href="shop-single-product-v1.html" class="product-image">
+                                            <a href="shop-single-product-v1.html" class="product-image" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')">
                                                 <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
                                             </a>
                                             <div class="product-details">
                                                 <h6 class="regular">
-                                                    <a href="shop-single-product-v1.html" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
+                                                    <a href="#" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
                                                 </h6>
-                                                <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
+                                                <span class="price text-primary">@yeniurun.IndirimliFiyati ₺</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -104,12 +104,12 @@
                                 {
                                 <ul class="items">
                                     <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
+                                        <a href="shop-single-product-v1.html" class="product-image" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')">
                                             <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
                                         </a>
                                         <div class="product-details">
                                             <h6 class="regular">
-                                                <a href="shop-single-product-v1.html" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
+                                                <a href="shop-single-product-v1.html" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
                                             </h6>
                                             <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
                                         </div>
@@ -130,12 +130,12 @@
                                 {
                                 <ul class="items">
                                     <li>
-                                        <a href="shop-single-product-v1.html" class="product-image">
+                                        <a href="shop-single-product-v1.html" class="product-image" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')">
                                             <img src="@yeniurun.Image" alt="@yeniurun.UrunAdi" class="img-responsive">
                                         </a>
                                         <div class="product-details">
                                             <h6 class="regular">
-                                                <a href="shop-single-product-v1.html" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
+                                                <a href="shop-single-product-v1.html" data-toggle="modal" data-target=".productQuickView" onclick="DataGom('@yeniurun.UrunAdi','@yeniurun.Image','@yeniurun.UrunFiyati','@yeniurun.IndirimliFiyati','@yeniurun.UrunAciklama')" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@yeniurun.UrunAdi</a>
                                             </h6>
                                             <span class="price text-primary">@yeniurun.IndirimliFiyati₺</span>
                                         </div>
@@ -146,6 +146,52 @@
                         }
                     </div>
                 </div>
+
+           <div class="modal fade productQuickView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+               <div class="modal-dialog modal-lg" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                           <h5 id="urunAdi"></h5>
+                       </div>
+                       <div class="modal-body">
+                           <div class="row">
+                               <div class="col-sm-5">
+                                   <div class='carousel slide product-slider' data-ride='carousel' data-interval="false">
+                                       <div class='carousel-inner'>
+                                           <div class='item active'>
+                                               <figure>
+                                                   <img id="urunResmi" />
+                                               </figure>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-sm-7">
+                                   <h4 class="text-primary" id="urunIndirim">$79.00</h4>
+                                   <small id="urunFiyati" class="amount off"></small>
+                                   <hr class="text-danger" />
+                                   <div class="col-md-pull-12">
+                                       <p class="text-danger" id="urunAciklama"></p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+
             </div>
             </div>
         </section>
+
+<script type="text/javascript">
+    function DataGom(obj, obj2, obj3, obj4, obj5) {
+        document.getElementById("urunAdi").innerHTML = obj;
+        document.getElementById("urunResmi").src = obj2;
+        document.getElementById("urunFiyati").innerHTML = "Ürün Fiyatı: " + obj3 + "₺";
+        document.getElementById("urunIndirim").innerHTML = "İndirimli Fiyatı: " + obj4 + "₺";
+        document.getElementById("urunAciklama").innerHTML = obj5;
+    };
+</script>

@@ -28,7 +28,8 @@ namespace ProjectMercury.DAL.Repository
                 int OnayBekleyenler = db.Siparis.Where(p => p.Onaylandimi == false && p.Gonderildimi == false && p.İptal == false).Count();
                 double ciroay = 0;
                 int urunindex = 0;
-                if (Gonderilenurunler != 0)
+                bool kontrol = db.AylikCiro.Any(d => d.Yil == yil && d.Ay == ay);
+                if (Gonderilenurunler != 0 && kontrol == true)
                 {
                     ciroay = db.AylikCiro.Where(P => P.Yil == yil && P.Ay == ay).Sum(P => P.ToplamSatis);
                     urunindex = db.AylikCiro.Where(p => p.Yil == yil && p.Ay == ay).Sum(p => p.ToplamAdet);
@@ -176,11 +177,12 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.AylikCiro.OrderByDescending(p=> p.Yil).Select(p=> new VMGunlukToplam {
-                Ay=p.Ay,
-                Yil=p.Yil,
-                ToplamAdet=p.ToplamAdet,
-                ToplamSatis=p.ToplamSatis
+                return db.AylikCiro.OrderByDescending(p => p.Yil).Select(p => new VMGunlukToplam
+                {
+                    Ay = p.Ay,
+                    Yil = p.Yil,
+                    ToplamAdet = p.ToplamAdet,
+                    ToplamSatis = p.ToplamSatis
                 }).ToList();
             }
         }
@@ -188,10 +190,12 @@ namespace ProjectMercury.DAL.Repository
         {
             using (DBCON db = new DBCON())
             {
-                return db.GunlukCiro.Where(p => p.Yil== yil && p.Ay== ay).OrderBy(p=> p.Gun).Select(p=> new VMGunlukToplam {
-                Ay=p.Ay,
-                Gun=p.Gun,
-                ToplamSatis=p.ToplamSatis
+                return db.GunlukCiro.Where(p => p.Yil == yil && p.Ay == ay).OrderBy(p => p.Gun).Select(p => new VMGunlukToplam
+                {
+                    Yil = p.Yil,
+                    Ay = p.Ay,
+                    Gun = p.Gun,
+                    ToplamSatis = p.ToplamSatis
                 }).ToList();
             }
         }
@@ -201,6 +205,7 @@ namespace ProjectMercury.DAL.Repository
             {
                 return db.GunlukCiro.Where(p => p.Yil == yil && p.Ay == ay).OrderBy(p => p.Gun).Select(p => new VMGunlukToplam
                 {
+                    Yil = p.Yil,
                     Ay = p.Ay,
                     Gun = p.Gun,
                     ToplamAdet = p.ToplamAdet

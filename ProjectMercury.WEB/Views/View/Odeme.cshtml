@@ -50,11 +50,13 @@
                                     <table id="DbOdeme" class="table table-striped table-bordered table-hover" width="100%">
                                         <thead>
                                             <tr>
-                                                <th colspan="2">Ürün Adı</th>
+                                                <th>Ürün Resmi</th>
+                                                <th>Ürün Adı</th>
                                                 <th>Ürün Fiyatı</th>
                                                 <th>Adet</th>
                                                 <th>Toplam Fiyat</th>
-                                                <th colspan="2">İşlemler</th>
+                                                <th>Adet İşlemi</th>
+                                                <th>Ürün İşlemi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -175,22 +177,22 @@
 
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input id="name" type="text" value="@Model.Uye.UyeAdiSoyadi" placeholder="Adı Soyadı" name="firstname" class="form-control input-md" required>
+                                                        <input id="name" type="text" value="@Model.Uye.UyeAdiSoyadi" placeholder="Adı Soyadı" name="UyeAdiSoyadi" class="form-control input-md" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input id="email" type="text" value="@Model.Uye.MailAdresi" placeholder="Email" name="email" class="form-control input-md" required email>
+                                                        <input id="email" type="text" value="@Model.Uye.MailAdresi" placeholder="Email" name="MailAdresi" class="form-control input-md" required email>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <input id="phone" type="tel" value="@Model.Uye.Telefon" placeholder="Telefon" name="phone" class="form-control input-md" required>
+                                                        <input id="phone" type="tel" value="@Model.Uye.Telefon" placeholder="Telefon" name="Telefon" class="form-control input-md" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group col-sm-12">
-                                                    <input id="billingAddress" type="text" value="@Model.Uye.Adres" placeholder="Adres" name="address1" class="form-control input-md" required>
+                                                    <input id="billingAddress" type="text" value="@Model.Uye.Adres" placeholder="Adres" name="Adres" class="form-control input-md" required>
                                                 </div>
                                                 <input name="UyelerID" value="@Model.Uye.UyelerID" hidden="hidden">
                                                 <input name="Gorev" value="Guncelle" hidden="hidden">
@@ -351,11 +353,11 @@
                                         <input name="Gorev" value="Adet" hidden="hidden">
                                         <div class="form-group">
                                             <label class="text-primary">Ürün Adı</label>
-                                            <input class="form-control" id="urunAdiAdet" name="UrunAdi" readonly="readonly">
+                                            <input class="form-control" id="urunAdiAdet" readonly="readonly">
                                         </div>
                                         <div class="form-group">
                                             <label class="text-primary">Ürün Adedi</label>
-                                            <input type="number" class="form-control" id="urunAdediAdet" name="UrunAdedi" min="1">
+                                            <input type="number" class="form-control" id="urunAdediAdet" name="UrunAdet" min="1">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-success form-control" >Kaydet</button>
@@ -380,7 +382,7 @@
                                         <input name="Gorev" value="Sil" hidden="hidden">
                                         <div class="form-group">
                                             <label class="text-primary">Bu Ürün Sepetten Çıkarılsın mı?</label>
-                                            <input class="form-control" id="urunAdi" name="UrunAdi" readonly="readonly">
+                                            <input class="form-control" id="urunAdi" readonly="readonly">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-danger form-control">Sil</button>
@@ -401,9 +403,10 @@
 
     $(document).ready(function () {
         $('#DbOdeme').DataTable({
+            responsive: true,
             lengthChange: false,
             dom: 'Bfrtip',
-            responsive: true
+            buttons: ['copy', 'excel', 'pdf', 'print']
         });
     });
 

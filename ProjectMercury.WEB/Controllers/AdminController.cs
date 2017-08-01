@@ -44,7 +44,7 @@ namespace ProjectMercury.WEB.Controllers
         {
             try
             {
-                bool Kontrol = UyelerRepo.UyeKaydetHızlı(Al);
+                bool Kontrol = UyelerRepo.UyeKaydetHizli(Al);
                 if (Kontrol != true)
                 {
                     TempData["UyariTipi"] = "text-danger";

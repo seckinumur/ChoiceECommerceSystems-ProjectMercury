@@ -34,6 +34,29 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static bool SiparisKaydetUye(Sepet Data) //sepet olarak gelen datayı siparişe ekledik
+        {
+            using (DBCON db = new DBCON())
+            {
+                try
+                {
+                    db.Siparis.Add(new Siparis()
+                    {
+                        Gonderildimi = false,
+                        Onaylandimi = false,
+                        SepetID = Data.SepetID,
+                        SiparisTarihi = DateTime.Now.ToShortDateString(),
+                        İptal = false
+                    });
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static bool SiparisOnayla(int ID)
         {
             using (DBCON db = new DBCON())
@@ -127,13 +150,13 @@ namespace ProjectMercury.DAL.Repository
                     }
                     foreach (var item in Siparis.Sepet.UrunSepet)
                     {
-                        double fiyat = item.Urun.IndirimliFiyati, toplam = fiyat * item.Adedi;
+                        double fiyat = item.Urun.IndirimliFiyati != 0 ? item.Urun.IndirimliFiyati : item.Urun.UrunFiyati, toplam = fiyat * item.Adedi;
 
                         try
                         {
                             var Bul = db.AylikCiro.FirstOrDefault(p => p.Yil == yil && p.Ay == ay);
                             Bul.ToplamAdet += item.Adedi;
-                            Bul.ToplamSatis = fiyat;
+                            Bul.ToplamSatis += fiyat;
                             db.SaveChanges();
                             try
                             {
@@ -280,6 +303,27 @@ namespace ProjectMercury.DAL.Repository
                     GonderimTarihi = p.GonderimTarihi,
                     SiparisID = p.SiparisID,
                     SiparisTarihi = p.SiparisTarihi,
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                }).ToList();
+            }
+        }
+        public static List<VMSiparis> UyeSiparisListele(string id)
+        {
+            using (DBCON db = new DBCON())
+            {
+                int ID = int.Parse(id);
+
+                return db.Siparis.Where(p => p.Sepet.UyelerID == ID).Select(p => new VMSiparis
+                {
+                    SepetID = p.SepetID,
+                    GonderimTarihi = p.GonderimTarihi,
+                    Durum = p.Gonderildimi == false  ? "label label-danger" : "label label-primary",
+                    Sonuc = p.Gonderildimi == false ? "Sipariş Hazırlanıyor" : "Sipariş Gönderildi",
+                    SiparisID = p.SiparisID,
+                    Gonderildimi=p.Gonderildimi,
+                    SiparisTarihi = p.SiparisTarihi,
+                    ToplamAdet= p.Sepet.UrunSepet.Sum(n=> n.Adedi),
+                    ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati ==0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati)*n.Adedi),
                     Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
                 }).ToList();
             }

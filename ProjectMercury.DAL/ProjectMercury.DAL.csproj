@@ -82,6 +82,7 @@
     <Compile Include="VMModels\VMUrunKategori.cs" />
     <Compile Include="VMModels\VMUrunModel.cs" />
     <Compile Include="VMModels\VMUyeler.cs" />
+    <Compile Include="VMModels\VMUyeSepet.cs" />
     <Compile Include="VMModels\VMViewKategori.cs" />
   </ItemGroup>
   <ItemGroup>

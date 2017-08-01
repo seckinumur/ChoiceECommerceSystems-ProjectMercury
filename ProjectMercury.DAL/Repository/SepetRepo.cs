@@ -80,9 +80,17 @@ namespace ProjectMercury.DAL.Repository
             {
                 try
                 {
-                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici);
-                    bul.Adet -= adet;
-                    db.SaveChanges();
+                    var bul = db.SanalSepet.FirstOrDefault(p => p.KullanicilarID == kullanici && p.UrunID == urun);
+                    if(bul.Adet == 1)
+                    {
+                        db.SanalSepet.Remove(bul);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        bul.Adet -= adet;
+                        db.SaveChanges();
+                    }
                     return db.SanalSepet.Where(p => p.KullanicilarID == kullanici).Select(p => new VMUrun
                     {
                         AltKategori = p.Urun.AltKategori.AltKategoriAdi,

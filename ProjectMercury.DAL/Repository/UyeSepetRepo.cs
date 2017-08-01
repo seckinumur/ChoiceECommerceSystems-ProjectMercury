@@ -80,52 +80,31 @@ namespace ProjectMercury.DAL.Repository
                 }).ToList();
             }
         }
-
-        public static List<VMUrun> Listele(int id) //Ajax Listele
-        {
-            return Urunler(id);
-        }
-
-        public static List<VMUrun> SanalSepeteCikar(int kullanici, int urun, int adet) //Sanal sepet
+        
+        public static bool Adet(int kullanici, int urun, int adet) //Adet Ekle
         {
             using (DBCON db = new DBCON())
             {
                 try
                 {
-                    var bul = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == kullanici);
-                    bul.Adet -= adet;
+                    var bul = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == kullanici && p.UrunID == urun);
+                    bul.Adet = adet;
                     db.SaveChanges();
-                    return db.SanalSepetUye.Where(p => p.UyelerID == kullanici).Select(p => new VMUrun
-                    {
-                        AltKategori = p.Urun.AltKategori.AltKategoriAdi,
-                        Kategori = p.Urun.Kategori.KategoriAdi,
-                        Marka = p.Urun.Marka.MarkaAdi,
-                        UrunAdedi = p.Adet,
-                        UrunAdi = p.Urun.UrunAdi,
-                        UrunKategori = p.Urun.UrunKategori.UrunKategoriAdi
-                    }).ToList();
+                    return true;
                 }
                 catch
                 {
-                    return db.SanalSepetUye.Where(p => p.UyelerID == kullanici).Select(p => new VMUrun
-                    {
-                        AltKategori = p.Urun.AltKategori.AltKategoriAdi,
-                        Kategori = p.Urun.Kategori.KategoriAdi,
-                        Marka = p.Urun.Marka.MarkaAdi,
-                        UrunAdedi = p.Adet,
-                        UrunAdi = p.Urun.UrunAdi,
-                        UrunKategori = p.Urun.UrunKategori.UrunKategoriAdi
-                    }).ToList();
+                    return false;
                 }
             }
         }
-        public static bool SepetiKaydetKullanici(int KullaniciID, string UyeID) //Kullanıcı Modunda Manuel Sepeti Ekle
+
+        public static bool Gonder(int KullaniciID) //Sipariş kaydetme
         {
             using (DBCON db = new DBCON())
             {
                 try
                 {
-                    int uyelerid = int.Parse(UyeID);
                     var bul = db.SanalSepetUye.Where(p => p.UyelerID == KullaniciID).ToList();
                     if (bul.Count != 0)
                     {
@@ -138,15 +117,15 @@ namespace ProjectMercury.DAL.Repository
                         db.Sepet.Add(new Sepet()
                         {
                             SiparisTamamlandimi = true,
-                            UyelerID = uyelerid,
+                            UyelerID = KullaniciID,
                             UrunSepet = liste,
-                            Manuel = true,
+                            Manuel = false,
                             Aktifmi = true
                         });
                         db.SaveChanges();
 
                         var bulsepet = db.Sepet.FirstOrDefault(p => p.Aktifmi == true);
-                        bool sonuc = SiparisRepo.SiparisKaydet(bulsepet);
+                        bool sonuc = SiparisRepo.SiparisKaydetUye(bulsepet);
                         if (sonuc == true)
                         {
                             bulsepet.Aktifmi = false;
@@ -166,14 +145,14 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
-        public static bool SepetiSilKullanici(int KullaniciID) //Kullanıcı Modunda Manuel Sepeti Sil
+        public static bool SepettenCikarma(int KullaniciID,int urun) //Sepetten Çıkar
         {
             using (DBCON db = new DBCON())
             {
                 try
                 {
-                    var sil = db.SanalSepetUye.Where(p => p.UyelerID == KullaniciID).ToList();
-                    db.SanalSepetUye.RemoveRange(sil);
+                    var sil = db.SanalSepetUye.FirstOrDefault(p => p.UyelerID == KullaniciID && p.UrunID==urun);
+                    db.SanalSepetUye.Remove(sil);
                     db.SaveChanges();
                     return true;
                 }

@@ -35,8 +35,10 @@
                     <p class="lead">(500) Sunucu Yanıt Vermiyor!</p>
                     <hr class="white-backgorund" />
                     <p class="lead">
-                       Sunucu Bilinmeyen Bir Nedenden Dolayı Yanıt Vermiyor. Lütfen Geliştiricinizle İrtibata Geçin.
+                        @TempData["Hata"]
                     </p>
+                    <hr />
+                    <h6>Geliştiriciler İçin Hata Kodu: @TempData["HataKodu"]</h6>
                 </div>
                 <div class="mastfoot">
                     <div class="inner">

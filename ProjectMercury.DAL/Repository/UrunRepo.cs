@@ -334,6 +334,13 @@ namespace ProjectMercury.DAL.Repository
                 }
             }
         }
+        public static List<Urun> UrunAjaxListesi() //Ürünleri tüm listesi
+        {
+            using (DBCON db = new DBCON())
+            {
+                return db.Urun.ToList();
+            }
+        }
     }
 }
 
