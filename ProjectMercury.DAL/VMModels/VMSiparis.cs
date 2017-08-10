@@ -17,6 +17,7 @@ namespace ProjectMercury.DAL.VMModels
         public string Gorev { get; set; }
         public string Durum { get; set; }
         public string Sonuc { get; set; }
+        public string Not { get; set; }
         public int ToplamAdet { get; set; }
         public double ToplamFiyat { get; set; }
         public bool Onaylandimi { get; set; }

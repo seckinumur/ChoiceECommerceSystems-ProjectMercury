@@ -28,6 +28,7 @@
                                 <th>Sipariş Tarihi</th>
                                 <th>Toplam Adet</th>
                                 <th>Toplam Tutar</th>
+                                <th>Notlar</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                         <td>@item.SiparisTarihi</td>
                                         <td>@item.ToplamAdet</td>
                                         <td>@item.ToplamFiyat</td>
+                                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#Not" onclick="Atama('@item.Not')">Not</button></td>
                                         <td>
                                             <button data-toggle="modal" data-target="#Uyedetaymodal" class="btn btn-warning" onclick="uyeDetay('@item.Uyeler.UyeAdiSoyadi','@item.Uyeler.Adres','@item.Uyeler.MailAdresi','@item.Uyeler.Telefon')">Üye Detay</button>
 
@@ -57,6 +59,24 @@
                             }
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Not" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Müşteri Notu</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <p id="notBurda"> </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,7 +272,7 @@
         document.getElementById("Tel").value = obj1;
         document.getElementById("Email").value = obj2;
         document.getElementById("Adres").value = obj3;
-    }
+    };
     function sepet(obj, obj2, obj3) {
         document.getElementById("adSoyad").value = obj2;
         document.getElementById("gonderimTarihi").value = obj3;
@@ -281,15 +301,18 @@
 
             }
         });
-    }
+    };
     function sil(obj, obj2) {
         document.getElementById("SilID").value = obj;
         document.getElementById("Silinecek").value = obj2;
-    }
+    };
+    function Atama(obj) {
+        document.getElementById("notBurda").innerHTML = obj;
+    };
     function Islem(obj, obj2) {
         document.getElementById("IDGonder").value = obj;
         document.getElementById("Silinecekg").value = obj2;
         document.getElementById("SilIDi").value = obj;
         document.getElementById("Silineceki").value = obj2;
-    }
+    };
 </script>

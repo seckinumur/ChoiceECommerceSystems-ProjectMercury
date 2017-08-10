@@ -46,7 +46,8 @@ namespace ProjectMercury.DAL.Repository
                         Onaylandimi = false,
                         SepetID = Data.SepetID,
                         SiparisTarihi = DateTime.Now.ToShortDateString(),
-                        İptal = false
+                        İptal = false,
+                        Not= Data.Uyeler.not
                     });
                     db.SaveChanges();
                     return true;
@@ -235,7 +236,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not= p.Not
                 }).ToList();
             }
         }
@@ -250,7 +252,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }
@@ -265,7 +268,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }
@@ -281,7 +285,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }
@@ -296,7 +301,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }
@@ -315,7 +321,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet = p.Sepet.UrunSepet.Sum(n => n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati == 0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati) * n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }
@@ -336,7 +343,8 @@ namespace ProjectMercury.DAL.Repository
                     SiparisTarihi = p.SiparisTarihi,
                     ToplamAdet= p.Sepet.UrunSepet.Sum(n=> n.Adedi),
                     ToplamFiyat = p.Sepet.UrunSepet.Sum(n => (n.Urun.IndirimliFiyati ==0 ? n.Urun.UrunFiyati : n.Urun.IndirimliFiyati)*n.Adedi),
-                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID)
+                    Uyeler = db.Uyeler.FirstOrDefault(w => w.UyelerID == p.Sepet.UyelerID),
+                    Not=p.Not
                 }).ToList();
             }
         }

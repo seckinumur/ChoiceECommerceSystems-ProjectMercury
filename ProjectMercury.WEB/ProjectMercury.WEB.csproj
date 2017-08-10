@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectMercury.WEB</RootNamespace>
     <AssemblyName>ProjectMercury.WEB</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -61,9 +61,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -226,6 +226,7 @@
     <Content Include="fonts\fontawesome-webfont9efe.ttf" />
     <Content Include="fonts\fontawesome-webfont9efe.woff" />
     <Content Include="fonts\fontawesome-webfont9efe.woff2" />
+    <Content Include="packages.config" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\buttons.bootstrap.min.js" />
     <Content Include="Scripts\buttons.colVis.min.js" />

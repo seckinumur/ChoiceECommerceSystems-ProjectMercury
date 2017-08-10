@@ -12,6 +12,7 @@ namespace ProjectMercury.DAL.VMModels
         public string UyeAdiSoyadi { get; set; }
         public string Adres { get; set; }
         public string Telefon { get; set; }
+        public string Notu { get; set; }
         public string MailAdresi { get; set; }
         public string Gorev { get; set; }
         public string Il { get; set; }

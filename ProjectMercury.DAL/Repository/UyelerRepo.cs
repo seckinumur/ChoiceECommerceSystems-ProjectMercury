@@ -98,12 +98,13 @@ namespace ProjectMercury.DAL.Repository
                 try
                 {
                     var Bul = db.Uyeler.FirstOrDefault(p => p.UyelerID == Al.UyelerID);
-
+                    var bul = db.SanalSepetUye.Where(p => p.UyelerID == Al.UyelerID).ToList();
                     Bul.Adres = Al.Adres.Trim();
                     Bul.MailAdresi = Al.MailAdresi.Trim();
                     Bul.UyeAdiSoyadi = Al.UyeAdiSoyadi.Trim();
                     Bul.Telefon = Al.Telefon.Trim();
                     Bul.Il = Al.Il;
+                    Bul.not = Al.Notu;
                     db.SaveChanges();
                     return true;
                 }

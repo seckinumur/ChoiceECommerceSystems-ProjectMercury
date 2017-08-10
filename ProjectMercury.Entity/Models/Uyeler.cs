@@ -17,5 +17,6 @@ namespace ProjectMercury.Entity.Models
         public string Sifre { get; set; }
         public bool Banlimi { get; set; }
         public string Tarih { get; set; }
+        public string not { get; set; }
     }
 }
